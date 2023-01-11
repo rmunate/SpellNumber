@@ -1,0 +1,37 @@
+{
+    "name": "rmunate/spell-number",
+    "description": "Convierta de números a letras, ideal para uso en facturas, remisiones o similares.",
+    "keywords": [
+        "letras",
+        "numeros",
+        "spell",
+        "altum",
+        "rmunate"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rmunate\\Utilities\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Raul Mauricio Uñate Castro",
+            "email": "raulmauriciounate@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+
+    },
+    "extra" : {
+        "branch-alias" : {
+            "dev-main": "1.0.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
