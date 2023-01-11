@@ -172,12 +172,20 @@ class SpellNumber
         /* Definir Moneda */
         $currency = $this->currency ?? 'Peso';
         if (($this->integer_original > 1) && (substr($currency, -1) != 's')) {
-            $currency = $currency . 's';
+            if (substr($currency, -1) != 'a' && substr($currency, -1) != 'e' && substr($currency, -1) != 'i' && substr($currency, -1) != 'o' && substr($currency, -1) != 'u') {
+                $currency = $currency . 'es';
+            } else {
+                $currency = $currency . 's';
+            }
         }
 
         $fraction = $this->fraction ?? 'Centavo';
         if (($this->decimal_original > 1) && (substr($fraction, -1) != 's')) {
-            $fraction = $fraction . 's';
+            if (substr($fraction, -1) != 'a' && substr($fraction, -1) != 'e' && substr($fraction, -1) != 'i' && substr($fraction, -1) != 'o' && substr($fraction, -1) != 'u') {
+                $fraction = $fraction . 'es';
+            } else {
+                $fraction = $fraction . 's';
+            }
         }
 
         if ($this->initializer == 'integer') {
