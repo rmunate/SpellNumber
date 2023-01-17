@@ -6,7 +6,7 @@ Convierta de números a letras, con la opción de determinar si es para uso en f
 Convierta de manera sencilla números a letras (Solo en idioma español), esta librería le puede ser útil para usar el valor en letras dentro de facturas, remisiones, etc. Puede retornar los valores como numero o como valor numérico de algún tipo de dinero en específico.
 
 ## Instalación
-# Instalar Con Composer
+# Instalar a través de Composer
 
 ```sh
 composer require rmunate/spell-number
@@ -37,6 +37,10 @@ composer require rmunate/spell-number
 ```sh
 SpellNumber::float('2000,50')->currency('Sol')->fraction('Centimo')->toMoney();
 // "Dos Mil Soles Con Cincuenta Centimos"
+
+SpellNumber::float('2000,50')->toMoney();
+// "Dos Mil Pesos Con Cincuenta Centavos"
+
 ```
 
 ## Desarrollador(es)
