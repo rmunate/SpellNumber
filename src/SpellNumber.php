@@ -12,8 +12,7 @@ use Exception;
  * V 1.0.0
  */
 
-class SpellNumber
-{
+class SpellNumber {
 
     /* Propiedades Inicializador */
     private static $type;
@@ -51,8 +50,7 @@ class SpellNumber
     #-------------------------------------
     # CONSTRUCTOR DE CLASE
     #-------------------------------------
-    public function __construct()
-    {
+    public function __construct(){
         $this->namespace = $this::class;
         $this->vendor = 'https://github.com/rmunate';
         $this->integer_string = Self::$integer_static;
@@ -66,8 +64,7 @@ class SpellNumber
     # INICIALIZADORES
     #-------------------------------------
 
-    public static function integer(int $value)
-    {
+    public static function integer(int $value){
 
         /* Garantizar que el valor cumpla con los limites */
         if (($value >= Self::$minInteger) && ($value <= Self::$maxInteger)) {
@@ -81,14 +78,13 @@ class SpellNumber
         } else {
 
             /* Retornar Excepcion */
-            throw new Exception("SpellNumberEl::integer - El valor ingresado no cumple con los limites establecidos Minimo = " . Self::minInteger . " y Maximo = " . Self::maxInteger);
+            throw new Exception("SpellNumberEl::integer() - El valor ingresado no cumple con los limites establecidos Minimo = " . Self::minInteger . " y Maximo = " . Self::maxInteger);
 
         }
 
     }
 
-    public static function float(string $value)
-    {
+    public static function float(string $value){
 
         // 1. Validar si es un string
         if (!is_string($value)) {
@@ -99,32 +95,32 @@ class SpellNumber
         $value = str_replace(',', '.', $value); /* Garantizar uso de Punto Como separador */
         $value = explode('.', $value);
         if (count($value) == 1 && !is_numeric($value[0])) {
-            throw new Exception("SpellNumber::float - El valor ingresado contiene letras, espacios ó caracteres no númericos, por favor corríjalo.");
+            throw new Exception("SpellNumber::float() - El valor ingresado contiene letras, espacios ó caracteres no númericos, por favor corríjalo.");
         }
         if (count($value) > 2) {
-            throw new Exception("SpellNumber::float - El valor ingresado contiene más de un separador decimal, por favor corríjalo.");
+            throw new Exception("SpellNumber::float() - El valor ingresado contiene más de un separador decimal, por favor corríjalo.");
         }
         if (count($value) == 2 && (!is_numeric($value[0]) || !is_numeric($value[1]))) {
-            throw new Exception("SpellNumber::float - El valor ingresado contiene letras, espacios ó caracteres no númericos, por favor corríjalo.");
+            throw new Exception("SpellNumber::float() - El valor ingresado contiene letras, espacios ó caracteres no númericos, por favor corríjalo.");
         }
 
         // 3. Validar Longitud Decimal
         if (intval($value[1]) >= 100) {
-            throw new Exception("SpellNumber::float - El valor decimal no puede ser mayor a 99.");
+            throw new Exception("SpellNumber::float() - El valor decimal no puede ser mayor a 99.");
         }
 
         /* Tratamiento Al Entero */
         if (($value[0] >= Self::$minFloat) && ($value[0] <= Self::$maxFloat)) {
             Self::$integer_static = str_pad($value[0], Self::$floatLength, " ", STR_PAD_LEFT);
         } else {
-            throw new Exception("SpellNumber::float - El valor númerico entero supera el limite establecido Maximo = " . Self::$maxFloat . " y Minimo = " . Self::$minFloat);
+            throw new Exception("SpellNumber::float() - El valor númerico entero supera el limite establecido Maximo = " . Self::$maxFloat . " y Minimo = " . Self::$minFloat);
         }
 
         /* Tratamiendo Decimal */
         if (($value[1] >= Self::$minDecimals) && ($value[1] <= Self::$maxDecimals)) {
             Self::$decimal_static = str_pad($value[1], Self::$decimalsLength, " ", STR_PAD_LEFT);
         } else {
-            throw new Exception("SpellNumber::float - El valor decimal supera el limite establecido Maximo = " . Self::$maxDecimals . " y Minimo = " . Self::$minDecimals);
+            throw new Exception("SpellNumber::float() - El valor decimal supera el limite establecido Maximo = " . Self::$maxDecimals . " y Minimo = " . Self::$minDecimals);
         }
 
         Self::$type = 'float';
@@ -136,14 +132,12 @@ class SpellNumber
     # VALORES PARA MONEDAS
     #-------------------------------------
 
-    public function currency(string $arg_currency)
-    {
+    public function currency(string $arg_currency){
         $this->currency = ucwords(strtolower($arg_currency));
         return $this;
     }
     
-    public function fraction(string $fraction)
-    {
+    public function fraction(string $fraction){
         $this->fraction = ucwords(strtolower($fraction));
         return $this;
     }
@@ -153,21 +147,19 @@ class SpellNumber
     #-------------------------------------
 
     /* Salida del Valor a Letras */
-    public function toLetters()
-    {
+    public function toLetters(){
         if ($this->initializer == 'integer') {
             $letters = $this->numtoletras($this->integer_string);
         } else if ($this->initializer == 'float') {
             $letters_int = $this->numtoletras($this->integer_string);
             $letters_dec = $this->numtoletras($this->decimal_string);
-            $letters = $letters_int . " Con " . $letters_dec;
+            $letters = $letters_int . " coma " . $letters_dec;
         }
         return $letters;
     }
 
     /* Salida del Valor a Letras De Moneda */
-    public function toMoney()
-    {
+    public function toMoney(){
 
         /* Definir Moneda */
         $currency = $this->currency ?? 'Peso';
@@ -247,8 +239,7 @@ class SpellNumber
     }
 
     /* Genera el Subfijo de la Sifra */
-    private function subfijo($value)
-    {
+    private function subfijo($value){
 
         /* Eliminar Espacios */
         $value = trim($value);
@@ -268,17 +259,15 @@ class SpellNumber
     }
 
     /* De Numeros A Letras */
-    public function numtoletras($value_string, $subject = null)
-    {
+    public function numtoletras($value_string, $subject = null){
         /* ARREGLO DE VALORES EN TEXTO */
         $arrayLetters = $this->arrayLetters();
 
         /* Eliminar Espacios y volver numero */
         $value = intval(trim($value_string));
-        
+
         /* Ajusto la longitud de la cifra, para que sea divisible por centenas de miles (grupos de 6) */
         $num_string_full = $value_string;
-
         $cadena_str = "";
 
         for ($i = 0; $i < 3; $i++) {
@@ -294,15 +283,15 @@ class SpellNumber
 
             while ($end) {
 
+                /* Si ya llegó al límite máximo de enteros */
                 if ($i_auxiliar == $limite) { 
-                    /* Si ya llegó al límite máximo de enteros */
                     break; 
                 }
 
                 /* Comienzo con los tres primeros digitos de la cifra, comenzando por la izquierda */
                 $digitos = ($limite - $i_auxiliar) * -1; 
 
-                /* obtengo la centena (los tres dígitos) */
+                /* Obtengo la centena (los tres dígitos) */
                 $num_substring = substr($num_substring, $digitos, abs($digitos)); 
 
                 /* Ciclo para revisar centenas, decenas y unidades, en ese orden */
@@ -310,9 +299,8 @@ class SpellNumber
 
                     switch ($i2) {
 
-                        /* checa las centenas */
+                        /* Checa las centenas */
                         case 1: 
-
                             if (!(substr($num_substring, 0, 3) < 100)){
 
                                 $key = (int) substr($num_substring, 0, 3);
@@ -343,7 +331,6 @@ class SpellNumber
                                 }
                             }
                             break;
-
                         case 2: 
                             /* Checa las decenas (con la misma lógica que las centenas) */
                             if (!(substr($num_substring, 1, 2) < 10)){
@@ -374,7 +361,6 @@ class SpellNumber
                                 }
                             }
                             break;
-
                         case 3: 
                             /* Checa las unidades */
                             if (!(substr($num_substring, 2, 1) < 1)) {
@@ -393,13 +379,13 @@ class SpellNumber
 
             }
 
+            /* Si la cadena obtenida termina en MILLON o BILLON, entonces le agrega al final la conjuncion DE */
             if ((substr(trim($cadena_str), -5, 5) == "ILLON") && (!empty($subject))) {
-                /* Si la cadena obtenida termina en MILLON o BILLON, entonces le agrega al final la conjuncion DE */
                 $cadena_str .= " DE";
             }
 
+            /* Si la cadena obtenida en MILLONES o BILLONES, entoncea le agrega al final la conjuncion DE */
             if ((substr(trim($cadena_str), -7, 7) == "ILLONES") && (!empty($subject))) {
-                /* Si la cadena obtenida en MILLONES o BILLONES, entoncea le agrega al final la conjuncion DE */
                 $cadena_str .= " DE";
             }
 
@@ -411,7 +397,6 @@ class SpellNumber
                         } else {
                             $cadena_str .= " BILLONES ";
                         }
-
                         break;
                     case 1:
                         if (trim(substr($num_string_full, $i * 6, 6)) == "1") {
@@ -419,7 +404,6 @@ class SpellNumber
                         } else {
                             $cadena_str .= " MILLONES ";
                         }
-
                         break;
                     case 2:
                         if ($value < 1) {
@@ -435,15 +419,14 @@ class SpellNumber
                 }
             }
             
-            /* Quito el espacio para el VEINTI, para que quede: VEINTICUATRO, VEINTIUN, VEINTIDOS, etc */
+            /* Limpiezas Cadenas */
             $cadena_str = str_replace("VEINTI ", "VEINTI", $cadena_str); 
-            $cadena_str = str_replace("  ", " ", $cadena_str); /* Quito espacios dobles */
-            $cadena_str = str_replace("UN UN", "UN", $cadena_str); /* Quito la duplicidad */
-            $cadena_str = str_replace("  ", " ", $cadena_str); /* Quito espacios dobles */
-            $cadena_str = str_replace("BILLON DE MILLONES", "BILLON DE", $cadena_str); /* Corrigo la leyenda */
-            $cadena_str = str_replace("BILLONES DE MILLONES", "BILLONES DE", $cadena_str); /* Corrigo la leyenda */
-            $cadena_str = str_replace("DE UN", "UN", $cadena_str); /* Corrigo la leyenda */
-            // $cadena_str = str_replace("UN MIL", "MIL", $cadena_str); /* Corrigo la leyenda */
+            $cadena_str = str_replace("  ", " ", $cadena_str);
+            $cadena_str = str_replace("UN UN", "UN", $cadena_str);
+            $cadena_str = str_replace("  ", " ", $cadena_str);
+            $cadena_str = str_replace("BILLON DE MILLONES", "BILLON DE", $cadena_str);
+            $cadena_str = str_replace("BILLONES DE MILLONES", "BILLONES DE", $cadena_str);
+            $cadena_str = str_replace("DE UN", "UN", $cadena_str);
         }
 
         return ucwords(strtolower(trim($cadena_str)));
