@@ -12,7 +12,8 @@ use Exception;
  * V 1.0.0
  */
 
-class SpellNumber {
+class SpellNumber
+{
 
     /* Propiedades Inicializador */
     private static $type;

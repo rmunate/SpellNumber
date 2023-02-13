@@ -8,12 +8,11 @@ Convierta de manera sencilla números a letras (Solo en idioma Español), esta l
 ## Instalación
 # Instalar a través de Composer
 
-```sh
-composer require rmunate/spell-number
+```console
+composer require rmunate/spell-number 1.0.x-dev
 ```
 
 ## Generalidades
-
 - El número entero más grande aceptado es 999999999999999999
 - El decimal más grande aceptado es 99
 - El método `->current('PESO')` asigna una S o ES al final en caso de que el numero sea mayor a 1, de no usarse, usará el valor PESO / PESOS
@@ -34,7 +33,7 @@ composer require rmunate/spell-number
 | ``` SpellNumber::float('1000.50')->currency('DOLAR')->fraction('CENTAVO')->toMoney() ``` | Retorna el valor en letras "Capital Case" como valor de "en este caso Dolares y Centavos" en letras.  |
 
 # Ejemplo de Uso
-```sh
+```php
 SpellNumber::float('2000,50')->currency('Sol')->fraction('Centimo')->toMoney();
 // "Dos Mil Soles Con Cincuenta Centimos"
 
@@ -44,7 +43,6 @@ SpellNumber::float('2000,50')->toMoney();
 ```
 
 ## Desarrollador(es)
-
 - Ingeniero, Raúl Mauricio Uñate Castro
 - raulmauriciounate@gmail.com
 - (Se reciben recomendaciones y mejoras al correo electronico.)

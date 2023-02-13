@@ -3,6 +3,7 @@ vendor
 /.fleet
 /.idea
 /.vscode
+/.DS_Store
 .fleet
 .idea
 .vscode
