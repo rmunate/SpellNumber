@@ -23,24 +23,24 @@ final class Replaces
             'illion' => 'illion Of',
         ],
         'es' => [
-            'illón' => 'illón De',
-            'illones' => 'illones De'
+            'illón'   => 'illón De',
+            'illones' => 'illones De',
         ],
         'pt' => [
-            'ilhão' => 'ilhão De',
-            'ilhões' => 'ilhões De'
+            'ilhão'  => 'ilhão De',
+            'ilhões' => 'ilhões De',
         ],
         'fr' => [
-            'illion' => 'illion De',
-            'illions' => 'illions De'
+            'illion'  => 'illion De',
+            'illions' => 'illions De',
         ],
         'it' => [
             'ilione' => 'ilione Di',
-            'ilioni' => 'ilioni Di'
+            'ilioni' => 'ilioni Di',
         ],
         'ro' => [
-            'ilion' => 'ilion De',
-            'ilioane' => 'ilioane De'
+            'ilion'   => 'ilion De',
+            'ilioane' => 'ilioane De',
         ],
     ];
 
@@ -49,7 +49,7 @@ final class Replaces
      */
     private const GENERAL_CASE = [
         'es' => [
-            'un pesos' => 'un peso',
+            'un pesos'    => 'un peso',
             'un centavos' => 'un centavo',
         ],
     ];
@@ -57,17 +57,19 @@ final class Replaces
     /**
      * Perform replacements in the given text based on the language and current currency.
      *
-     * @param string $value The original text string.
-     * @param string $locale The language of the text.
+     * @param string $value   The original text string.
+     * @param string $locale  The language of the text.
      * @param string $current The current currency.
-     * @return string The adjusted text with the replacements performed.
+     *
      * @throws \InvalidArgumentException If the parameters are invalid.
+     *
+     * @return string The adjusted text with the replacements performed.
      */
     public static function locale(string $value, string $locale, string $current): string
     {
         // Parameter validation
         if (empty($value) || empty($locale) || empty($current)) {
-            throw new \InvalidArgumentException("All parameters must have a value.");
+            throw new \InvalidArgumentException('All parameters must have a value.');
         }
 
         // Replace final strings for each language
@@ -88,7 +90,7 @@ final class Replaces
         }
 
         // Assign the currency value
-        $value = Str::lower($value . ' ' . $current);
+        $value = Str::lower($value.' '.$current);
 
         foreach ($replacesGeneral as $search => $replace) {
             if (substr_compare($value, $search, -strlen($search)) === 0) {
