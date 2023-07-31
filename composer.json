@@ -1,13 +1,17 @@
 {
     "name": "rmunate/spell-number",
-    "description": "Convierta de números a letras, ideal para uso en facturas, remisiones ó similares.",
+    "description": "Easily convert numbers to letters, this library supports the native PHP INTL extension with which we can easily convert numbers to letters. This library provides us with the possibility of converting only to numbers or to currency formats depending on the language to be used, this package has support in the languages in: English, es: Spanish, pt: Portuguese, fr: French, it: Italian. ro: Romanian.",
     "keywords": [
         "letras",
-        "numeros",
+        "towords",
+        "toletters",
+        "números",
+        "numbers",
         "spell",
         "altum",
         "rmunate"
     ],
+    "homepage": "https://github.com/rmunate/SpellNumber",
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -18,15 +22,17 @@
     "authors": [
         {
             "name": "Raul Mauricio Uñate Castro",
-            "email": "raulmauriciounate@gmail.com"
+            "email": "raulmauriciounate@gmail.com",
+            "homepage": "https://github.com/rmunate",
+            "role": "owner"
         }
     ],
     "require": {
-        "php": ">=7.4"
+        "php": "^7.4|^8.0",
+        "ext-intl": "*",
+        "illuminate/support": "^8.0|^9.0|^10.0",
     },
-    "require-dev": {
-
-    },
+    "require-dev": {},
     "extra" : {
         "branch-alias" : {
             "dev-main": "1.0.x-dev"

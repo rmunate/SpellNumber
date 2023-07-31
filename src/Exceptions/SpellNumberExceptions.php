@@ -5,18 +5,22 @@ namespace Rmunate\Utilities\Exceptions;
 use Exception;
 use Throwable;
 
-class SpellNumberExceptions extends Exception
+/**
+ * The SpellNumberExceptions class extends Exception and provides custom exception handling for the SpellNumber library.
+ */
+final class SpellNumberExceptions extends Exception
 {
     /**
-     * Método estático para lanzar la excepción desde la clase donde se llame.
+     * Static method to throw the exception from the calling class.
      *
-     * @param string $message El mensaje de la excepción.
-     * @param int $code El código de la excepción (opcional).
-     * @param Throwable|null $previous La excepción anterior (opcional).
-     * @throws SpellNumberExceptions Cambio "CustomException" a "SpellNumberExceptions"
+     * @param string $message The exception message.
+     * @param int $code The exception code (optional).
+     * @param Throwable|null $previous The previous exception (optional).
+     * @throws SpellNumberExceptions Changed "CustomException" to "SpellNumberExceptions".
+     * @return SpellNumberExceptions An instance of SpellNumberExceptions.
      */
     public static function create($message, $code = 0, Throwable $previous = null)
     {
-        return new self($message, $code, $previous);
+        return new self("SpellNumber - " . $message, $code, $previous);
     }
 }

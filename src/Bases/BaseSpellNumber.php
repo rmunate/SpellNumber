@@ -2,8 +2,11 @@
 
 namespace Rmunate\Utilities\Bases;
 
-use Rmunate\Utilities\Miscellaneous\Utilities;
+use Exception;
+use NumberFormatter;
 use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
+use Rmunate\Utilities\Langs\Langs;
+use Rmunate\Utilities\Validator\SpellNumberValidator;
 
 /**
  * The BaseSpellNumber abstract class provides a base for converting numeric values to words.
@@ -18,26 +21,9 @@ abstract class BaseSpellNumber
      * @return static An instance of the child class.
      * @throws SpellNumberExceptions When the Intl extension is not available or the value is not valid (integer or double).
      */
-    public static function create($value)
+    public static function value($value)
     {
-        // Check if the intl extension is installed.
-        if (!Utilities::validateExtension('intl')) {
-            throw SpellNumberExceptions::create(
-                'BaseSpellNumber::create(?) - The Intl extension is not installed or not available.'
-            );
-        }
-
-        // Validate that it is a valid number (integer or double).
-        if (!Utilities::isValidNumber($value)) {
-            throw SpellNumberExceptions::create(
-                'BaseSpellNumber::create(?) - The supplied value is not valid. It must be of type integer or float (double).'
-            );
-        }
-
-        // Determine the type (integer or double).
-        $type = Utilities::isValidInteger($value) ? 'integer' : 'double';
-
-        // Return new instance.
+        $type = SpellNumberValidator::check('mixed', $value)->result();
         return new static($value, $type);
     }
 
@@ -50,21 +36,7 @@ abstract class BaseSpellNumber
      */
     public static function integer($value)
     {
-        // Check if the intl extension is installed.
-        if (!Utilities::validateExtension('intl')) {
-            throw SpellNumberExceptions::create(
-                'BaseSpellNumber::integer(?) - The Intl extension is not installed or not available.'
-            );
-        }
-
-        // Validate that it is a valid integer.
-        if (!Utilities::isValidInteger($value)) {
-            throw SpellNumberExceptions::create(
-                'BaseSpellNumber::integer(?) - The supplied value is not valid. It must be of type integer.'
-            );
-        }
-
-        // Return new instance.
+        SpellNumberValidator::check('integer', $value)->result();
         return new static($value, 'integer');
     }
 
@@ -77,22 +49,17 @@ abstract class BaseSpellNumber
      */
     public static function float($value)
     {
-        // Check if the intl extension is installed.
-        if (!Utilities::validateExtension('intl')) {
-            throw SpellNumberExceptions::create(
-                'BaseSpellNumber::float(?) - The Intl extension is not installed or not available.'
-            );
-        }
-
-        // Validate that it is a valid float.
-        if (!Utilities::isValidDouble($value)) {
-            throw SpellNumberExceptions::create(
-                'BaseSpellNumber::float(?) - The supplied value is not valid. It must be of type float (double).'
-            );
-        }
-
-        // Return new instance.
+        SpellNumberValidator::check('double', $value)->result();
         return new static($value, 'double');
     }
-    
+
+    /**
+     * Retrieves a list of all available locales supported by the NumberFormatter class.
+     *
+     * @return array An array containing all available locales.
+     */
+    public static function getAllLocales()
+    {
+        return Langs::LOCALES;
+    }
 }
