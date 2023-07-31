@@ -2,8 +2,8 @@
 
 namespace Rmunate\Utilities\Validator\Traits;
 
-use Rmunate\Utilities\Miscellaneous\Utilities;
 use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
+use Rmunate\Utilities\Miscellaneous\Utilities;
 
 trait CommonValidate
 {
@@ -11,6 +11,7 @@ trait CommonValidate
      * Validate that the "Intl" extension is loaded.
      *
      * @throws SpellNumberExceptions If the "Intl" extension is not installed or not available.
+     *
      * @return bool
      */
     private function validateExtension()
@@ -27,6 +28,7 @@ trait CommonValidate
      * Validate if the value is numeric.
      *
      * @throws SpellNumberExceptions If the supplied value is not valid (not integer or float).
+     *
      * @return bool
      */
     private function validateNumeric()
@@ -34,6 +36,7 @@ trait CommonValidate
         if (!Utilities::isValidNumber($this->value)) {
             throw SpellNumberExceptions::create('The supplied value is not valid. It must be of type integer or float (double).');
         }
+
         return true;
     }
 
@@ -41,6 +44,7 @@ trait CommonValidate
      * Validate if the value is an integer.
      *
      * @throws SpellNumberExceptions If the supplied value is not a valid integer.
+     *
      * @return bool
      */
     private function validateInteger()
@@ -48,6 +52,7 @@ trait CommonValidate
         if (!Utilities::isValidInteger($this->value)) {
             throw SpellNumberExceptions::create('The supplied value is not valid. It must be of type integer.');
         }
+
         return true;
     }
 
@@ -55,6 +60,7 @@ trait CommonValidate
      * Validate if the value is a string.
      *
      * @throws SpellNumberExceptions If the supplied value is not a valid string.
+     *
      * @return bool
      */
     private function validateString()
@@ -62,6 +68,7 @@ trait CommonValidate
         if (!Utilities::isValidString($this->value)) {
             throw SpellNumberExceptions::create('The supplied value is not valid. It must be of type String.');
         }
+
         return true;
     }
 
@@ -69,6 +76,7 @@ trait CommonValidate
      * Validate if the value does not exceed the maximum allowed value.
      *
      * @throws SpellNumberExceptions If the entered value exceeds the maximum allowed value.
+     *
      * @return bool
      */
     private function validateMaximun()
@@ -76,6 +84,7 @@ trait CommonValidate
         if (!Utilities::isNotExceedMax($this->value)) {
             throw SpellNumberExceptions::create('The value entered is too large and has been converted to scientific notation which prevents processing.');
         }
+
         return true;
     }
 

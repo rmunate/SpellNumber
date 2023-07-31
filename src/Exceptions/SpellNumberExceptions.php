@@ -13,14 +13,16 @@ final class SpellNumberExceptions extends Exception
     /**
      * Static method to throw the exception from the calling class.
      *
-     * @param string $message The exception message.
-     * @param int $code The exception code (optional).
+     * @param string         $message  The exception message.
+     * @param int            $code     The exception code (optional).
      * @param Throwable|null $previous The previous exception (optional).
+     *
      * @throws SpellNumberExceptions Changed "CustomException" to "SpellNumberExceptions".
+     *
      * @return SpellNumberExceptions An instance of SpellNumberExceptions.
      */
     public static function create($message, $code = 0, Throwable $previous = null)
     {
-        return new self("SpellNumber - " . $message, $code, $previous);
+        return new self('SpellNumber - '.$message, $code, $previous);
     }
 }

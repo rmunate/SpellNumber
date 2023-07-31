@@ -17,8 +17,8 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
     /**
      * Create a new instance of the SpellNumberValidator.
      *
-     * @param string $type The type of data to validate (e.g., "mixed", "integer", "float").
-     * @param mixed $value The value to validate.
+     * @param string $type  The type of data to validate (e.g., "mixed", "integer", "float").
+     * @param mixed  $value The value to validate.
      */
     public function __construct(string $type, $value)
     {
@@ -46,6 +46,7 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
         $this->validateNumeric();
         $this->validateMaximun();
         $this->response = $this->validateType();
+
         return $this;
     }
 
@@ -58,6 +59,7 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
     {
         $this->validateInteger();
         $this->response = $this->validateMaximun();
+
         return $this;
     }
 
@@ -70,6 +72,7 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
     {
         $this->validateString();
         $this->response = $this->validateMaximun();
+
         return $this;
     }
 
