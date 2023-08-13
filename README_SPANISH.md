@@ -107,8 +107,8 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 
 ## Contribuidores
 Idioma Farsi
-- <img src="https://avatars.githubusercontent.com/u/56381478?v=4" alt="Imagen de perfil" width="30" style="border-radius: 50%;">
-  [Siros Fakhri](https://github.com/sirosfakhri)
+
+<img src="https://avatars.githubusercontent.com/u/56381478?v=4" alt="Imagen de perfil" width="30" style="border-radius: 50%;">[Siros Fakhri](https://github.com/sirosfakhri)
 
 ## Licencia
 
