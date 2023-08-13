@@ -27,12 +27,12 @@ final class Langs
      * @var array
      */
     public const LOCALES_CONNECTORS = [
-        'en' => 'and',   // English from the United States: "and"
-        'es' => 'con',   // Spanish from Spain: "con"
-        'pt' => 'com',   // Portuguese from Portugal: "com"
-        'fr' => 'et',    // French from France: "et"
-        'it' => 'con',   // Italian from Italy: "con"
-        'ro' => 'cu',    // Romanian from Romania: "cu"
+        'en' => 'and',      // English from the United States: "and"
+        'es' => 'con',      // Spanish from Spain: "con"
+        'pt' => 'com',      // Portuguese from Portugal: "com"
+        'fr' => 'et',       // French from France: "et"
+        'it' => 'con',      // Italian from Italy: "con"
+        'ro' => 'cu',       // Romanian from Romania: "cu"
         'fa' => 'ممیز',     // Farsi from Iran: "ممیز"
     ];
 
@@ -45,10 +45,10 @@ final class Langs
         'en' => 'of',   // English from the United States: "of"
         'es' => 'de',   // Spanish from Spain: "de"
         'pt' => 'de',   // Portuguese from Portugal: "de"
-        'fr' => 'de',    // French from France: "de"
+        'fr' => 'de',   // French from France: "de"
         'it' => 'di',   // Italian from Italy: "di"
-        'ro' => 'de',    // Romanian from Romania: "de"
-        'fa' => 'از',     // Farsi from Iran: "از"
+        'ro' => 'de',   // Romanian from Romania: "de"
+        'fa' => 'از',   // Farsi from Iran: "از"
     ];
 
     /**
