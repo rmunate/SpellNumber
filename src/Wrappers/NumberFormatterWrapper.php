@@ -14,12 +14,12 @@ final class NumberFormatterWrapper
     /**
      * Format a given numeric value as a spelled-out string.
      *
-     * @param float|int $value  The numeric value to format.
-     * @param string    $locale The locale used for formatting the number. Optional.
+     * @param float|int $value The numeric value to format.
+     * @param string|null $locale The locale used for formatting the number. Optional.
      *
      * @return string|null The spelled-out representation of the number, or null on failure.
      */
-    public static function format($value, string $locale = null)
+    public static function format(float|int $value, string $locale = null): ?string
     {
         // If no locale is provided, use the default locale from the environment.
         $locale = $locale ?: Langs::getLocaleLaravel();

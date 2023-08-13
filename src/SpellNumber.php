@@ -24,10 +24,10 @@ class SpellNumber extends BaseSpellNumber
     public const FRACTION = 'Centavos';
 
     private $value;
-    private $type;
-    protected $locale;
-    protected $currency;
-    protected $fraction;
+    private string $type;
+    protected string $locale;
+    protected string $currency;
+    protected string $fraction;
 
     /**
      * Constructor.
@@ -35,7 +35,7 @@ class SpellNumber extends BaseSpellNumber
      * @param mixed  $value The numeric value to convert to words.
      * @param string $type  The type of the value ('integer' or 'double').
      */
-    public function __construct($value, $type)
+    public function __construct($value, string $type)
     {
         $this->value = $value;
         $this->type = $type;

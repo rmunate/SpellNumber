@@ -42,6 +42,9 @@ final class Replaces
             'ilion'   => 'ilion De',
             'ilioane' => 'ilioane De',
         ],
+        'fa' => [
+            'ilion'   => 'میلیون و',
+        ],
     ];
 
     /**
