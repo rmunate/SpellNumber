@@ -14,7 +14,7 @@ final class NumberFormatterWrapper
     /**
      * Format a given numeric value as a spelled-out string.
      *
-     * @param float|int $value The numeric value to format.
+     * @param float|int   $value  The numeric value to format.
      * @param string|null $locale The locale used for formatting the number. Optional.
      *
      * @return string|null The spelled-out representation of the number, or null on failure.
