@@ -106,9 +106,7 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 - Email: raulmauriciounate@gmail.com
 
 ## Contributors
-<a href="https://github.com/sirosfakhri">
-    <img src="https://avatars.githubusercontent.com/u/56381478?v=4" alt="Imagen de perfil" width="40" height="40" style="border-radius: 50%;">
-</a>
+[![Imagen de perfil](https://avatars.githubusercontent.com/u/56381478?v=4){: width="40" height="40" style="border-radius: 50%;"}](https://github.com/sirosfakhri)
 [Siros Fakhri](https://github.com/sirosfakhri)
 
 ## License
