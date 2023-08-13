@@ -18,6 +18,7 @@ final class Langs
         'fr',    // French from France
         'it',    // Italian from Italy
         'ro',    // Romanian from Romania
+        'fa',    // Farsi from Iran
     ];
 
     /**
@@ -32,6 +33,7 @@ final class Langs
         'fr' => 'et',    // French from France: "et"
         'it' => 'con',   // Italian from Italy: "con"
         'ro' => 'cu',    // Romanian from Romania: "cu"
+        'fa' => 'ممیز',     // Farsi from Iran: "ممیز"
     ];
 
     /**
@@ -46,15 +48,14 @@ final class Langs
         'fr' => 'de',    // French from France: "de"
         'it' => 'di',   // Italian from Italy: "di"
         'ro' => 'de',    // Romanian from Romania: "de"
+        'fa' => 'از',     // Farsi from Iran: "از"
     ];
 
     /**
      * Get the language locale used in Laravel application.
      * If the locale is supported in ISO 639-1 format, return it. Otherwise, return the default.
-     *
-     * @return string
      */
-    public static function getLocaleLaravel()
+    public static function getLocaleLaravel(): string
     {
         $localeLaravel = App::getLocale();
         $iso639_1 = substr($localeLaravel, 0, 2);

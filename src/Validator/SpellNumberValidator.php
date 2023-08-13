@@ -3,6 +3,7 @@
 namespace Rmunate\Utilities\Validator;
 
 use Rmunate\Utilities\Bases\BaseSpellNumberValidator;
+use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
 use Rmunate\Utilities\Validator\Traits\CommonValidate;
 
 final class SpellNumberValidator extends BaseSpellNumberValidator
@@ -17,8 +18,9 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
     /**
      * Create a new instance of the SpellNumberValidator.
      *
-     * @param string $type  The type of data to validate (e.g., "mixed", "integer", "float").
-     * @param mixed  $value The value to validate.
+     * @param string $type The type of data to validate (e.g., "mixed", "integer", "float").
+     * @param mixed $value The value to validate.
+     * @throws SpellNumberExceptions
      */
     public function __construct(string $type, $value)
     {
@@ -40,11 +42,12 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
      * Validate when the type is "mixed".
      *
      * @return $this
+     * @throws SpellNumberExceptions
      */
     public function mixed()
     {
         $this->validateNumeric();
-        $this->validateMaximun();
+        $this->validateMaximum();
         $this->response = $this->validateType();
 
         return $this;
@@ -54,11 +57,12 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
      * Validate when the type is "integer".
      *
      * @return $this
+     * @throws SpellNumberExceptions
      */
     public function integer()
     {
         $this->validateInteger();
-        $this->response = $this->validateMaximun();
+        $this->response = $this->validateMaximum();
 
         return $this;
     }
@@ -67,11 +71,12 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
      * Validate when the type is "float".
      *
      * @return $this
+     * @throws SpellNumberExceptions
      */
     public function float()
     {
         $this->validateString();
-        $this->response = $this->validateMaximun();
+        $this->response = $this->validateMaximum();
 
         return $this;
     }
@@ -81,7 +86,7 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
      *
      * @return mixed The result of the validation.
      */
-    public function result()
+    public function result(): mixed
     {
         return $this->response;
     }
