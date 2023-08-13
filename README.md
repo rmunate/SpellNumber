@@ -106,9 +106,10 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 - Email: raulmauriciounate@gmail.com
 
 ## Contributors
-Farsi language:
-
-<img src="https://avatars.githubusercontent.com/u/56381478?v=4" alt="Profile Image" width="30" style="border-radius: 50%;">[Siros Fakhri](https://github.com/sirosfakhri)
+<a href="https://github.com/sirosfakhri">
+    <img src="https://avatars.githubusercontent.com/u/56381478?v=4" alt="Imagen de perfil" width="40" height="40" style="border-radius: 50%;">
+</a>
+[Siros Fakhri](https://github.com/sirosfakhri)
 
 ## License
 
