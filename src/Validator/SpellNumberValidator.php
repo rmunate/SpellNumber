@@ -18,8 +18,9 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
     /**
      * Create a new instance of the SpellNumberValidator.
      *
-     * @param string $type The type of data to validate (e.g., "mixed", "integer", "float").
-     * @param mixed $value The value to validate.
+     * @param string $type  The type of data to validate (e.g., "mixed", "integer", "float").
+     * @param mixed  $value The value to validate.
+     *
      * @throws SpellNumberExceptions
      */
     public function __construct(string $type, $value)
@@ -41,8 +42,9 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
     /**
      * Validate when the type is "mixed".
      *
-     * @return $this
      * @throws SpellNumberExceptions
+     *
+     * @return $this
      */
     public function mixed()
     {
@@ -56,8 +58,9 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
     /**
      * Validate when the type is "integer".
      *
-     * @return $this
      * @throws SpellNumberExceptions
+     *
+     * @return $this
      */
     public function integer()
     {
@@ -70,8 +73,9 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
     /**
      * Validate when the type is "float".
      *
-     * @return $this
      * @throws SpellNumberExceptions
+     *
+     * @return $this
      */
     public function float()
     {
