@@ -119,8 +119,8 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 - Email: raulmauriciounate@gmail.com
 
 ## Contributors
-[Siros Fakhri](https://github.com/sirosfakhri) (Farsi Language)
-[Ashok Devatwal](https://github.com/ashokdevatwal) (Hindi Language)
+- [Siros Fakhri](https://github.com/sirosfakhri) (Farsi Language)
+- [Ashok Devatwal](https://github.com/ashokdevatwal) (Hindi Language)
 
 ## License
 
