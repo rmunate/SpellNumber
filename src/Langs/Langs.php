@@ -20,6 +20,7 @@ final class Langs
         'ro',    // Romanian from Romania
         'fa',    // Farsi from Iran
         'hi',    // Hindi from India
+        'pl',    // Polish from Poland
     ];
 
     /**
@@ -36,6 +37,7 @@ final class Langs
         'ro' => 'cu',       // Romanian from Romania: "cu"
         'fa' => 'ممیز',     // Farsi from Iran: "ممیز"
         'hi' => 'और',       // Hindi from India: "और"
+        'pl' => 'i',        // Polish from Poland: "i"
     ];
 
     /**
