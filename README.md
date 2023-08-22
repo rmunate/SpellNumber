@@ -1,6 +1,6 @@
 # Convert Numbers to Words in Laravel
 
-Easily convert numbers to words in Laravel using this library, which leverages the native `PHP INTL` extension to perform conversion effortlessly. With this library, you can convert numbers to words in various languages and also obtain the value in currency format according to the selected language. Supported languages include English, Spanish, Portuguese, French, Italian, Romanian, Hindi, Polish and with the contribution of [Siros Fakhri](https://github.com/sirosfakhri), Persian (Farsi) support has been added.
+Easily convert numbers to words in Laravel using this library, which leverages the native `PHP INTL` extension to perform conversion effortlessly. With this library, you can convert numbers to words in various languages and also obtain the value in currency format according to the selected language. Supported languages include English, Spanish, Portuguese, French, Italian, Romanian, Hindi, Polish and Persian (Farsi).
 
 ⚙️ This library is compatible with Laravel versions 8.0 and higher ⚙️
 
@@ -38,7 +38,7 @@ To obtain the current list of languages with support, execute the following comm
 
 ```php
 SpellNumber::getAllLocales();
-// array:7 [▼
+// array [▼
 //     0 => "en" (English)
 //     1 => "es" (Spanish)
 //     2 => "pt" (Portuguese)
@@ -125,6 +125,7 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 ## Contributors
 - [Siros Fakhri](https://github.com/sirosfakhri) (Farsi Language)
 - [Ashok Devatwal](https://github.com/ashokdevatwal) (Hindi Language)
+- [Olsza](https://github.com/olsza) (Polish Language)
 
 ## License
 
