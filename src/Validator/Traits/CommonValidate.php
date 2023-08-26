@@ -18,7 +18,7 @@ trait CommonValidate
         if (!Utilities::validateExtension('Intl')) {
             throw SpellNumberExceptions::create('The Intl extension is not installed or not available.');
         }
-        // If it exists
+        
         return true;
     }
 

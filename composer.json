@@ -25,6 +25,22 @@
             "email": "raulmauriciounate@gmail.com",
             "homepage": "https://github.com/rmunate",
             "role": "owner"
+        },
+        {
+            "name": "Olsza",
+            "homepage": "https://github.com/olsza",
+            "role": "developer"
+        },
+        {
+            "name": "Er. Ashok Devatwal",
+            "email": "ashokdev78@gmail.com",
+            "homepage": "https://github.com/ashokdevatwal",
+            "role": "developer"
+        },
+        {
+            "name": "Siros Fakhri",
+            "homepage": "https://github.com/sirosfakhri",
+            "role": "developer"
         }
     ],
     "require": {

@@ -1,8 +1,8 @@
-# Convertir Números a Letras en Laravel
+# Convertir Números a Palabras en Laravel
 
-Convierte fácilmente números a letras en Laravel utilizando esta biblioteca, que emplea la extensión nativa `PHP INTL` para realizar la conversión de manera sencilla. Con esta librería, puedes convertir números a letras en varios idiomas y también obtener el valor en formato de moneda según el idioma seleccionado. Los idiomas con soporte incluyen inglés, español, portugués, francés, italiano, rumano y gracias a la colaboración de [Siros Fakhri](https://github.com/sirosfakhri), también se ha agregado soporte para persa (Farsi).
+Convierte fácilmente números a palabras en Laravel utilizando esta biblioteca, que aprovecha la extensión `PHP INTL` nativa para realizar conversiones sin esfuerzo. Con esta biblioteca, puedes convertir números a palabras en varios idiomas y también obtener el valor en formato de moneda según el idioma seleccionado. Los idiomas admitidos incluyen inglés, español, portugués, francés, italiano, rumano, hindi, polaco y persa (farsi).
 
-⚙️ Esta librería es compatible con versiones de Laravel 8.0 y superiores ⚙️
+⚙️ Esta biblioteca es compatible con las versiones de Laravel 8.0 y superiores ⚙️
 
 ![Laravel 8.0+](https://img.shields.io/badge/Laravel-8.0%2B-orange.svg)
 ![Laravel 9.0+](https://img.shields.io/badge/Laravel-9.0%2B-orange.svg)
@@ -10,12 +10,14 @@ Convierte fácilmente números a letras en Laravel utilizando esta biblioteca, q
 
 ![SpellNumbers](https://github.com/rmunate/SpellNumber/assets/91748598/f2aea68b-fc9f-46be-ae54-a4955f0ce7a2)
 
+📖 [**DOCUMENTATION IN ENGLISH**](README.md) 📖
+
 ## Tabla de Contenidos
 
 - [Instalación](#instalación)
 - [Uso](#uso)
 - [Creador](#creador)
-- [Contribuidores](#contribuidores)
+- [Contribuyentes](#contribuyentes)
 - [Licencia](#licencia)
 
 ## Instalación
@@ -30,15 +32,15 @@ Es importante asegurarse de que la extensión `intl` esté habilitada y cargada 
 
 ## Uso
 
-Después de instalar la dependencia en tu proyecto, puedes empezar a usarla con los siguientes ejemplos:
+Después de instalar la dependencia en tu proyecto, puedes comenzar a usarla con los siguientes ejemplos:
 
-#### Conocer las Configuraciones Regionales con Soporte
+#### Conocer las Configuraciones Regionales Soportadas
 
-Para obtener el listado actual de idiomas con soporte, ejecuta el siguiente comando:
+Para obtener la lista actual de idiomas compatibles, ejecuta el siguiente comando:
 
 ```php
 SpellNumber::getAllLocales();
-// array:7 [▼
+// array [▼
 //     0 => "en" (Inglés)
 //     1 => "es" (Español)
 //     2 => "pt" (Portugués)
@@ -46,12 +48,14 @@ SpellNumber::getAllLocales();
 //     4 => "it" (Italiano)
 //     5 => "ro" (Rumano)
 //     6 => "fa" (Farsi)
+//     7 => "hi" (Hindi) 
+//     8 => "pl" (Polaco)
 // ]
 ```
 
-#### Convertir Números Enteros a Letras
+#### Convertir Enteros a Palabras
 
-Puedes convertir fácilmente números a letras definiendo la configuración regional a aplicar. Si no defines la configuración regional, por defecto se aplicará "en" (Inglés).
+Puedes convertir fácilmente números a palabras definiendo la configuración regional a aplicar. Si no defines una configuración regional, se aplicará "en" (inglés) de forma predeterminada.
 
 ```php
 SpellNumber::value(100)->locale('es')->toLetters();
@@ -62,20 +66,26 @@ SpellNumber::value(100)->locale('fa')->toLetters();
 
 SpellNumber::value(100)->locale('en')->toLetters();
 // "One Hundred"
+
+SpellNumber::value(100)->locale('hi')->toLetters();
+// "एक सौ"
 ```
 
-#### Convertir Números de Coma Flotante
+#### Convertir Números de Punto Flotante
 
-Si lo necesitas, puedes enviar un número de coma flotante como argumento para convertirlo a letras.
+Si es necesario, puedes pasar un número de punto flotante como argumento para convertirlo a palabras.
 
 ```php
 SpellNumber::value(123456789.12)->locale('es')->toLetters();
 // "Ciento Veintitrés Millones Cuatrocientos Cincuenta Y Seis Mil Setecientos Ochenta Y Nueve Con Doce"
+
+SpellNumber::value(123456789.12)->locale('hi')->toLetters();
+// "बारह करोड़ चौंतीस लाख छप्पन हज़ार सात सौ नवासी और बारह"
 ```
 
-#### Convertir a Formato Moneda
+#### Convertir a Formato de Moneda
 
-Este método puede ser útil para facturas, remisiones y similares. Obtén el valor suministrado en formato moneda.
+Este método puede ser útil para facturas, recibos y escenarios similares. Obtiene el valor proporcionado en formato de moneda.
 
 ```php
 SpellNumber::value(100)->locale('es')->currency('pesos')->toMoney();
@@ -86,28 +96,48 @@ SpellNumber::value(100.12)->locale('es')->currency('Pesos')->fraction('centavos'
 
 SpellNumber::value(100)->locale('fa')->currency('تومان')->toMoney();
 // "صد تومان"
+
+SpellNumber::value(100.12)->locale('hi')->currency('रूपये')->fraction('पैसे')->toMoney();
+// "एक सौ रूपये और बारह पैसे"
+
+SpellNumber::value(100)->locale('hi')->currency('रूपये')->toMoney();
+// "एक सौ रूपये"
+
+SpellNumber::value(100.65)->locale('pl')->currency('złotych')->fraction('groszy')->toMoney;
+// "Sto Złotych I Sześćdziesiąt Pięć Groszy"
 ```
 
-#### Otros Métodos Inicializadores
+#### Otros Métodos de Inicialización
 
-Para dar soporte a la versión 1.X, se mantienen los siguientes inicializadores.
+Para admitir la versión 1.X, se mantienen los siguientes métodos de inicialización.
 
 ```php
-// Entero, este método requiere de forma estricta que se envíe un valor entero como argumento.
+// Entero, este método requiere estrictamente un valor entero que se envíe como argumento.
 SpellNumber::integer(100)->locale('es')->toLetters();
 
-// Flotantes, este método requiere de forma estricta que se envíe un valor de cadena de texto como argumento.
+// Números de punto flotante, este método requiere estrictamente un valor de cadena como argumento.
 SpellNumber::float('12345.23')->locale('es')->toLetters();
 ```
 
 ## Creador
 
 - 🇨🇴 Raúl Mauricio Uñate Castro
-- Correo electrónico: raulmauriciounate@gmail.com
+- Correo Electrónico: raulmauriciounate@gmail.com
 
-## Contribuidores
-[Siros Fakhri](https://github.com/sirosfakhri) (Idioma Farsi)
+## Contribuyentes
+
+- [Siros Fakhri](https://github.com/sirosfakhri) (Idioma Farsi)
+- [Ashok Devatwal](https://github.com/ashokdevatwal) (Idioma Hindi)
+- [Olsza](https://github.com/olsza) (Idioma Polaco)
 
 ## Licencia
 
 Este proyecto se encuentra bajo la [Licencia MIT](https://choosealicense.com/licenses/mit/).
+
+🌟 ¡Apoya Mis Proyectos! 🚀
+
+Realiza cualquier contribución que consideres adecuada; el código es completamente tuyo. Juntos, podemos hacer cosas increíbles y mejorar el mundo del desarrollo. Tu apoyo es invaluable. ✨
+
+Si tienes ideas, suger
+
+encias o simplemente quieres colaborar, ¡estamos abiertos a todo! Únete a nuestra comunidad y sé parte de nuestro camino hacia el éxito. 🌐👩‍💻👨‍💻

@@ -29,15 +29,15 @@ final class Langs
      * @var array
      */
     public const LOCALES_CONNECTORS = [
-        'en' => 'and',      // English from the United States: "and"
-        'es' => 'con',      // Spanish from Spain: "con"
-        'pt' => 'com',      // Portuguese from Portugal: "com"
-        'fr' => 'et',       // French from France: "et"
-        'it' => 'con',      // Italian from Italy: "con"
-        'ro' => 'cu',       // Romanian from Romania: "cu"
-        'fa' => 'ممیز',     // Farsi from Iran: "ممیز"
-        'hi' => 'और',       // Hindi from India: "और"
-        'pl' => 'i',        // Polish from Poland: "i"
+        'en' => 'and',  // English from the United States: "and"
+        'es' => 'con',  // Spanish from Spain: "con"
+        'pt' => 'com',  // Portuguese from Portugal: "com"
+        'fr' => 'et',   // French from France: "et"
+        'it' => 'con',  // Italian from Italy: "con"
+        'ro' => 'cu',   // Romanian from Romania: "cu"
+        'fa' => 'ممیز', // Farsi from Iran: "ممیز"
+        'hi' => 'और',   // Hindi from India: "और"
+        'pl' => 'i',    // Polish from Poland: "i"
     ];
 
     /**

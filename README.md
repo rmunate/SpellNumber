@@ -10,6 +10,8 @@ Easily convert numbers to words in Laravel using this library, which leverages t
 
 ![SpellNumbers](https://github.com/rmunate/SpellNumber/assets/91748598/f2aea68b-fc9f-46be-ae54-a4955f0ce7a2)
 
+📖 [**DOCUMENTACIÓN EN ESPAÑOL**](README_SPANISH.md) 📖
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -128,5 +130,10 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 - [Olsza](https://github.com/olsza) (Polish Language)
 
 ## License
+This project is under the [MIT License](https://choosealicense.com/licenses/mit/).
 
-This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
+🌟 Support My Projects! 🚀
+
+Make any contributions you see fit; the code is entirely yours. Together, we can do amazing things and improve the world of development. Your support is invaluable. ✨
+
+If you have ideas, suggestions, or just want to collaborate, we are open to everything! Join our community and be part of our journey to success! 🌐👩‍💻👨‍💻
