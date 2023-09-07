@@ -8,7 +8,7 @@ Convierte fácilmente números a palabras en Laravel utilizando esta biblioteca,
 ![Laravel 9.0+](https://img.shields.io/badge/Laravel-9.0%2B-orange.svg)
 ![Laravel 10.0+](https://img.shields.io/badge/Laravel-10.0%2B-orange.svg)
 
-![SpellNumbers](https://github.com/rmunate/SpellNumber/assets/91748598/f2aea68b-fc9f-46be-ae54-a4955f0ce7a2)
+![logo-spell-number](https://github.com/alejandrodiazpinilla/SpellNumber/assets/51100789/e51cf045-26d0-44e0-a873-3034deaea046)
 
 📖 [**DOCUMENTATION IN ENGLISH**](README.md) 📖
 
