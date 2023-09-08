@@ -103,7 +103,7 @@ SpellNumber::value(100.12)->locale('hi')->currency('रूपये')->fraction(
 SpellNumber::value(100)->locale('hi')->currency('रूपये')->toMoney();
 // "एक सौ रूपये"
 
-SpellNumber::value(100.65)->locale('pl')->currency('złotych')->fraction('groszy')->toMoney;
+SpellNumber::value(100.65)->locale('pl')->currency('złotych')->fraction('groszy')->toMoney();
 // "Sto Złotych I Sześćdziesiąt Pięć Groszy"
 ```
 
