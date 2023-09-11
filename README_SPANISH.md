@@ -40,16 +40,17 @@ Para obtener la lista actual de idiomas compatibles, ejecuta el siguiente comand
 
 ```php
 SpellNumber::getAllLocales();
-// array [▼
-//     0 => "en" (Inglés)
-//     1 => "es" (Español)
-//     2 => "pt" (Portugués)
-//     3 => "fr" (Francés)
-//     4 => "it" (Italiano)
-//     5 => "ro" (Rumano)
-//     6 => "fa" (Farsi)
-//     7 => "hi" (Hindi) 
-//     8 => "pl" (Polaco)
+// array [
+//    'de', // German from Germany
+//    'en', // English from the United States
+//    'es', // Spanish from Spain
+//    'pt', // Portuguese from Portugal
+//    'fr', // French from France
+//    'it', // Italian from Italy
+//    'ro', // Romanian from Romania
+//    'fa', // Farsi from Iran
+//    'hi', // Hindi from India
+//    'pl', // Polish from Poland
 // ]
 ```
 
@@ -129,6 +130,7 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 - [Siros Fakhri](https://github.com/sirosfakhri) (Idioma Farsi)
 - [Ashok Devatwal](https://github.com/ashokdevatwal) (Idioma Hindi)
 - [Olsza](https://github.com/olsza) (Idioma Polaco)
+- [Jens Twesmann](https://github.com/jetwes) (German Language)
 
 ## Licencia
 

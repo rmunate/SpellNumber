@@ -40,16 +40,17 @@ To obtain the current list of languages with support, execute the following comm
 
 ```php
 SpellNumber::getAllLocales();
-// array [▼
-//     0 => "en" (English)
-//     1 => "es" (Spanish)
-//     2 => "pt" (Portuguese)
-//     3 => "fr" (French)
-//     4 => "it" (Italian)
-//     5 => "ro" (Romanian)
-//     6 => "fa" (Farsi)
-//     7 => "hi" (India) 
-//     8 => "pl" (Polish)
+// array [
+//    'de', // German from Germany
+//    'en', // English from the United States
+//    'es', // Spanish from Spain
+//    'pt', // Portuguese from Portugal
+//    'fr', // French from France
+//    'it', // Italian from Italy
+//    'ro', // Romanian from Romania
+//    'fa', // Farsi from Iran
+//    'hi', // Hindi from India
+//    'pl', // Polish from Poland
 // ]
 ```
 
@@ -128,6 +129,7 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 - [Siros Fakhri](https://github.com/sirosfakhri) (Farsi Language)
 - [Ashok Devatwal](https://github.com/ashokdevatwal) (Hindi Language)
 - [Olsza](https://github.com/olsza) (Polish Language)
+- [Jens Twesmann](https://github.com/jetwes) (German Language)
 
 ## License
 This project is under the [MIT License](https://choosealicense.com/licenses/mit/).
