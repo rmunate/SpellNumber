@@ -12,6 +12,7 @@ final class Langs
      * @var array
      */
     public const LOCALES = [
+        'de',    // German from Germany
         'en',    // English from the United States
         'es',    // Spanish from Spain
         'pt',    // Portuguese from Portugal
@@ -29,6 +30,7 @@ final class Langs
      * @var array
      */
     public const LOCALES_CONNECTORS = [
+        'de' => 'und',  // German from Germany: "und"
         'en' => 'and',  // English from the United States: "and"
         'es' => 'con',  // Spanish from Spain: "con"
         'pt' => 'com',  // Portuguese from Portugal: "com"
@@ -46,6 +48,7 @@ final class Langs
      * @var array
      */
     public const LOCALES_CONNECTORS_MONEY = [
+        'de' => 'von',  // German frm Germany: "von"
         'en' => 'of',   // English from the United States: "of"
         'es' => 'de',   // Spanish from Spain: "de"
         'pt' => 'de',   // Portuguese from Portugal: "de"

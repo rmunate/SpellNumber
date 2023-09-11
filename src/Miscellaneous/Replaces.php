@@ -19,6 +19,9 @@ final class Replaces
      * Replacements where the currency needs to be defined at the end.
      */
     private const MONEY_LOCALE_CASE = [
+        'de' => [
+            'illion' => 'illion Von',
+        ],
         'en' => [
             'illion' => 'illion Of',
         ],
