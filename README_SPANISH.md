@@ -2,7 +2,7 @@
 
 Convierte fácilmente números a palabras en Laravel utilizando esta biblioteca, que aprovecha la extensión `PHP INTL` nativa para realizar conversiones sin esfuerzo. Con esta biblioteca, puedes convertir números a palabras en varios idiomas y también obtener el valor en formato de moneda según el idioma seleccionado. Los idiomas admitidos incluyen inglés, español, portugués, francés, italiano, rumano, hindi, polaco y persa (farsi).
 
-⚙️ Esta biblioteca es compatible con las versiones de Laravel 8.0 y superiores ⚙️
+⚙️ Esta biblioteca es compatible con las versiones de PHP +8.0 con Laravel 8.0 y superiores ⚙️
 
 ![Laravel 8.0+](https://img.shields.io/badge/Laravel-8.0%2B-orange.svg)
 ![Laravel 9.0+](https://img.shields.io/badge/Laravel-9.0%2B-orange.svg)
