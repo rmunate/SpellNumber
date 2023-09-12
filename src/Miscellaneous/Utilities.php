@@ -16,7 +16,7 @@ final class Utilities
      *
      * @return bool True if the extension is loaded, false otherwise.
      */
-    public static function validateExtension(string $name): bool
+    public static function validateExtension(string $name)
     {
         return extension_loaded($name);
     }
@@ -28,7 +28,7 @@ final class Utilities
      *
      * @return bool True if the value is numeric, false otherwise.
      */
-    public static function isValidNumber($value): bool
+    public static function isValidNumber($value)
     {
         return is_numeric($value);
     }
@@ -40,7 +40,7 @@ final class Utilities
      *
      * @return bool True if the value is a string, false otherwise.
      */
-    public static function isValidString($value): bool
+    public static function isValidString($value)
     {
         return is_string($value);
     }
@@ -52,7 +52,7 @@ final class Utilities
      *
      * @return bool True if the value is an integer, false otherwise.
      */
-    public static function isValidInteger($value): bool
+    public static function isValidInteger($value)
     {
         return is_int($value);
     }
@@ -64,7 +64,7 @@ final class Utilities
      *
      * @return bool True if the value is a float, false otherwise.
      */
-    public static function isValidDouble($value): bool
+    public static function isValidDouble($value)
     {
         return is_float($value);
     }
@@ -76,7 +76,7 @@ final class Utilities
      *
      * @return bool True if the value does not exceed the maximum, false otherwise.
      */
-    public static function isNotExceedMax($value): bool
+    public static function isNotExceedMax($value)
     {
         //Validate scientific notation.
         if (preg_match('/[+\-E]/i', strval($value)) > 0) {
@@ -105,7 +105,7 @@ final class Utilities
      *
      * @return bool True if the locale is valid and supported, false otherwise.
      */
-    public static function isValidLocale($locale): bool
+    public static function isValidLocale($locale)
     {
         return in_array($locale, Langs::LOCALES);
     }
@@ -117,7 +117,7 @@ final class Utilities
      *
      * @return string The connector for the given locale.
      */
-    public static function connector($locale): string
+    public static function connector($locale)
     {
         $connector = Langs::LOCALES_CONNECTORS;
 
@@ -131,7 +131,7 @@ final class Utilities
      *
      * @return string The money connector for the given locale.
      */
-    public static function connectorMoney($locale): string
+    public static function connectorMoney($locale)
     {
         $connector = Langs::LOCALES_CONNECTORS_MONEY;
 

@@ -8,7 +8,6 @@
         "números",
         "numbers",
         "spell",
-        "altum",
         "rmunate"
     ],
     "homepage": "https://github.com/rmunate/SpellNumber",
@@ -40,6 +39,11 @@
         {
             "name": "Siros Fakhri",
             "homepage": "https://github.com/sirosfakhri",
+            "role": "developer"
+        },
+        {
+            "name": "Jens Twesmann",
+            "homepage": "https://github.com/jetwes",
             "role": "developer"
         }
     ],

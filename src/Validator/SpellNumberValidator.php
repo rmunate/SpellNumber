@@ -90,7 +90,7 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
      *
      * @return mixed The result of the validation.
      */
-    public function result(): mixed
+    public function result()
     {
         return $this->response;
     }

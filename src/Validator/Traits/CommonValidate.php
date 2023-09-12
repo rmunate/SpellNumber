@@ -12,7 +12,7 @@ trait CommonValidate
      *
      * @throws SpellNumberExceptions If the "Intl" extension is not installed or not available.
      */
-    private function validateExtension(): bool
+    private function validateExtension()
     {
         // Check if the intl extension is installed.
         if (!Utilities::validateExtension('Intl')) {
@@ -27,7 +27,7 @@ trait CommonValidate
      *
      * @throws SpellNumberExceptions If the supplied value is not valid (not integer or float).
      */
-    private function validateNumeric(): bool
+    private function validateNumeric()
     {
         if (!Utilities::isValidNumber($this->value)) {
             throw SpellNumberExceptions::create('The supplied value is not valid. It must be of type integer or float (double).');
@@ -41,7 +41,7 @@ trait CommonValidate
      *
      * @throws SpellNumberExceptions If the supplied value is not a valid integer.
      */
-    private function validateInteger(): bool
+    private function validateInteger()
     {
         if (!Utilities::isValidInteger($this->value)) {
             throw SpellNumberExceptions::create('The supplied value is not valid. It must be of type integer.');
@@ -55,7 +55,7 @@ trait CommonValidate
      *
      * @throws SpellNumberExceptions If the supplied value is not a valid string.
      */
-    private function validateString(): bool
+    private function validateString()
     {
         if (!Utilities::isValidString($this->value)) {
             throw SpellNumberExceptions::create('The supplied value is not valid. It must be of type String.');
@@ -69,7 +69,7 @@ trait CommonValidate
      *
      * @throws SpellNumberExceptions If the entered value exceeds the maximum allowed value.
      */
-    private function validateMaximum(): bool
+    private function validateMaximum()
     {
         if (!Utilities::isNotExceedMax($this->value)) {
             throw SpellNumberExceptions::create('The value entered is too large and has been converted to scientific notation which prevents processing.');
@@ -83,7 +83,7 @@ trait CommonValidate
      *
      * @return string Returns "integer" if the value is a valid integer, otherwise "double".
      */
-    private function validateType(): string
+    private function validateType()
     {
         return Utilities::isValidInteger($this->value) ? 'integer' : 'double';
     }

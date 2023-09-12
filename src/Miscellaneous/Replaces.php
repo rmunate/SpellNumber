@@ -71,7 +71,7 @@ final class Replaces
      *
      * @return string The adjusted text with the replacements performed.
      */
-    public static function locale(string $value, string $locale, string $current): string
+    public static function locale(string $value, string $locale, string $current)
     {
         // Parameter validation
         if (empty($value) || empty($locale) || empty($current)) {

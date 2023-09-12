@@ -41,16 +41,16 @@ Para obtener la lista actual de idiomas compatibles, ejecuta el siguiente comand
 ```php
 SpellNumber::getAllLocales();
 // array [
-//    'de', // German from Germany
-//    'en', // English from the United States
-//    'es', // Spanish from Spain
-//    'pt', // Portuguese from Portugal
-//    'fr', // French from France
-//    'it', // Italian from Italy
-//    'ro', // Romanian from Romania
-//    'fa', // Farsi from Iran
-//    'hi', // Hindi from India
-//    'pl', // Polish from Poland
+//    'de', // German
+//    'en', // English
+//    'es', // Spanish
+//    'pt', // Portuguese
+//    'fr', // French
+//    'it', // Italian
+//    'ro', // Romanian
+//    'fa', // Farsi
+//    'hi', // Hindi
+//    'pl', // Polish
 // ]
 ```
 
@@ -109,7 +109,6 @@ SpellNumber::value(100.65)->locale('pl')->currency('złotych')->fraction('groszy
 ```
 
 #### Otros Métodos de Inicialización
-
 Para admitir la versión 1.X, se mantienen los siguientes métodos de inicialización.
 
 ```php
@@ -121,7 +120,6 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 ```
 
 ## Creador
-
 - 🇨🇴 Raúl Mauricio Uñate Castro
 - Correo Electrónico: raulmauriciounate@gmail.com
 
@@ -133,13 +131,12 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 - [Jens Twesmann](https://github.com/jetwes) (German Language)
 
 ## Licencia
-
 Este proyecto se encuentra bajo la [Licencia MIT](https://choosealicense.com/licenses/mit/).
 
 🌟 ¡Apoya Mis Proyectos! 🚀
 
+[![Hazte patrocinador](https://img.shields.io/badge/-Házte%20patrocinador-green?style=for-the-badge&logo=github)](https://github.com/sponsors/rmunate)
+
 Realiza cualquier contribución que consideres adecuada; el código es completamente tuyo. Juntos, podemos hacer cosas increíbles y mejorar el mundo del desarrollo. Tu apoyo es invaluable. ✨
 
-Si tienes ideas, suger
-
-encias o simplemente quieres colaborar, ¡estamos abiertos a todo! Únete a nuestra comunidad y sé parte de nuestro camino hacia el éxito. 🌐👩‍💻👨‍💻
+Si tienes ideas, sugerencias o simplemente quieres colaborar, ¡estamos abiertos a todo! Únete a nuestra comunidad y sé parte de nuestro camino hacia el éxito. 🌐👩‍💻👨‍💻

@@ -41,16 +41,16 @@ To obtain the current list of languages with support, execute the following comm
 ```php
 SpellNumber::getAllLocales();
 // array [
-//    'de', // German from Germany
-//    'en', // English from the United States
-//    'es', // Spanish from Spain
-//    'pt', // Portuguese from Portugal
-//    'fr', // French from France
-//    'it', // Italian from Italy
-//    'ro', // Romanian from Romania
-//    'fa', // Farsi from Iran
-//    'hi', // Hindi from India
-//    'pl', // Polish from Poland
+//    'de', // German
+//    'en', // English
+//    'es', // Spanish
+//    'pt', // Portuguese
+//    'fr', // French
+//    'it', // Italian
+//    'ro', // Romanian
+//    'fa', // Farsi
+//    'hi', // Hindi
+//    'pl', // Polish
 // ]
 ```
 
@@ -121,7 +121,6 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 ```
 
 ## Creator
-
 - 🇨🇴 Raúl Mauricio Uñate Castro
 - Email: raulmauriciounate@gmail.com
 
@@ -135,6 +134,8 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 This project is under the [MIT License](https://choosealicense.com/licenses/mit/).
 
 🌟 Support My Projects! 🚀
+
+[![Become a Sponsor](https://img.shields.io/badge/-Become%20a%20Sponsor-green?style=for-the-badge&logo=github)](https://github.com/sponsors/rmunate)
 
 Make any contributions you see fit; the code is entirely yours. Together, we can do amazing things and improve the world of development. Your support is invaluable. ✨
 

@@ -53,7 +53,7 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return SpellNumber The SpellNumber instance with the fractional value added.
      */
-    public function fractional(int $value): SpellNumber
+    public function fractional(int $value)
     {
         if ($this->type == 'double') {
             throw SpellNumberExceptions::create('The value used initially is already a float value, it is not possible to add other decimals to it.');
@@ -75,7 +75,7 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return SpellNumber The SpellNumber instance with the updated locale.
      */
-    public function locale(string $locale): SpellNumber
+    public function locale(string $locale)
     {
         if (!Utilities::isValidLocale($locale)) {
             throw SpellNumberExceptions::create('The provided value is not valid. You can use the getAllLocales() method to see the available options.');
@@ -92,7 +92,7 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return SpellNumber The SpellNumber instance with the updated currency.
      */
-    public function currency(string $currency): SpellNumber
+    public function currency(string $currency)
     {
         $this->currency = Str::title($currency);
 
@@ -106,7 +106,7 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return SpellNumber The SpellNumber instance with the updated fraction.
      */
-    public function fraction(string $fraction): SpellNumber
+    public function fraction(string $fraction)
     {
         $this->fraction = Str::title($fraction);
 
@@ -118,7 +118,7 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return string The textual representation of the numeric value.
      */
-    public function toLetters(): string
+    public function toLetters()
     {
         return ($this->type == 'integer') ? Str::title($this->integerToLetters()) : Str::title($this->doubleToLetters());
     }
@@ -128,7 +128,7 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return string The textual representation of the money value.
      */
-    public function toMoney(): string
+    public function toMoney()
     {
         return ($this->type == 'integer') ? Str::title($this->integerToMoney()) : Str::title($this->doubleToMoney());
     }
@@ -138,7 +138,7 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return string The textual representation of the integer numeric value.
      */
-    private function integerToLetters(): string
+    private function integerToLetters()
     {
         $formatter = NumberFormatterWrapper::format($this->value, $this->locale);
 
@@ -150,7 +150,7 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return string The textual representation of the double numeric value.
      */
-    private function doubleToLetters(): string
+    private function doubleToLetters()
     {
         $parts = explode('.', $this->value);
         $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale);
@@ -164,7 +164,7 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return string The money representation of the integer numeric value.
      */
-    private function integerToMoney(): string
+    private function integerToMoney()
     {
         $letters = NumberFormatterWrapper::format($this->value, $this->locale);
         $letters = Replaces::locale($letters, $this->locale, $this->currency);
@@ -177,7 +177,7 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return string The money representation of the double numeric value.
      */
-    private function doubleToMoney(): string
+    private function doubleToMoney()
     {
         $parts = explode('.', $this->value);
         $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale);

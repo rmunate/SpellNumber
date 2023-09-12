@@ -1,11 +1,18 @@
-vendor
+# Ignore common macOS files and directories
+**/.DS_Store
+
+# Ignore automatically generated files and directories
 /vendor/
 /.fleet
 /.idea
 /.vscode
-/.DS_Store
+
+
+# Ignore Composer generated directory and files
+/vendor
+
+# Ignore development tool generated files and directories
 .fleet
 .idea
 .vscode
-.DS_Store
 composer.lock

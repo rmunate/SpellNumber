@@ -62,7 +62,7 @@ final class Langs
      * Get the language locale used in Laravel application.
      * If the locale is supported in ISO 639-1 format, return it. Otherwise, return the default.
      */
-    public static function getLocaleLaravel(): string
+    public static function getLocaleLaravel()
     {
         $localeLaravel = App::getLocale();
         $iso639_1 = substr($localeLaravel, 0, 2);
