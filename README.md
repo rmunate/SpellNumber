@@ -135,7 +135,7 @@ This project is under the [MIT License](https://choosealicense.com/licenses/mit/
 
 🌟 Support My Projects! 🚀
 
-[![Become a Sponsor](https://img.shields.io/badge/-Become%20a%20Sponsor-green?style=for-the-badge&logo=github)](https://github.com/sponsors/rmunate)
+[![Become a Sponsor](https://img.shields.io/badge/-Become%20a%20Sponsor-blue?style=for-the-badge&logo=github)](https://github.com/sponsors/rmunate)
 
 Make any contributions you see fit; the code is entirely yours. Together, we can do amazing things and improve the world of development. Your support is invaluable. ✨
 
