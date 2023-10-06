@@ -68,7 +68,6 @@ final class Langs
         $iso639_1 = substr($localeLaravel, 0, 2);
 
         if (in_array($iso639_1, self::LOCALES)) {
-
             return $iso639_1;
         }
 
