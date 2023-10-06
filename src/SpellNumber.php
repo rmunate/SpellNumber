@@ -23,6 +23,7 @@ class SpellNumber extends BaseSpellNumber
     public const CURRENCY = 'Pesos';
     public const FRACTION = 'Centavos';
 
+    /* Propierties */
     private $value;
     private string $type;
     protected string $locale;

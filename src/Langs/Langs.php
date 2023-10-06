@@ -12,16 +12,16 @@ final class Langs
      * @var array
      */
     public const LOCALES = [
-        'de',    // German from Germany
-        'en',    // English from the United States
-        'es',    // Spanish from Spain
-        'pt',    // Portuguese from Portugal
-        'fr',    // French from France
-        'it',    // Italian from Italy
-        'ro',    // Romanian from Romania
-        'fa',    // Farsi from Iran
-        'hi',    // Hindi from India
-        'pl',    // Polish from Poland
+        'de', // German from Germany
+        'en', // English from the United States
+        'es', // Spanish from Spain
+        'pt', // Portuguese from Portugal
+        'fr', // French from France
+        'it', // Italian from Italy
+        'ro', // Romanian from Romania
+        'fa', // Farsi from Iran
+        'hi', // Hindi from India
+        'pl', // Polish from Poland
     ];
 
     /**
@@ -66,7 +66,9 @@ final class Langs
     {
         $localeLaravel = App::getLocale();
         $iso639_1 = substr($localeLaravel, 0, 2);
+
         if (in_array($iso639_1, self::LOCALES)) {
+
             return $iso639_1;
         }
 
