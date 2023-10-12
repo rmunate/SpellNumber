@@ -87,7 +87,7 @@ final class Utilities
         if (self::isValidString($value) || self::isValidDouble($value)) {
             $parts = explode('.', $value);
             $integerPart = intval($parts[0]);
-            $decimalPart = intval($parts[1]);
+            $decimalPart = intval($parts[1] ?? 0);
 
             $validateInteger = is_numeric($integerPart) && filter_var($integerPart, FILTER_VALIDATE_INT) !== false;
             $validateDecimal = is_numeric($decimalPart) && filter_var($decimalPart, FILTER_VALIDATE_INT) !== false;

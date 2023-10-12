@@ -181,6 +181,11 @@ class SpellNumber extends BaseSpellNumber
     private function doubleToMoney()
     {
         $parts = explode('.', $this->value);
+
+        if(! array_key_exists(1, $parts)){
+            return $this->integerToMoney();
+        }
+
         $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale);
         $letters1 = Replaces::locale($letters1, $this->locale, $this->currency);
 
