@@ -154,6 +154,11 @@ class SpellNumber extends BaseSpellNumber
     private function doubleToLetters()
     {
         $parts = explode('.', $this->value);
+
+        if(! array_key_exists(1, $parts)){
+            return $this->integerToLetters();
+        }
+
         $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale);
         $letters2 = NumberFormatterWrapper::format($parts[1], $this->locale);
 
