@@ -129,6 +129,8 @@ SpellNumber::float('12345.23')->locale('es')->toLetters();
 - [Ashok Devatwal](https://github.com/ashokdevatwal) (Idioma Hindi)
 - [Olsza](https://github.com/olsza) (Idioma Polaco)
 - [Jens Twesmann](https://github.com/jetwes) (German Language)
+- [Gabriel Rausch](https://github.com/gdsrmygdsrjr) (Zero Decimal Correction)
+- [Alejandro Diaz](https://github.com/gdsrmygdsrjr) (Readme And Icon)
 
 ## Licencia
 Este proyecto se encuentra bajo la [Licencia MIT](https://choosealicense.com/licenses/mit/).
