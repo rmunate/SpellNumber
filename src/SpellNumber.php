@@ -155,7 +155,7 @@ class SpellNumber extends BaseSpellNumber
     {
         $parts = explode('.', $this->value);
 
-        if(! array_key_exists(1, $parts)){
+        if(! array_key_exists(1, $parts)) {
             return $this->integerToLetters();
         }
 
@@ -187,7 +187,7 @@ class SpellNumber extends BaseSpellNumber
     {
         $parts = explode('.', $this->value);
 
-        if(! array_key_exists(1, $parts)){
+        if(! array_key_exists(1, $parts)) {
             return $this->integerToMoney();
         }
 
