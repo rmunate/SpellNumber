@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Rmunate\Utilities\Langs\Langs;
 use Rmunate\Utilities\Miscellaneous\Words;
 use Rmunate\Utilities\Bases\BaseSpellNumber;
+use Rmunate\Utilities\Callback\DataResponse;
 use Rmunate\Utilities\Miscellaneous\Utilities;
 use Rmunate\Utilities\Validator\Traits\CommonValidate;
 use Rmunate\Utilities\Wrappers\NumberFormatterWrapper;
@@ -93,18 +94,52 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return string The textual representation of the numeric value.
      */
-    public function toLetters()
+    public function toLetters($withOutCallBack = false)
     {
+        $callback = config("spell-number.callback_output");
+
+        if (!empty($callback) && is_callable($callback) && !$withOutCallBack) {
+
+            $words = ($this->type == 'integer') ? Str::title($this->integerToMoney()) : Str::title($this->doubleToMoney());
+
+            return $callback(new DataResponse([
+                'method'   => 'toLetters',
+                'type'     => $this->type,
+                'value'    => $this->value,
+                'words'    => $words,
+                'lang'     => $this->locale,
+                'currency' => $this->currency,
+                'fraction' => $this->fraction,
+            ]));
+        }
+
         return ($this->type == 'integer') ? Str::title($this->integerToLetters()) : Str::title($this->doubleToLetters());
     }
-
+    
     /**
      * Convert the numeric value to a money representation.
      *
      * @return string The textual representation of the money value.
      */
-    public function toMoney()
+    public function toMoney($withOutCallBack = false)
     {
+        $callback = config("spell-number.callback_output");
+
+        if (!empty($callback) && is_callable($callback) && !$withOutCallBack) {
+
+            $words = ($this->type == 'integer') ? Str::title($this->integerToMoney()) : Str::title($this->doubleToMoney());
+
+            return $callback(new DataResponse([
+                'method'   => 'toMoney',
+                'type'     => $this->type,
+                'value'    => $this->value,
+                'words'    => $words,
+                'lang'     => $this->locale,
+                'currency' => $this->currency,
+                'fraction' => $this->fraction,
+            ]));
+        }
+
         return ($this->type == 'integer') ? Str::title($this->integerToMoney()) : Str::title($this->doubleToMoney());
     }
 

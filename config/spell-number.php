@@ -78,10 +78,10 @@ return [
     |
     */
 
-    'callback_output' => [
-        // 'en' => function ($words) {
-        //     // Your logic here...
-        //     return $words;
-        // },
-    ],
+    'callback_output' => function ($data) {
+
+        // Your logic here...
+
+        return $data->getWords();
+    },
 ];
