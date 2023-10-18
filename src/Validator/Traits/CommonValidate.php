@@ -8,15 +8,28 @@ use Rmunate\Utilities\Miscellaneous\Utilities;
 trait CommonValidate
 {
     /**
+     * Validate if a value is in scientific notation.
+     *
+     * @return bool  True if the value is in scientific notation, false otherwise.
+     */
+    private function validateScientificConnotation()
+    {
+        if (Utilities::isScientificConnotation($this->value)) {
+            throw SpellNumberExceptions::create('The entered value exceeds the processable limits of the current version of PHP and has become a scientific connotation.');
+        }
+
+        return true;
+    }
+
+    /**
      * Validate that the "Intl" extension is loaded.
      *
      * @throws SpellNumberExceptions If the "Intl" extension is not installed or not available.
      */
     private function validateExtension()
     {
-        // Check if the intl extension is installed.
         if (!Utilities::validateExtension('Intl')) {
-            throw SpellNumberExceptions::create('The Intl extension is not installed or not available.');
+            throw SpellNumberExceptions::create('The INTL extension is not installed or not available. (https://www.php.net/manual/es/intl.installation.php)');
         }
 
         return true;
@@ -30,7 +43,7 @@ trait CommonValidate
     private function validateNumeric()
     {
         if (!Utilities::isValidNumber($this->value)) {
-            throw SpellNumberExceptions::create('The supplied value is not valid. It must be of type integer or float (double).');
+            throw SpellNumberExceptions::create('The provided value is not valid. It must be of type integer or float (double). Additionally, scientific overtones generated when the maximum number available in the current version of PHP is exceeded cannot be processed.');
         }
 
         return true;

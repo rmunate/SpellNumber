@@ -3,7 +3,6 @@
 namespace Rmunate\Utilities\Validator;
 
 use Rmunate\Utilities\Bases\BaseSpellNumberValidator;
-use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
 use Rmunate\Utilities\Validator\Traits\CommonValidate;
 
 final class SpellNumberValidator extends BaseSpellNumberValidator
@@ -25,11 +24,14 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
      */
     public function __construct(string $type, $value)
     {
+        // Assign the value to validate.
+        $this->value = $value;
+
         // Check if the intl extension is installed.
         $this->validateExtension();
 
-        // Assign the value to validate.
-        $this->value = $value;
+        // Validate that it is not a scientific notation
+        $this->validateScientificConnotation();
 
         // Execute the appropriate validation based on the type.
         match ($type) {

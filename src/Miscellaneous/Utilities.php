@@ -10,6 +10,21 @@ use Rmunate\Utilities\Langs\Langs;
 final class Utilities
 {
     /**
+     * Validate if a value is in scientific notation.
+     *
+     * @param  string  $value  The value to be validated.
+     * @return bool  True if the value is in scientific notation, false otherwise.
+     */
+    public static function isScientificConnotation($value)
+    {
+        if (preg_match('/[+\-]?\d+(\.\d+)?[Ee][+\-]?\d+/', $value)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Check if a specific PHP extension is loaded.
      *
      * @param string $name The name of the PHP extension to check.
@@ -78,13 +93,9 @@ final class Utilities
      */
     public static function isNotExceedMax($value)
     {
-        //Validate scientific notation.
-        if (preg_match('/[+\-E]/i', strval($value)) > 0) {
-            return false;
-        }
-
         // Implementation for checking if the value does not exceed the maximum is provided here.
         if (self::isValidString($value) || self::isValidDouble($value)) {
+
             $parts = explode('.', $value);
             $integerPart = intval($parts[0]);
             $decimalPart = intval($parts[1] ?? 0);
@@ -107,7 +118,9 @@ final class Utilities
      */
     public static function isValidLocale($locale)
     {
-        return in_array($locale, Langs::LOCALES);
+        $timezones = array_keys(Langs::TIMEZONES_AVAILABLE);
+
+        return in_array($locale, $timezones);
     }
 
     /**
@@ -136,5 +149,38 @@ final class Utilities
         $connector = Langs::LOCALES_CONNECTORS_MONEY;
 
         return $connector[$locale];
+    }
+
+    /**
+     * Set the numeric value where the trailing zero is removed
+     * @param mixed $value
+     * 
+     * @return mixed
+     */
+    public static function decimal($value)
+    {
+       $result = match ($value) {
+            '01'    =>  1,
+            '1'     =>  10,
+            '02'    =>  2,
+            '2'     =>  20,
+            '03'    =>  3,
+            '3'     =>  30,
+            '04'    =>  4,
+            '4'     =>  40,
+            '05'    =>  5,
+            '5'     =>  50,
+            '06'    =>  6,
+            '6'     =>  60,
+            '07'    =>  7,
+            '7'     =>  70,
+            '08'    =>  8,
+            '8'     =>  80,
+            '09'    =>  9,
+            '9'     =>  90,
+            default =>  $value,
+        };
+       
+        return $result;
     }
 }

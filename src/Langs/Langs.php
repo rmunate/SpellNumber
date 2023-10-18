@@ -7,21 +7,21 @@ use Illuminate\Support\Facades\App;
 final class Langs
 {
     /**
-     * Array containing supported locales in ISO 639-1 format.
+     * List of time zones available in the package.
      *
      * @var array
      */
-    public const LOCALES = [
-        'de', // German from Germany
-        'en', // English from the United States
-        'es', // Spanish from Spain
-        'pt', // Portuguese from Portugal
-        'fr', // French from France
-        'it', // Italian from Italy
-        'ro', // Romanian from Romania
-        'fa', // Farsi from Iran
-        'hi', // Hindi from India
-        'pl', // Polish from Poland
+    public const TIMEZONES_AVAILABLE = [
+        'de' => 'German',     // German from Germany
+        'en' => 'English',    // English from the United States
+        'es' => 'Spanish',    // Spanish from Spain
+        'fa' => 'Farsi',      // Farsi from Iran
+        'fr' => 'French',     // French from France
+        'hi' => 'Hindi',      // Hindi from India
+        'it' => 'Italian',    // Italian from Italy
+        'pl' => 'Polish',     // Polish from Poland
+        'pt' => 'Portuguese', // Portuguese from Portugal
+        'ro' => 'Romanian',   // Romanian from Romania
     ];
 
     /**
@@ -33,13 +33,13 @@ final class Langs
         'de' => 'und',  // German from Germany: "und"
         'en' => 'and',  // English from the United States: "and"
         'es' => 'con',  // Spanish from Spain: "con"
-        'pt' => 'com',  // Portuguese from Portugal: "com"
-        'fr' => 'et',   // French from France: "et"
-        'it' => 'con',  // Italian from Italy: "con"
-        'ro' => 'cu',   // Romanian from Romania: "cu"
         'fa' => 'ممیز', // Farsi from Iran: "ممیز"
+        'fr' => 'et',   // French from France: "et"
         'hi' => 'और',   // Hindi from India: "और"
+        'it' => 'con',  // Italian from Italy: "con"
         'pl' => 'i',    // Polish from Poland: "i"
+        'pt' => 'com',  // Portuguese from Portugal: "com"
+        'ro' => 'cu',   // Romanian from Romania: "cu"
     ];
 
     /**
@@ -51,11 +51,13 @@ final class Langs
         'de' => 'von',  // German frm Germany: "von"
         'en' => 'of',   // English from the United States: "of"
         'es' => 'de',   // Spanish from Spain: "de"
-        'pt' => 'de',   // Portuguese from Portugal: "de"
-        'fr' => 'de',   // French from France: "de"
-        'it' => 'di',   // Italian from Italy: "di"
-        'ro' => 'de',   // Romanian from Romania: "de"
         'fa' => 'از',   // Farsi from Iran: "از"
+        'fr' => 'de',   // French from France: "de"
+        'hi' => 'का',   // Hindi from India: "का"
+        'it' => 'di',   // Italian from Italy: "di"
+        'pl' => 'i',    // Polish from Poland: "i"
+        'pt' => 'de',   // Portuguese from Portugal: "de"
+        'ro' => 'de',   // Romanian from Romania: "de"
     ];
 
     /**
@@ -65,13 +67,16 @@ final class Langs
     public static function getLocaleLaravel()
     {
         $localeLaravel = App::getLocale();
-        $iso639_1 = substr($localeLaravel, 0, 2);
+        $isoLang = substr($localeLaravel, 0, 2);
 
-        if (in_array($iso639_1, self::LOCALES)) {
-            return $iso639_1;
+        $availables = array_keys(self::TIMEZONES_AVAILABLE);
+
+        // Return especific timezone
+        if (in_array($isoLang, $availables)) {
+            return $isoLang;
         }
 
         // Return the default locale if not found in supported locales.
-        return self::LOCALES[0];
+        return 'en'; // English
     }
 }

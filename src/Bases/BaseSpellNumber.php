@@ -2,8 +2,6 @@
 
 namespace Rmunate\Utilities\Bases;
 
-use NumberFormatter;
-use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
 use Rmunate\Utilities\Langs\Langs;
 use Rmunate\Utilities\Validator\SpellNumberValidator;
 
@@ -68,6 +66,16 @@ abstract class BaseSpellNumber
      */
     public static function getAllLocales()
     {
-        return Langs::LOCALES;
+        return array_keys(Langs::TIMEZONES_AVAILABLE);
+    }
+
+    /**
+     * Retrieves a list of all available TimeZones by the NumberFormatter class.
+     *
+     * @return array An array containing all available locales.
+     */
+    public static function getTimeZones()
+    {
+        return Langs::TIMEZONES_AVAILABLE;
     }
 }

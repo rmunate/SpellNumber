@@ -3,13 +3,13 @@
 namespace Rmunate\Utilities;
 
 use Illuminate\Support\Str;
-use Rmunate\Utilities\Bases\BaseSpellNumber;
-use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
 use Rmunate\Utilities\Langs\Langs;
-use Rmunate\Utilities\Miscellaneous\Replaces;
+use Rmunate\Utilities\Miscellaneous\Words;
+use Rmunate\Utilities\Bases\BaseSpellNumber;
 use Rmunate\Utilities\Miscellaneous\Utilities;
 use Rmunate\Utilities\Validator\Traits\CommonValidate;
 use Rmunate\Utilities\Wrappers\NumberFormatterWrapper;
+use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
 
 /**
  * Class SpellNumber
@@ -18,10 +18,6 @@ use Rmunate\Utilities\Wrappers\NumberFormatterWrapper;
 class SpellNumber extends BaseSpellNumber
 {
     use CommonValidate;
-
-    /* Default constant values for currency if not defined */
-    public const CURRENCY = 'Pesos';
-    public const FRACTION = 'Centavos';
 
     /* Propierties */
     private $value;
@@ -40,31 +36,9 @@ class SpellNumber extends BaseSpellNumber
     {
         $this->value = $value;
         $this->type = $type;
-        $this->locale = Langs::getLocaleLaravel();
-        $this->currency = self::CURRENCY;
-        $this->fraction = self::FRACTION;
-    }
-
-    /**
-     * Convert the numeric value to a fractional value.
-     *
-     * @param int $value The fractional value to add to the original value.
-     *
-     * @throws SpellNumberExceptions If the initial value is already a double value.
-     *
-     * @return SpellNumber The SpellNumber instance with the fractional value added.
-     */
-    public function fractional(int $value)
-    {
-        if ($this->type == 'double') {
-            throw SpellNumberExceptions::create('The value used initially is already a float value, it is not possible to add other decimals to it.');
-        }
-        $this->validateInteger();
-        $this->validateMaximum();
-        $this->value = strval($this->value).'.'.strval($value);
-        $this->type = 'double';
-
-        return $this;
+        $this->locale = config("spell-number.default.lang") ?? Langs::getLocaleLaravel();
+        $this->currency = config("spell-number.default.currency") ?? "dollars";
+        $this->fraction = config("spell-number.default.fraction") ?? "cents";
     }
 
     /**
@@ -95,7 +69,7 @@ class SpellNumber extends BaseSpellNumber
      */
     public function currency(string $currency)
     {
-        $this->currency = Str::title($currency);
+        $this->currency = $currency;
 
         return $this;
     }
@@ -109,7 +83,7 @@ class SpellNumber extends BaseSpellNumber
      */
     public function fraction(string $fraction)
     {
-        $this->fraction = Str::title($fraction);
+        $this->fraction = $fraction;
 
         return $this;
     }
@@ -159,6 +133,8 @@ class SpellNumber extends BaseSpellNumber
             return $this->integerToLetters();
         }
 
+        $parts[1] = Utilities::decimal($parts[1]);
+
         $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale);
         $letters2 = NumberFormatterWrapper::format($parts[1], $this->locale);
 
@@ -173,7 +149,7 @@ class SpellNumber extends BaseSpellNumber
     private function integerToMoney()
     {
         $letters = NumberFormatterWrapper::format($this->value, $this->locale);
-        $letters = Replaces::locale($letters, $this->locale, $this->currency);
+        $letters = Words::locale($letters, $this->locale, $this->currency);
 
         return $letters;
     }
@@ -186,17 +162,19 @@ class SpellNumber extends BaseSpellNumber
     private function doubleToMoney()
     {
         $parts = explode('.', $this->value);
-
+        
         if (!array_key_exists(1, $parts)) {
             return $this->integerToMoney();
         }
 
+        $parts[1] = Utilities::decimal($parts[1]);
+
         $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale);
-        $letters1 = Replaces::locale($letters1, $this->locale, $this->currency);
+        $letters1 = Words::locale($letters1, $this->locale, $this->currency);
 
         $letters2 = NumberFormatterWrapper::format($parts[1], $this->locale);
-        $letters2 = Replaces::locale($letters2, $this->locale, $this->fraction);
+        $letters2 = Words::locale($letters2, $this->locale, $this->fraction);
 
-        return Str::title($letters1.' '.Utilities::connector($this->locale).' '.$letters2);
+        return Str::title($letters1 . ' ' . Utilities::connector($this->locale) . ' ' . $letters2);
     }
 }
