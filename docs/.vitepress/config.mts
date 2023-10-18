@@ -1,8 +1,7 @@
 import {defineConfig} from 'vitepress'
 
-// https://vitepress.dev/reference/site-config
 export default defineConfig({
-    title: "Laravel LangCountry",
+    title: "Laravel SpellNumber",
     description: "The localisation package for auto date-formats, language switcher helper and more.",
     lastUpdated: true,
     base: '/SpellNumber',
