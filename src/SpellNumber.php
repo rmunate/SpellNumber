@@ -94,13 +94,13 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return string The textual representation of the numeric value.
      */
-    public function toLetters($withOutCallBack = false)
+    public function toLetters()
     {
         $callback = config("spell-number.callback_output");
 
-        if (!empty($callback) && is_callable($callback) && !$withOutCallBack) {
+        if (!empty($callback) && is_callable($callback)) {
 
-            $words = ($this->type == 'integer') ? Str::title($this->integerToMoney()) : Str::title($this->doubleToMoney());
+            $words = ($this->type == 'integer') ? Str::title($this->integerToLetters()) : Str::title($this->doubleToLetters());
 
             return $callback(new DataResponse([
                 'method'   => 'toLetters',
@@ -121,11 +121,11 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return string The textual representation of the money value.
      */
-    public function toMoney($withOutCallBack = false)
+    public function toMoney()
     {
         $callback = config("spell-number.callback_output");
 
-        if (!empty($callback) && is_callable($callback) && !$withOutCallBack) {
+        if (!empty($callback) && is_callable($callback)) {
 
             $words = ($this->type == 'integer') ? Str::title($this->integerToMoney()) : Str::title($this->doubleToMoney());
 

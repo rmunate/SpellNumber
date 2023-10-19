@@ -74,7 +74,7 @@ abstract class BaseSpellNumber
      *
      * @return array An array containing all available locales.
      */
-    public static function getTimeZones()
+    public static function getLanguages()
     {
         return Langs::TIMEZONES_AVAILABLE;
     }
