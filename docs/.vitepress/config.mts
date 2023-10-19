@@ -24,7 +24,7 @@ export default async () => {
         lastUpdated: true,
         base: '/SpellNumber',
         themeConfig: {
-            logo: './../public/laravel_black.svg',
+            logo: 'laravel_black.svg',
             nav: [
                 {text: `${api.version} (${api.date})`, link: '/'},
             ],
