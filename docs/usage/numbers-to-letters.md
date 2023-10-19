@@ -33,6 +33,9 @@ If required, you can pass a floating point number as an argument to convert it t
 ```php
 use Rmunate\Utilities\SpellNumber;
 
+SpellNumber::value(123456789.12)->locale('en')->toLetters();
+// "One Hundred Twenty-Three Million Four Hundred Fifty-Six Thousand Seven Hundred Eighty-Nine And Twelve"
+
 SpellNumber::value(123456789.12)->locale('es')->toLetters();
 // "Ciento Veintitrés Millones Cuatrocientos Cincuenta Y Seis Mil Setecientos Ochenta Y Nueve Con Doce"
 
@@ -50,6 +53,9 @@ use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::integer(100)->locale('en')->toLetters();
 // "One Hundred"
+
+SpellNumber::integer(100)->locale('es')->toLetters();
+// "Cien"
 ```
 
 ## Method Float
@@ -59,6 +65,9 @@ Now, if you require it to be translated into letters of more than two decimal pl
 ```php
 use Rmunate\Utilities\SpellNumber;
 
-SpellNumber::float('12345.23')->locale('en')->toLetters();
-//"Twelve Thousand Three Hundred Forty-Five With Twenty-Three"
+SpellNumber::float('12345.230')->locale('en')->toLetters();
+// "Twelve Thousand Three Hundred Forty-Five And Two Hundred Thirty"
+
+SpellNumber::float('12345.230')->locale('es')->toLetters();
+// "Doce Mil Trescientos Cuarenta Y Cinco Con Doscientos Treinta"
 ```

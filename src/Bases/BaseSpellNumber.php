@@ -70,6 +70,17 @@ abstract class BaseSpellNumber
     }
 
     /**
+     * Retrieves a list of all available locales supported by the NumberFormatter class.
+     *
+     * @return array An array containing all available locales.
+     */
+    public static function getLocales()
+    {
+        return array_keys(Langs::TIMEZONES_AVAILABLE);
+    }
+
+
+    /**
      * Retrieves a list of all available TimeZones by the NumberFormatter class.
      *
      * @return array An array containing all available locales.

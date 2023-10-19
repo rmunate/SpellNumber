@@ -108,8 +108,8 @@ class SpellNumber extends BaseSpellNumber
                 'value'    => $this->value,
                 'words'    => $words,
                 'lang'     => $this->locale,
-                'currency' => $this->currency,
-                'fraction' => $this->fraction,
+                'currency' => null,
+                'fraction' => null,
             ]));
         }
 

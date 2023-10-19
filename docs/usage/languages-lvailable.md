@@ -16,12 +16,12 @@ We currently have 10 supported languages to easily work with this package. Below
 If you want to get the supported languages directly from the package, you have two ways to do it.
 
 ## Languages List
-Execute the command `getAllLocales`, as output it will give you an array with the available values.
+Execute the command `getLocales`, as output it will give you an array with the available values.
 
 ```php
 use Rmunate\Utilities\SpellNumber;
 
-SpellNumber::getAllLocales();
+SpellNumber::getLocales();
 
 // array:10 [▼
 //   0 => "de"
