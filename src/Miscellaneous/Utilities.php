@@ -12,8 +12,9 @@ final class Utilities
     /**
      * Validate if a value is in scientific notation.
      *
-     * @param  string  $value  The value to be validated.
-     * @return bool  True if the value is in scientific notation, false otherwise.
+     * @param string $value The value to be validated.
+     *
+     * @return bool True if the value is in scientific notation, false otherwise.
      */
     public static function isScientificConnotation($value)
     {
@@ -95,7 +96,6 @@ final class Utilities
     {
         // Implementation for checking if the value does not exceed the maximum is provided here.
         if (self::isValidString($value) || self::isValidDouble($value)) {
-
             $parts = explode('.', $value);
             $integerPart = intval($parts[0]);
             $decimalPart = intval($parts[1] ?? 0);
@@ -152,35 +152,36 @@ final class Utilities
     }
 
     /**
-     * Set the numeric value where the trailing zero is removed
+     * Set the numeric value where the trailing zero is removed.
+     *
      * @param mixed $value
-     * 
+     *
      * @return mixed
      */
     public static function decimal($value)
     {
-       $result = match ($value) {
-            '01'    =>  1,
-            '1'     =>  10,
-            '02'    =>  2,
-            '2'     =>  20,
-            '03'    =>  3,
-            '3'     =>  30,
-            '04'    =>  4,
-            '4'     =>  40,
-            '05'    =>  5,
-            '5'     =>  50,
-            '06'    =>  6,
-            '6'     =>  60,
-            '07'    =>  7,
-            '7'     =>  70,
-            '08'    =>  8,
-            '8'     =>  80,
-            '09'    =>  9,
-            '9'     =>  90,
-            default =>  $value,
+        $result = match ($value) {
+            '01'    => 1,
+            '1'     => 10,
+            '02'    => 2,
+            '2'     => 20,
+            '03'    => 3,
+            '3'     => 30,
+            '04'    => 4,
+            '4'     => 40,
+            '05'    => 5,
+            '5'     => 50,
+            '06'    => 6,
+            '6'     => 60,
+            '07'    => 7,
+            '7'     => 70,
+            '08'    => 8,
+            '8'     => 80,
+            '09'    => 9,
+            '9'     => 90,
+            default => $value,
         };
-       
+
         return $result;
     }
 }

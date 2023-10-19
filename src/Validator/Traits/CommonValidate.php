@@ -10,7 +10,7 @@ trait CommonValidate
     /**
      * Validate if a value is in scientific notation.
      *
-     * @return bool  True if the value is in scientific notation, false otherwise.
+     * @return bool True if the value is in scientific notation, false otherwise.
      */
     private function validateScientificConnotation()
     {

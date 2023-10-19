@@ -64,7 +64,7 @@ return [
 
     'replacements' => [
         // 'en' => [
-        //     'that' => 'this', 
+        //     'that' => 'this',
         // ],
     ],
 
@@ -79,7 +79,6 @@ return [
     */
 
     'callback_output' => function ($data) {
-
         // Your logic here...
 
         return $data->getWords();
