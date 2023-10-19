@@ -1,38 +1,28 @@
-# Contributing to the project
+---
+outline: deep
+---
 
-Contributions are **welcome** and will be fully **credited**.
+# Contributing 
 
-We accept contributions via Pull Requests on [Github](https://github.com/stefro/laravel-lang-country).
+If you want to add support for a new language or want to develop new features, you can submit your requests to the main branch of the repository.
 
-::: warning Adding new features
-To prevent disappointment, please open an issue to discuss your feature before you start coding. We can then discuss if
-it's a good fit for the package before you put in the effort of creating a PR.
-:::
+To date, the following world-class developers have contributed their knowledge.
 
-## Pull Requests
+To whom we thank for supporting making programming easier.
 
-- [PSR-12 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-12-extended-coding-style-guide.md)
-  Fix the formating of your code with `composer format`.
+- [Ashok Devatwal](https://github.com/ashokdevatwal) (Hindi Language)
+- [Olsza](https://github.com/olsza) (Polish Language)
+- [Jens Twesmann](https://github.com/jetwes) (German Language)
+- [Gabriel Rausch](https://github.com/gdsrmygdsrjr) (Zero Decimal Correction)
+- [Alejandro Diaz](https://github.com/alejandrodiazpinilla) (Readme And Icon)
 
-- **Add tests!** - Your patch won't be accepted if it doesn't have tests, we have 100% code coverage. You can run the
-  tests with `composer test` or `composer test:fast` (parallel testing). And you can check the coverage
-  with `composer test:coverage`.
+## License
+This project is under the [MIT License](https://choosealicense.com/licenses/mit/).
 
-- Make sure all your code is **typed**. We have 100% type coverage. You can check the type coverage with
-  `composer type:check`.
--
-- **Document any change in behaviour** -You can find all the files for documentation in de `/docs` directory.
+🌟 Support My Projects! 🚀
 
-- **Consider our release cycle** - We try to follow [SemVer v2.0.0](http://semver.org/). Randomly breaking public APIs
-  is not an option.
+[![Become a Sponsor](https://img.shields.io/badge/-Become%20a%20Sponsor-blue?style=for-the-badge&logo=github)](https://github.com/sponsors/rmunate)
 
-- **Create feature branches** - Don't ask us to pull from your master branch.
+Make any contributions you see fit; the code is entirely yours. Together, we can do amazing things and improve the world of development. Your support is invaluable. ✨
 
-- **One pull request per feature** - If you want to do more than one thing, send multiple pull requests.
-
-- **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make
-  multiple intermediate commits while developing,
-  please [squash them](http://www.git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages)
-  before submitting.
-
-**Happy coding**!
+If you have ideas, suggestions, or just want to collaborate, we are open to everything! Join our community and be part of our journey to success! 🌐👩‍💻👨‍💻

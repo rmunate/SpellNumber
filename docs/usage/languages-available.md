@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # Supported Languages
 
 We currently have 10 supported languages to easily work with this package. Below we list the configured languages:

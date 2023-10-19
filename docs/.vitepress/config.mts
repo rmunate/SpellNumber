@@ -24,7 +24,7 @@ export default async () => {
         lastUpdated: true,
         base: '/SpellNumber',
         themeConfig: {
-            logo: './public/spell-number.svg',
+            logo: './../public/laravel_black.svg',
             nav: [
                 {text: `${api.version} (${api.date})`, link: '/'},
             ],
@@ -42,7 +42,7 @@ export default async () => {
                     text: 'Usage',
                     collapsed: false,
                     items: [
-                        {text: 'Languages Available', link: '/usage/languages-lvailable.md'},
+                        {text: 'Languages Available', link: '/usage/languages-available.md'},
                         {text: 'Numbers To Letters', link: '/usage/numbers-to-letters'},
                         {text: 'Numbers To Money', link: '/usage/numbers-to-money'},
                         {text: 'Config File', link: '/usage/config-file'},
@@ -52,7 +52,7 @@ export default async () => {
                     text: 'Contribute',
                     collapsed: true,
                     items: [
-                        {text: 'Report Bugs', link: 'contribute/report-bugs'},
+                        {text: 'Bug Report', link: 'contribute/report-bugs'},
                         {text: 'Contribution', link: 'contribute/contribution'}
                     ]
                 }

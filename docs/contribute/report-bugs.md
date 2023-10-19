@@ -1,14 +1,12 @@
-# How can I help?
+---
+outline: deep
+---
 
-Glad your asking! We can always use some more country info in this package. Copy the `_template.json` file in
-the `src/LangCountryData` directory and fill in the blanks. You can then make a PR.
-Some good resources:
+# Bug Report 
 
-* [http://www.localeplanet.com/icu/index.html](http://www.localeplanet.com/icu/index.html)
-* [https://gist.github.com/mlconnor/1887156](https://gist.github.com/mlconnor/1887156)
-* [http://www.lingoes.net/en/translator/langcode.htm](http://www.lingoes.net/en/translator/langcode.htm)
-* [https://emojipedia.org/flags/](https://emojipedia.org/flags/)
-* [https://github.com/mledoze/countries](https://github.com/mledoze/countries)
+If you find errors or opportunities within the package, you can create an incident that we will attend to in the shortest time possible.
 
-Please see [contributing](/contribute/contribution)
-and [code of conduct](https://github.com/stefro/laravel-lang-country/blob/master/CODE_OF_CONDUCT.md) for details.
+Here!:
+[https://github.com/rmunate/SpellNumber/issues/new](https://github.com/rmunate/SpellNumber/issues/new)
+
+Remember that you can also contribute as a collaborator of this solution.

@@ -1,18 +1,75 @@
-# Middleware
+---
+outline: deep
+---
 
-The middleware is optional [middleware](/getting-started/installation#middleware-optional). You can create your own
-middleware tailored to your needs. But you can also use the “out of the box” middleware. This is what the default
-middleware will do:
+# Config File
 
-* It will check the users browser language preferences if there is no LangCountry is set. Then it will try to make the
-  most perfect match to the `allowed` lang_country’s in your settings file.
-* When there is no perfect match (language AND country) it will try to make a match on language only.
-* When there is still no match, it will return to your fallback setting.
-* It will ALWAYS store a `lang_country` session, so you can safely use all the LangCountry features it in your app.
-* When a lang_country is already set, it will not run any unnecessary scripts.
-* If you're
-  using [Translation Strings As Keys](https://laravel.com/docs/master/localization#using-translation-strings-as-keys):
-  Based on the `lang_country` it will check your (Laravel) `lang/` folder for an exact match in your
-  json translation files (example es_CO). If an exact match is found it will set the Laravel Locale to this value. This
-  way you’re able to create different translation files for each country if you need it.
-* When no exact match, it will set the Laravel Locale to the language only.
+Since version 4.0 of the package, you will have the option to configure your environment so that the translations are easier to write in your controllers or classes, now you will have a file inside the `config` folder that will allow you to adjust by default the values to be used in the conversions.
+
+You will also have a unique functionality, where you can create your own logic for any output of the values processed in the package.
+
+## Export file from vendor to project
+
+To export the configuration file from the vendor to the `config` folder, you can use the command:
+
+``` bash
+php artisan vendor:publish --provider="Rmunate\\Utilities\\Providers\\SpellNumberProvider" --tag="config"
+```
+
+## Translations language.
+
+Now that you have the `spell-number.php` file in the `config` folder, you can adjust the language that will be used for all translations of the package from numbers to letters, avoiding having to use it when invoking the use of the library.
+
+``` php
+return [
+  //...
+  'default' => [
+    //...
+      'lang' => 'en',
+    //... 
+    ]
+]
+```
+
+In the index `lang` you can assign the one you are going to use globally.
+
+## Currency Values
+
+Just as you can set the global translation language, you can also define the currency values that should be used in all library processing outputs.
+
+``` php
+return [
+  //...
+  'default' => [
+    //...
+      'currency' => 'dollars',
+    //... 
+      'fraction' => 'cents',
+    ]
+]
+```
+
+## Replacements
+
+Some people around the world have seen that some small fragments of the packet processing outputs must conform to the current language of the country or region, usually they are small fragments that could be replaced by a specific term or form of writing, for that you now have the possibility of defining all the replacements of text fragments that you consider necessary.
+
+Relying on the structure of an associative array, you will put the value to be searched as an index and the text to be assigned as its replacement as a value.
+
+``` php
+return [
+  //...
+  'replacements' => [
+      'es' => [
+          'uno' => 'un', 
+      ],
+  ],
+]
+```
+
+You must define the language on which the replacement should be applied in all the outputs of the internal processing of the package.
+
+## Callback
+
+If what you would like is to have a programmable way to modify the output of the package value, in that case this solution is what you need.
+
+Go to the next page. >>>

@@ -4,21 +4,7 @@ Easily convert numbers to words in Laravel using this library, which leverages t
 
 ⚙️ This library is compatible with PHP +8.0 and Laravel versions 8.0 and higher ⚙️
 
-![Laravel 8.0+](https://img.shields.io/badge/Laravel-8.0%2B-orange.svg)
-![Laravel 9.0+](https://img.shields.io/badge/Laravel-9.0%2B-orange.svg)
-![Laravel 10.0+](https://img.shields.io/badge/Laravel-10.0%2B-orange.svg)
-
 ![logo-spell-number](https://github.com/alejandrodiazpinilla/SpellNumber/assets/51100789/e51cf045-26d0-44e0-a873-3034deaea046)
-
-📖 [**DOCUMENTACIÓN EN ESPAÑOL**](README_SPANISH.md) 📖
-
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Creator](#creator)
-- [Contributors](#contributors)
-- [License](#license)
 
 ## Installation
 
@@ -32,25 +18,30 @@ It's important to ensure that the `intl` extension is enabled and loaded in the 
 
 ## Usage
 
+> SEE 📖📖📖 [FULL DOCUMENTATION](https://rmunate.github.io/SpellNumber/) 📖📖📖
+
 After installing the dependency in your project, you can start using it with the following examples:
 
-#### Knowing Supported Regional Configurations
+#### Languages List Whit Name
 
-To obtain the current list of languages with support, execute the following command:
+Execute the command `getLanguages`, as output it will give you an associative array with the values of available languages.
 
 ```php
-SpellNumber::getAllLocales();
-// array [
-//    'de', // German
-//    'en', // English
-//    'es', // Spanish
-//    'pt', // Portuguese
-//    'fr', // French
-//    'it', // Italian
-//    'ro', // Romanian
-//    'fa', // Farsi
-//    'hi', // Hindi
-//    'pl', // Polish
+use Rmunate\Utilities\SpellNumber;
+
+SpellNumber::getLanguages();
+
+// array:10 [▼ 
+//   "de" => "German"
+//   "en" => "English"
+//   "es" => "Spanish"
+//   "fa" => "Farsi"
+//   "fr" => "French"
+//   "hi" => "Hindi"
+//   "it" => "Italian"
+//   "pl" => "Polish"
+//   "pt" => "Portuguese"
+//   "ro" => "Romanian"
 // ]
 ```
 
@@ -108,27 +99,10 @@ SpellNumber::value(100.65)->locale('pl')->currency('złotych')->fraction('groszy
 // "Sto Złotych I Sześćdziesiąt Pięć Groszy"
 ```
 
-#### Other Initializer Methods
-
-To support version 1.X, the following initializer methods are maintained.
-
-```php
-// Integer, this method strictly requires an integer value to be sent as an argument.
-SpellNumber::integer(100)->locale('es')->toLetters();
-
-// Floating-point numbers, this method strictly requires a string value as an argument.
-SpellNumber::float('12345.23')->locale('es')->toLetters();
-```
 
 ## Creator
-- 🇨🇴 Raúl Mauricio Uñate Castro
+- Raúl Mauricio Uñate Castro
 - Email: raulmauriciounate@gmail.com
-
-## Contributors
-- [Siros Fakhri](https://github.com/sirosfakhri) (Farsi Language)
-- [Ashok Devatwal](https://github.com/ashokdevatwal) (Hindi Language)
-- [Olsza](https://github.com/olsza) (Polish Language)
-- [Jens Twesmann](https://github.com/jetwes) (German Language)
 
 ## License
 This project is under the [MIT License](https://choosealicense.com/licenses/mit/).
