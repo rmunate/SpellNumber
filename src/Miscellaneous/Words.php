@@ -2,8 +2,8 @@
 
 namespace Rmunate\Utilities\Miscellaneous;
 
-use Rmunate\Utilities\Langs\Replaces;
 use Illuminate\Support\Str;
+use Rmunate\Utilities\Langs\Replaces;
 
 final class Words
 {
@@ -25,7 +25,7 @@ final class Words
                 $value = str_replace($search, $replace, $value);
             }
         }
-        
+
         // Assign the currency value
         $replacesGeneral = Replaces::GENERAL[$locale] ?? [];
         $value = Str::lower($value.' '.$current);

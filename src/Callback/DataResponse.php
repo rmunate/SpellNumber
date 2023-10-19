@@ -2,10 +2,8 @@
 
 namespace Rmunate\Utilities\Callback;
 
-use Rmunate\Utilities\SpellNumber;
-
 /**
- * DataResponse
+ * DataResponse.
  *
  * This class represents a data response object, used for storing and accessing
  * data related to callback responses. It provides methods to retrieve various
@@ -28,13 +26,13 @@ final class DataResponse
      */
     public function __construct(array $data)
     {
-        $this->method = $data["method"];
-        $this->type = $data["type"];
-        $this->value = $data["value"];
-        $this->words = $data["words"];
-        $this->lang = $data["lang"];
-        $this->currency = $data["currency"];
-        $this->fraction = $data["fraction"];
+        $this->method = $data['method'];
+        $this->type = $data['type'];
+        $this->value = $data['value'];
+        $this->words = $data['words'];
+        $this->lang = $data['lang'];
+        $this->currency = $data['currency'];
+        $this->fraction = $data['fraction'];
     }
 
     /**
@@ -106,5 +104,4 @@ final class DataResponse
     {
         return $this->fraction;
     }
-
 }

@@ -14,9 +14,8 @@ class SpellNumberProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../../config/spell-number.php' => config_path('spell-number.php'),
+            __DIR__.'/../../config/spell-number.php' => config_path('spell-number.php'),
         ], 'config');
-
     }
 
     /**

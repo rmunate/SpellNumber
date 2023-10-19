@@ -79,7 +79,6 @@ abstract class BaseSpellNumber
         return array_keys(Langs::TIMEZONES_AVAILABLE);
     }
 
-
     /**
      * Retrieves a list of all available TimeZones by the NumberFormatter class.
      *

@@ -3,14 +3,14 @@
 namespace Rmunate\Utilities;
 
 use Illuminate\Support\Str;
-use Rmunate\Utilities\Langs\Langs;
-use Rmunate\Utilities\Miscellaneous\Words;
 use Rmunate\Utilities\Bases\BaseSpellNumber;
 use Rmunate\Utilities\Callback\DataResponse;
+use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
+use Rmunate\Utilities\Langs\Langs;
 use Rmunate\Utilities\Miscellaneous\Utilities;
+use Rmunate\Utilities\Miscellaneous\Words;
 use Rmunate\Utilities\Validator\Traits\CommonValidate;
 use Rmunate\Utilities\Wrappers\NumberFormatterWrapper;
-use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
 
 /**
  * Class SpellNumber
@@ -37,9 +37,9 @@ class SpellNumber extends BaseSpellNumber
     {
         $this->value = $value;
         $this->type = $type;
-        $this->locale = config("spell-number.default.lang") ?? Langs::getLocaleLaravel();
-        $this->currency = config("spell-number.default.currency") ?? "dollars";
-        $this->fraction = config("spell-number.default.fraction") ?? "cents";
+        $this->locale = config('spell-number.default.lang') ?? Langs::getLocaleLaravel();
+        $this->currency = config('spell-number.default.currency') ?? 'dollars';
+        $this->fraction = config('spell-number.default.fraction') ?? 'cents';
     }
 
     /**
@@ -96,10 +96,9 @@ class SpellNumber extends BaseSpellNumber
      */
     public function toLetters()
     {
-        $callback = config("spell-number.callback_output");
+        $callback = config('spell-number.callback_output');
 
         if (!empty($callback) && is_callable($callback)) {
-
             $words = ($this->type == 'integer') ? Str::title($this->integerToLetters()) : Str::title($this->doubleToLetters());
 
             return $callback(new DataResponse([
@@ -115,7 +114,7 @@ class SpellNumber extends BaseSpellNumber
 
         return ($this->type == 'integer') ? Str::title($this->integerToLetters()) : Str::title($this->doubleToLetters());
     }
-    
+
     /**
      * Convert the numeric value to a money representation.
      *
@@ -123,10 +122,9 @@ class SpellNumber extends BaseSpellNumber
      */
     public function toMoney()
     {
-        $callback = config("spell-number.callback_output");
+        $callback = config('spell-number.callback_output');
 
         if (!empty($callback) && is_callable($callback)) {
-
             $words = ($this->type == 'integer') ? Str::title($this->integerToMoney()) : Str::title($this->doubleToMoney());
 
             return $callback(new DataResponse([
@@ -197,7 +195,7 @@ class SpellNumber extends BaseSpellNumber
     private function doubleToMoney()
     {
         $parts = explode('.', $this->value);
-        
+
         if (!array_key_exists(1, $parts)) {
             return $this->integerToMoney();
         }
@@ -210,6 +208,6 @@ class SpellNumber extends BaseSpellNumber
         $letters2 = NumberFormatterWrapper::format($parts[1], $this->locale);
         $letters2 = Words::locale($letters2, $this->locale, $this->fraction);
 
-        return Str::title($letters1 . ' ' . Utilities::connector($this->locale) . ' ' . $letters2);
+        return Str::title($letters1.' '.Utilities::connector($this->locale).' '.$letters2);
     }
 }
