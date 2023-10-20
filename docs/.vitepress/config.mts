@@ -51,17 +51,17 @@ export default defineConfig({
     head: [
         ['link', {
                 rel: 'icon',
-                href: '/favicon.svg'
+                href: '/SpellNumber/favicon.svg'
             }
         ],
         ['meta', {
                 property: 'og:image',
-                content: 'https://user-images.githubusercontent.com/51100789/266456351-e51cf045-26d0-44e0-a873-3034deaea046.png' 
+                content: '/SpellNumber/logo-github.png' 
             }
         ],
         ['meta', {
                 property: 'og:image:secure_url',
-                content: 'https://user-images.githubusercontent.com/51100789/266456351-e51cf045-26d0-44e0-a873-3034deaea046.png'
+                content: '/SpellNumber/logo-github.png'
             }
         ],
         ['meta', {
