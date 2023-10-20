@@ -81,7 +81,7 @@ export default defineConfig({
         ],
         ['meta', {
                 property: 'og:description',
-                content: 'Develop easily and without having to allocate additional server resources!'
+                content: 'Easily convert numbers to words in Laravel Framework.'
             }
         ],
         ['meta', {
