@@ -1,36 +1,37 @@
 # Convert Numbers to Words in Laravel
 
-Easily convert numbers to words in Laravel using this library, which leverages the native `PHP INTL` extension to perform conversion effortlessly. With this library, you can convert numbers to words in various languages and also obtain the value in currency format according to the selected language. Supported languages include English, Spanish, Portuguese, French, Italian, Romanian, Hindi, Polish and Persian (Farsi).
+Easily convert numbers to words in Laravel using this powerful library, which harnesses the native `PHP INTL` extension to effortlessly perform conversions. With this library, you can convert numbers to words in various languages and even obtain values in currency format tailored to the selected language. Supported languages include English, Spanish, Portuguese, French, Italian, Romanian, Hindi, Polish, and Persian (Farsi).
 
-⚙️ This library is compatible with PHP +8.0 and Laravel versions 8.0 and higher ⚙️
+⚙️ **Compatibility**: This library is compatible with PHP +8.0 and Laravel versions 8.0 and higher. ⚙️
 
-![logo-spell-number](https://github.com/alejandrodiazpinilla/SpellNumber/assets/51100789/e51cf045-26d0-44e0-a873-3034deaea046)
+![Spell Number Logo](https://github.com/alejandrodiazpinilla/SpellNumber/assets/51100789/e51cf045-26d0-44e0-a873-3034deaea046)
 
 ## Installation
 
-To install the dependency via Composer, execute the following command:
+To integrate this library into your project using Composer, simply execute the following command:
 
 ```shell
 composer require rmunate/spell-number
 ```
 
-It's important to ensure that the `intl` extension is enabled and loaded in the environment.
+Please ensure that the `intl` extension is enabled and loaded in your environment.
 
 ## Usage
 
-> 📖📖📖 [FULL DOCUMENTATION](https://rmunate.github.io/SpellNumber/) 📖📖📖
+> 📖📖📖 **[FULL DOCUMENTATION](https://rmunate.github.io/SpellNumber/)** 📖📖📖
 
-After installing the dependency in your project, you can start using it with the following examples:
+Once the dependency is installed in your project, you can start using it with ease. Here are some examples:
 
-#### Languages List Whit Name
+### Languages List with Names
 
-Execute the command `getLanguages`, as output it will give you an associative array with the values of available languages.
+Execute the `getLanguages` command to retrieve an associative array of available languages:
 
 ```php
 use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::getLanguages();
 
+// Result:
 // array:10 [▼ 
 //   "de" => "German"
 //   "en" => "English"
@@ -45,9 +46,9 @@ SpellNumber::getLanguages();
 // ]
 ```
 
-#### Convert Integers to Words
+### Convert Integers to Words
 
-You can easily convert numbers to words by defining the regional configuration to apply. If you don't define a regional configuration, "en" (English) will be applied by default.
+Easily convert numbers to words by specifying the desired regional configuration. If not specified, "en" (English) is used by default:
 
 ```php
 SpellNumber::value(100)->locale('es')->toLetters();
@@ -63,9 +64,9 @@ SpellNumber::value(100)->locale('hi')->toLetters();
 // "एक सौ"
 ```
 
-#### Convert Floating-Point Numbers
+### Convert Floating-Point Numbers
 
-If needed, you can pass a floating-point number as an argument to convert it to words.
+Should the need arise, you can convert floating-point numbers to words:
 
 ```php
 SpellNumber::value(123456789.12)->locale('es')->toLetters();
@@ -75,9 +76,9 @@ SpellNumber::value(123456789.12)->locale('hi')->toLetters();
 // "बारह करोड़ चौंतीस लाख छप्पन हज़ार सात सौ नवासी और बारह"
 ```
 
-#### Convert to Currency Format
+### Convert to Currency Format
 
-This method can be useful for invoices, receipts, and similar scenarios. Obtain the supplied value in currency format.
+For scenarios like invoices and receipts, obtain values in currency format:
 
 ```php
 SpellNumber::value(100)->locale('es')->currency('pesos')->toMoney();
@@ -99,18 +100,19 @@ SpellNumber::value(100.65)->locale('pl')->currency('złotych')->fraction('groszy
 // "Sto Złotych I Sześćdziesiąt Pięć Groszy"
 ```
 
-
 ## Creator
-- Raúl Mauricio Uñate Castro
+
+- **Raúl Mauricio Uñate Castro**
 - Email: raulmauriciounate@gmail.com
 
 ## License
+
 This project is under the [MIT License](https://choosealicense.com/licenses/mit/).
 
-🌟 Support My Projects! 🚀
+🌟 **Support My Projects!** 🚀
 
 [![Become a Sponsor](https://img.shields.io/badge/-Become%20a%20Sponsor-blue?style=for-the-badge&logo=github)](https://github.com/sponsors/rmunate)
 
-Make any contributions you see fit; the code is entirely yours. Together, we can do amazing things and improve the world of development. Your support is invaluable. ✨
+Feel free to contribute, as the code is open to all. Together, we can create amazing things and enhance the world of development. Your support is invaluable. ✨
 
-If you have ideas, suggestions, or just want to collaborate, we are open to everything! Join our community and be part of our journey to success! 🌐👩‍💻👨‍💻
+If you have ideas, suggestions, or wish to collaborate, we are open to everything! Join our community and be part of our journey to success! 🌐👩‍💻👨‍💻
