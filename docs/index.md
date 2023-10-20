@@ -1,8 +1,8 @@
 ---
-title: SpellNumbers
-pageMeta: {
-  previewImage: "./public/logo-github.png",
-}
+hero:
+  image:
+    src: ./public/logo-github.png
+    alt: SpellNumber Laravel
 ---
 
 ![logo-spell-number](./public/logo-full-scream.png)
