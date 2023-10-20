@@ -6,8 +6,6 @@ Easily convert numbers to words in Laravel using this library, which leverages t
 
 ![logo-spell-number](https://github.com/alejandrodiazpinilla/SpellNumber/assets/51100789/e51cf045-26d0-44e0-a873-3034deaea046)
 
-> SEE 📖📖📖 [FULL DOCUMENTATION](https://rmunate.github.io/SpellNumber/) 📖📖📖
-
 ## Installation
 
 To install the dependency via Composer, execute the following command:
@@ -20,7 +18,7 @@ It's important to ensure that the `intl` extension is enabled and loaded in the 
 
 ## Usage
 
-> SEE 📖📖📖 [FULL DOCUMENTATION](https://rmunate.github.io/SpellNumber/) 📖📖📖
+> 📖📖📖 [FULL DOCUMENTATION](https://rmunate.github.io/SpellNumber/) 📖📖📖
 
 After installing the dependency in your project, you can start using it with the following examples:
 
