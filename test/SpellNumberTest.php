@@ -27,10 +27,10 @@ class SpellNumberTest extends TestCase
         $this->assertEquals(SpellNumber::value(100)->locale('en')->currency('Dollars')->toMoney(), 'One Hundred Dollars');
         $this->assertEquals(SpellNumber::value(100)->locale('es')->currency('Pesos')->toMoney(), 'Cien Pesos');
         $this->assertEquals(SpellNumber::value(100)->locale('hi')->currency('रूपये')->toMoney(), 'एक सौ रूपये');
-        
+
         //Integer
         $this->assertEquals(SpellNumber::integer(100)->locale('es')->currency('Pesos')->toMoney(), 'Cien Pesos');
-        
+
         //Float
         $this->assertEquals(SpellNumber::float('12345.230')->locale('es')->currency('Pesos')->fraction('Centavos')->toMoney(), 'Doce Mil Trescientos Cuarenta Y Cinco Pesos Con Doscientos Treinta Centavos');
     }
