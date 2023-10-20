@@ -4,6 +4,7 @@ import {defineConfig} from 'vitepress'
 export default defineConfig({
     title: "Laravel SpellNumber",
     description: "Easily convert numbers to words in Laravel Framework.",
+    lang: 'en-US',
     lastUpdated: true,
     base: '/SpellNumber',
     themeConfig: {
@@ -11,7 +12,6 @@ export default defineConfig({
         nav: [
             {text: 'v4.0.0 (2023/10/19)', link: '/'},
         ],
-
         sidebar: [
             {
                 text: 'Getting Started',
@@ -49,17 +49,50 @@ export default defineConfig({
         }
     },
     head: [
-        [
-            'script',
-            {async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-ZNPSG44PGL'}
+        ['link', {
+                rel: 'icon',
+                href: '/favicon.svg'
+            }
         ],
-        [
-            'script',
-            {},
-            `window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-ZNPSG44PGL');`
-        ]
-    ]
+        ['meta', {
+                property: 'og:image',
+                content: 'https://user-images.githubusercontent.com/51100789/266456351-e51cf045-26d0-44e0-a873-3034deaea046.png' 
+            }
+        ],
+        ['meta', {
+                property: 'og:image:secure_url',
+                content: 'https://user-images.githubusercontent.com/51100789/266456351-e51cf045-26d0-44e0-a873-3034deaea046.png'
+            }
+        ],
+        ['meta', {
+                property: 'og:image:width',
+                content: '600'
+            }
+        ],
+        ['meta', {
+                property: 'og:image:height',
+                content: '400'
+            }
+        ],
+        ['meta', {
+                property: 'og:title',
+                content: 'SpellNumber'
+            }
+        ],
+        ['meta', {
+                property: 'og:description',
+                content: 'Develop easily and without having to allocate additional server resources!'
+            }
+        ],
+        ['meta', {
+                property: 'og:url',
+                content: 'Easily convert numbers to words in Laravel Framework.'
+            }
+        ],
+        ['meta', {
+                property: 'og:type',
+                content: 'website'
+            }
+        ],
+    ],
 })

@@ -1,10 +1,3 @@
----
-hero:
-  image:
-    src: ./public/logo-github.png
-    alt: SpellNumber Laravel
----
-
 ![logo-spell-number](./public/logo-full-scream.png)
 
 ![Laravel 8.0+](https://img.shields.io/badge/Laravel-8.0%2B-white.svg)
