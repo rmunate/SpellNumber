@@ -1,3 +1,10 @@
+---
+title: SpellNumbers
+pageMeta: {
+  previewImage: "./public/logo-github.png",
+}
+---
+
 ![logo-spell-number](./public/logo-full-scream.png)
 
 ![Laravel 8.0+](https://img.shields.io/badge/Laravel-8.0%2B-white.svg)

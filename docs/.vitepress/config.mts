@@ -33,7 +33,7 @@ export default defineConfig({
                 ]
             }, {
                 text: 'Contribute',
-                collapsed: true,
+                collapsed: false,
                 items: [
                     {text: 'Bug Report', link: 'contribute/report-bugs'},
                     {text: 'Contribution', link: 'contribute/contribution'}
