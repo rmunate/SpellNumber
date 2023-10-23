@@ -5,9 +5,6 @@ namespace Rmunate\Utilities\Exceptions;
 use Exception;
 use Throwable;
 
-/**
- * The SpellNumberExceptions class extends Exception and provides custom exception handling for the SpellNumber library.
- */
 final class SpellNumberExceptions extends Exception
 {
     /**

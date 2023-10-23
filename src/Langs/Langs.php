@@ -12,16 +12,16 @@ final class Langs
      * @var array
      */
     public const TIMEZONES_AVAILABLE = [
-        'de' => 'German',     // German from Germany
-        'en' => 'English',    // English from the United States
-        'es' => 'Spanish',    // Spanish from Spain
-        'fa' => 'Farsi',      // Farsi from Iran
-        'fr' => 'French',     // French from France
-        'hi' => 'Hindi',      // Hindi from India
-        'it' => 'Italian',    // Italian from Italy
-        'pl' => 'Polish',     // Polish from Poland
-        'pt' => 'Portuguese', // Portuguese from Portugal
-        'ro' => 'Romanian',   // Romanian from Romania
+        'de' => 'German',     // German from Germany.
+        'en' => 'English',    // English from the United States.
+        'es' => 'Spanish',    // Spanish from Spain.
+        'fa' => 'Farsi',      // Farsi from Iran.
+        'fr' => 'French',     // French from France.
+        'hi' => 'Hindi',      // Hindi from India.
+        'it' => 'Italian',    // Italian from Italy.
+        'pl' => 'Polish',     // Polish from Poland.
+        'pt' => 'Portuguese', // Portuguese from Portugal.
+        'ro' => 'Romanian',   // Romanian from Romania.
     ];
 
     /**

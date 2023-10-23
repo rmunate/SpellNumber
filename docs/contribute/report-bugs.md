@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Bug Report 
+# Bug Report
 
 If you find errors or opportunities within the package, you can create an incident that we will attend to in the shortest time possible.
 

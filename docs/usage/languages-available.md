@@ -6,16 +6,16 @@ outline: deep
 
 We currently have 10 supported languages to easily work with this package. Below we list the configured languages:
 
-- German 
-- English 
-- Spanish 
-- Farsi 
-- French 
-- Hindi 
-- Italian 
-- Polish 
-- Portuguese 
-- Romanian 
+- German.
+- English.
+- Spanish.
+- Farsi.
+- French.
+- Hindi.
+- Italian.
+- Polish.
+- Portuguese.
+- Romanian.
 
 If you want to get the supported languages directly from the package, you have two ways to do it.
 

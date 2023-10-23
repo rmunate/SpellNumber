@@ -18,7 +18,7 @@ final class Words
      */
     public static function locale(string $value, string $locale, string $current)
     {
-        // Replace final strings for each language
+        // Replace final strings for each language.
         $replacesLocale = Replaces::TO_MONEY[$locale] ?? [];
         foreach ($replacesLocale as $search => $replace) {
             if (substr_compare($value, $search, -strlen($search)) === 0) {
@@ -26,7 +26,7 @@ final class Words
             }
         }
 
-        // Assign the currency value
+        // Assign the currency value.
         $replacesGeneral = Replaces::GENERAL[$locale] ?? [];
         $value = Str::lower($value.' '.$current);
         foreach ($replacesGeneral as $search => $replace) {
@@ -35,7 +35,7 @@ final class Words
             }
         }
 
-        //From Config
+        //From Config.
         $replacesLocaleConfig = config("spell-number.replacements.$locale") ?? [];
         foreach ($replacesLocaleConfig as $search => $replace) {
             if (substr_compare($value, $search, -strlen($search)) === 0) {
@@ -43,7 +43,7 @@ final class Words
             }
         }
 
-        // Return the adjusted text
+        // Return the adjusted text.
         return $value;
     }
 }

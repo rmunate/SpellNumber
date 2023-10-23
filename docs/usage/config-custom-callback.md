@@ -23,6 +23,8 @@ Inside the callback you will have a variable `$data`, which contains the necessa
 If you print the $data variable, you will find an instance of the `Rmunate\Utilities\Callback\DataResponse` object that allows you to access the following values.
 
 ``` php
+dd($data);
+
 // Rmunate\Utilities\Callback\DataResponse {
 //   #method: "toMoney"
 //   #type: "double"

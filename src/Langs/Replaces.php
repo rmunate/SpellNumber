@@ -41,7 +41,7 @@ final class Replaces
     ];
 
     /**
-     * These replacements will be applied generally to the output of each language.
+     * These replacements will be applied generally to the output each language.
      */
     public const GENERAL = [
         'es' => [

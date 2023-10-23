@@ -12,10 +12,6 @@ use Rmunate\Utilities\Miscellaneous\Words;
 use Rmunate\Utilities\Validator\Traits\CommonValidate;
 use Rmunate\Utilities\Wrappers\NumberFormatterWrapper;
 
-/**
- * Class SpellNumber
- * This class is used to convert numeric values into their respective textual representation in different languages.
- */
 class SpellNumber extends BaseSpellNumber
 {
     use CommonValidate;

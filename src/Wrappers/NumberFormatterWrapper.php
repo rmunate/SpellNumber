@@ -5,10 +5,6 @@ namespace Rmunate\Utilities\Wrappers;
 use NumberFormatter;
 use Rmunate\Utilities\Langs\Langs;
 
-/**
- * The NumberFormatterWrapper class provides a simple wrapper around PHP's NumberFormatter class
- * to format numbers as spelled-out strings.
- */
 final class NumberFormatterWrapper
 {
     /**

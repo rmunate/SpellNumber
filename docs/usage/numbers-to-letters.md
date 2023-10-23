@@ -46,7 +46,7 @@ SpellNumber::value(123456789.12)->locale('hi')->toLetters();
 ## Method Integer
 
 You can also rely on the `Integer` method to define that the input is a new integer.
-Remember to ensure that the input value is of type `int`
+Remember to ensure that the input value is of type `int`.
 
 ```php
 use Rmunate\Utilities\SpellNumber;

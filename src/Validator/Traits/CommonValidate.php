@@ -15,7 +15,7 @@ trait CommonValidate
     private function validateScientificConnotation()
     {
         if (Utilities::isScientificConnotation($this->value)) {
-            throw SpellNumberExceptions::create('The entered value exceeds the processable limits of the current version of PHP and has become a scientific connotation.');
+            throw SpellNumberExceptions::create('The entered value exceeds the processable limits of the current version of PHP and has become a Scientific Connotation.');
         }
 
         return true;

@@ -2,13 +2,6 @@
 
 namespace Rmunate\Utilities\Callback;
 
-/**
- * DataResponse.
- *
- * This class represents a data response object, used for storing and accessing
- * data related to callback responses. It provides methods to retrieve various
- * properties of the response data.
- */
 final class DataResponse
 {
     protected $method;

@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Contributing 
+# Contributing
 
 If you want to add support for a new language or want to develop new features, you can submit your requests to the main branch of the repository.
 

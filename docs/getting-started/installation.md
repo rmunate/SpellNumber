@@ -6,7 +6,7 @@ outline: deep
 
 ## Requirements
 
-For this solution to work properly you must have at least a version of PHP 8.0 since the package in its CORE has typed data.
+For this solution to work correctly, you must have at least PHP 8.0 installed, as the package includes typed data in its core.
 
 You must have Laravel Framework version 8 or higher.
 

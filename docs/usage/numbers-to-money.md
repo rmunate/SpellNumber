@@ -48,7 +48,7 @@ SpellNumber::value(100.65)->locale('pl')->currency('złotych')->fraction('groszy
 ## Method Integer
 
 You can also rely on the `Integer` method to define that the input is a new integer.
-Remember to ensure that the input value is of type `int`
+Remember to ensure that the input value is of type `int`.
 
 ```php
 SpellNumber::integer(100)->locale('es')->currency('Pesos')->toMoney();

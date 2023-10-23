@@ -25,6 +25,6 @@ class SpellNumberProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //...
+        // Register any package-specific services here
     }
 }

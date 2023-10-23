@@ -86,7 +86,7 @@ export default defineConfig({
         ],
         ['meta', {
                 property: 'og:url',
-                content: 'Easily convert numbers to words in Laravel Framework.'
+                content: 'https://rmunate.github.io/SpellNumber/'
             }
         ],
         ['meta', {

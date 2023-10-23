@@ -4,9 +4,6 @@ namespace Rmunate\Utilities\Miscellaneous;
 
 use Rmunate\Utilities\Langs\Langs;
 
-/**
- * The Utilities class provides various utility methods for common operations.
- */
 final class Utilities
 {
     /**

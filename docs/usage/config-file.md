@@ -72,4 +72,4 @@ You must define the language on which the replacement should be applied in all t
 
 If what you would like is to have a programmable way to modify the output of the package value, in that case this solution is what you need.
 
-Go to the next page. >>>
+Go to the next page =>

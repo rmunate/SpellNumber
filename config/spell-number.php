@@ -20,7 +20,7 @@ return [
         |
         | Define the language over which values will be translated to words.
         | Remember that you only have the following options available:
-        | 'de', 'en', 'es', 'fa', 'fr', 'hi', 'it', 'pl', 'pt', 'ro',
+        | 'de', 'en', 'es', 'fa', 'fr', 'hi', 'it', 'pl', 'pt', 'ro'.
         |
         */
 
@@ -28,7 +28,7 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | Define the Currency
+        | Define the Currency.
         |--------------------------------------------------------------------------
         |
         | Define the name of the currency to use globally.
@@ -40,12 +40,12 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | Define the Fraction
+        | Define the Fraction.
         |--------------------------------------------------------------------------
         |
         | Define the name of the currency fraction to use globally.
         | This will reduce the amount of code when using the library.
-        | Cents? What will you use?
+        | Cents? What will you use?.
         |
         */
 
@@ -70,7 +70,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Encountered a specific adjustment in the number to words output?
+    | Encountered a specific adjustment in the number to words output?.
     |--------------------------------------------------------------------------
     |
     | Here, you have the option to adjust whatever you need, the best part!

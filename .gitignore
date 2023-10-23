@@ -7,7 +7,6 @@
 /.idea
 /.vscode
 
-
 # Ignore Composer generated directory and files
 /vendor
 

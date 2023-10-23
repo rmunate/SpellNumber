@@ -5,9 +5,6 @@ namespace Rmunate\Utilities\Bases;
 use Rmunate\Utilities\Langs\Langs;
 use Rmunate\Utilities\Validator\SpellNumberValidator;
 
-/**
- * The BaseSpellNumber abstract class provides a base for converting numeric values to words.
- */
 abstract class BaseSpellNumber
 {
     /**

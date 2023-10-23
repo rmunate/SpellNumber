@@ -30,7 +30,7 @@ final class SpellNumberValidator extends BaseSpellNumberValidator
         // Check if the intl extension is installed.
         $this->validateExtension();
 
-        // Validate that it is not a scientific notation
+        // Validate that it is not a scientific notation.
         $this->validateScientificConnotation();
 
         // Execute the appropriate validation based on the type.
