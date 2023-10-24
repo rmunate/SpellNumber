@@ -8,7 +8,7 @@ export default defineConfig({
     lastUpdated: true,
     base: '/SpellNumber',
     themeConfig: {
-        logo: 'laravel_black.svg',
+        logo: 'logo.png',
         nav: [
             {text: 'v4.0.0 (2023/10/19)', link: '/'},
         ],
@@ -51,7 +51,8 @@ export default defineConfig({
     head: [
         ['link', {
                 rel: 'icon',
-                href: '/SpellNumber/favicon.svg'
+                href: '/SpellNumber/logo.png',
+                type: 'image/png'
             }
         ],
         ['meta', {
