@@ -31,6 +31,7 @@ export default defineConfig({
                     {text: 'Numbers To Ordinal', link: '/usage/numbers-to-ordinal'},
                     {text: 'Config File', link: '/usage/config-file'},
                     {text: 'Config Custom Callback', link: '/usage/config-custom-callback'},
+                    {text: 'Macroable', link: '/usage/macroable'},
                 ]
             }, {
                 text: 'Contribute',

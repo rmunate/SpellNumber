@@ -26,6 +26,11 @@ class SpellNumber extends BaseSpellNumber
     public const ORDINAL_MALE = '%spellout-ordinal-masculine';
     public const ORDINAL_FEMALE = '%spellout-ordinal-feminine';
 
+    /* Constants Macros */
+    public const TO_LETTERS = 'TO_LETTERS';
+    public const TO_MONEY = 'TO_MONEY';
+    public const TO_ORDINAL = 'TO_ORDINAL';
+
     /* Propierties */
     private $value;
     private string $type;
@@ -270,5 +275,25 @@ class SpellNumber extends BaseSpellNumber
         $letters2 = Words::locale($letters2, $this->locale, $this->fraction);
 
         return Str::title($letters1.' '.Utilities::connector($this->locale).' '.$letters2);
+    }
+
+    /**
+     * Perform a spell-related action based on the specified method and optional ordinal mode.
+     *
+     * @param string $method       The method to perform (TO_LETTERS, TO_MONEY, or TO_ORDINAL).
+     * @param string|null $modeOrdinal The optional ordinal mode when using TO_ORDINAL.
+     *
+     * @return mixed The result of the specified action.
+     *
+     * @throws SpellNumberExceptions When the requested action is invalid.
+     */
+    private function spell(string $method, ?string $modeOrdinal = null)
+    {
+        return match ($method) {
+            'TO_LETTERS' => $this->toLetters(),
+            'TO_MONEY'   => $this->toMoney(),
+            'TO_ORDINAL' => $this->toOrdinal($modeOrdinal),
+            default      => throw SpellNumberExceptions::create("The requested action does not exist. The 'spell' method only accepts one of the following three options: SpellNumber::TO_LETTERS, SpellNumber::TO_MONEY, or SpellNumber::TO_ORDINAL."),
+        };
     }
 }
