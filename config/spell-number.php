@@ -31,9 +31,9 @@ return [
         | Try using a "locale" not listed in the previous option.
         |--------------------------------------------------------------------------
         |
-        | If you want to use an option different from those previously listed, 
+        | If you want to use an option different from those previously listed,
         | you must set the following indicator to true, so that the conversion to the supplied
-        | location can be attempted. To list possible additional options to use with the package, 
+        | location can be attempted. To list possible additional options to use with the package,
         | you can run the function SpellNumber::getAllLocales();
         |
         */
@@ -70,8 +70,8 @@ return [
         | Output type ordinal texts
         |--------------------------------------------------------------------------
         |
-        | The output usually depends on the language to be used, 
-        | so you can use any of the following three options. 
+        | The output usually depends on the language to be used,
+        | so you can use any of the following three options.
         |
         | Options: 'default', 'male', 'female'
         |

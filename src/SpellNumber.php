@@ -3,15 +3,15 @@
 namespace Rmunate\Utilities;
 
 use Illuminate\Support\Str;
-use Rmunate\Utilities\Langs\Langs;
 use Illuminate\Support\Traits\Macroable;
-use Rmunate\Utilities\Miscellaneous\Words;
 use Rmunate\Utilities\Bases\BaseSpellNumber;
 use Rmunate\Utilities\Callback\DataResponse;
+use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
+use Rmunate\Utilities\Langs\Langs;
 use Rmunate\Utilities\Miscellaneous\Utilities;
+use Rmunate\Utilities\Miscellaneous\Words;
 use Rmunate\Utilities\Validator\Traits\CommonValidate;
 use Rmunate\Utilities\Wrappers\NumberFormatterWrapper;
-use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
 
 class SpellNumber extends BaseSpellNumber
 {
@@ -163,7 +163,7 @@ class SpellNumber extends BaseSpellNumber
 
     /**
      * Convert the numeric value to ordinal representation.
-     * 
+     *
      * @return string The textual representation of the ordinal value.
      */
     public function toOrdinal(?string $attr = null)
@@ -199,7 +199,7 @@ class SpellNumber extends BaseSpellNumber
     private function integerToOrdinal($attr)
     {
         if ($this->type == 'double') {
-            throw SpellNumberExceptions::create("To convert to ordinal numbers, an integer value is required as input");
+            throw SpellNumberExceptions::create('To convert to ordinal numbers, an integer value is required as input');
         }
 
         $formatter = NumberFormatterWrapper::format($this->value, $this->locale, true, $attr);
@@ -280,12 +280,12 @@ class SpellNumber extends BaseSpellNumber
     /**
      * Perform a spell-related action based on the specified method and optional ordinal mode.
      *
-     * @param string $method       The method to perform (TO_LETTERS, TO_MONEY, or TO_ORDINAL).
+     * @param string      $method      The method to perform (TO_LETTERS, TO_MONEY, or TO_ORDINAL).
      * @param string|null $modeOrdinal The optional ordinal mode when using TO_ORDINAL.
      *
-     * @return mixed The result of the specified action.
-     *
      * @throws SpellNumberExceptions When the requested action is invalid.
+     *
+     * @return mixed The result of the specified action.
      */
     private function spell(string $method, ?string $modeOrdinal = null)
     {
