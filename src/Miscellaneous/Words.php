@@ -4,7 +4,6 @@ namespace Rmunate\Utilities\Miscellaneous;
 
 use Illuminate\Support\Str;
 use Rmunate\Utilities\Langs\Replaces;
-use Rmunate\Utilities\Miscellaneous\Utilities;
 
 final class Words
 {

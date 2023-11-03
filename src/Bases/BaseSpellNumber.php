@@ -57,7 +57,7 @@ abstract class BaseSpellNumber
     }
 
     /**
-     * Returns the list of available premises according to PHP
+     * Returns the list of available premises according to PHP.
      *
      * @return array An array containing all locales.
      */
@@ -67,9 +67,7 @@ abstract class BaseSpellNumber
             $availableLocales = \ResourceBundle::getLocales('');
 
             return $availableLocales;
-
         } catch (\Throwable $th) {
-            
             return array_keys(Langs::LOCALES_AVAILABLE);
         }
     }

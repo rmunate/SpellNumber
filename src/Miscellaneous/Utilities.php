@@ -183,9 +183,10 @@ final class Utilities
     }
 
     /**
-     * Extracts the main value of the "Locale" example "es_MX" extracts "es"
+     * Extracts the main value of the "Locale" example "es_MX" extracts "es".
+     *
      * @param mixed $string
-     * 
+     *
      * @return string
      */
     public static function extractPrimaryLocale($string)
@@ -233,5 +234,4 @@ final class Utilities
             '%spellout-ordinal'           => 'default',
         };
     }
-
 }
