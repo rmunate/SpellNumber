@@ -42,20 +42,6 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | Output type ordinal texts
-        |--------------------------------------------------------------------------
-        |
-        | The output usually depends on the language to be used, 
-        | so you can use any of the following three options. 
-        |
-        | Options: 'default', 'male', 'female'
-        |
-        */
-
-        'ordinal_output' => 'default',
-
-        /*
-        |--------------------------------------------------------------------------
         | Define the Currency.
         |--------------------------------------------------------------------------
         |
@@ -78,6 +64,20 @@ return [
         */
 
         'fraction' => 'cents',
+
+        /*
+        |--------------------------------------------------------------------------
+        | Output type ordinal texts
+        |--------------------------------------------------------------------------
+        |
+        | The output usually depends on the language to be used, 
+        | so you can use any of the following three options. 
+        |
+        | Options: 'default', 'male', 'female'
+        |
+        */
+
+        'ordinal_output' => 'default',
     ],
 
     /*

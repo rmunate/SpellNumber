@@ -59,7 +59,7 @@ class SpellNumber extends BaseSpellNumber
      */
     public function locale(string $locale, ?bool $specific_locale = null)
     {
-        $valueConfig = config('spell-number.specific_locale');
+        $valueConfig = config('spell-number.default.specific_locale');
 
         $specific_locale = $specific_locale ?? $valueConfig ?? false;
 
@@ -163,7 +163,7 @@ class SpellNumber extends BaseSpellNumber
      */
     public function toOrdinal(?string $attr = null)
     {
-        $valueConfig = config('spell-number.ordinal_output');
+        $valueConfig = config('spell-number.default.ordinal_output');
 
         $attr = Utilities::textOrdinalMode($attr ?? $valueConfig);
 
