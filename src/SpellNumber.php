@@ -57,11 +57,15 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return SpellNumber The SpellNumber instance with the updated locale.
      */
-    public function locale(string $locale, bool $specific_locale = false)
+    public function locale(string $locale, ?bool $specific_locale = null)
     {
+        $valueConfig = config('spell-number.specific_locale');
+
+        $specific_locale = $specific_locale ?? $valueConfig ?? false;
+
         if ($specific_locale === false) {
             if (!Utilities::isValidLocale($locale)) {
-                throw SpellNumberExceptions::create('The provided value is not valid. You can use the "SpellNumber::getAvailableLocales()" method to see the available options or pass the "SpellNumber::SPECIFIC_LOCALE" constant as a second parameter to allow specific or different usage.');
+                throw SpellNumberExceptions::create('The provided value is not valid. To view the available options, you can use the SpellNumber::getAvailableLocales() method, or you can pass the SpellNumber::SPECIFIC_LOCALE constant as the second parameter to enable specific or customized usage.');
             }
         }
 
@@ -157,8 +161,12 @@ class SpellNumber extends BaseSpellNumber
      * 
      * @return string The textual representation of the ordinal value.
      */
-    public function toOrdinal($attr = '%spellout-ordinal')
+    public function toOrdinal(?string $attr = null)
     {
+        $valueConfig = config('spell-number.ordinal_output');
+
+        $attr = Utilities::textOrdinalMode($attr ?? $valueConfig);
+
         $callback = config('spell-number.callback_output');
 
         if (!empty($callback) && is_callable($callback)) {
@@ -171,6 +179,7 @@ class SpellNumber extends BaseSpellNumber
                 'words'    => $words,
                 'lang'     => Utilities::extractPrimaryLocale($this->locale),
                 'locale'   => $this->locale,
+                'mode'     => Utilities::textOrdinalModeHuman($attr),
             ]));
         }
 

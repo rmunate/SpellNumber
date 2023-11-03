@@ -192,4 +192,46 @@ final class Utilities
     {
         return mb_strtolower(substr($string, 0, 2));
     }
+
+    /**
+     * Determine the ordinal text mode based on the provided value.
+     *
+     * @param string|null $value The value indicating the ordinal text mode.
+     *
+     * @return string The corresponding rule for ordinal text formatting.
+     */
+    public static function textOrdinalMode(?string $value)
+    {
+        return match ($value) {
+            'default'                     => '%spellout-ordinal',
+            'male'                        => '%spellout-ordinal-masculine',
+            'female'                      => '%spellout-ordinal-feminine',
+            'masculine'                   => '%spellout-ordinal-masculine',
+            'feminine'                    => '%spellout-ordinal-feminine',
+            '%spellout-ordinal'           => '%spellout-ordinal',
+            '%spellout-ordinal-masculine' => '%spellout-ordinal-masculine',
+            '%spellout-ordinal-feminine'  => '%spellout-ordinal-feminine',
+            'ordinal'                     => '%spellout-ordinal',
+            'ordinal-masculine'           => '%spellout-ordinal-masculine',
+            'ordinal-feminine'            => '%spellout-ordinal-feminine',
+            default                       => '%spellout-ordinal',
+        };
+    }
+
+    /**
+     * Determine the human-readable ordinal text mode based on the provided value.
+     *
+     * @param string|null $value The value indicating the ordinal text mode.
+     *
+     * @return string The corresponding human-readable ordinal text mode.
+     */
+    public static function textOrdinalModeHuman(?string $value)
+    {
+        return match ($value) {
+            '%spellout-ordinal-masculine' => 'male',
+            '%spellout-ordinal-feminine'  => 'female',
+            '%spellout-ordinal'           => 'default',
+        };
+    }
+
 }

@@ -8,6 +8,7 @@ class DataResponse
     protected $type;
     protected $lang;
     protected $locale;
+    protected $mode;
     protected $currency;
     protected $fraction;
     public $value;
@@ -26,6 +27,7 @@ class DataResponse
         $this->words = $data['words'] ?? null;
         $this->lang = $data['lang'] ?? null;
         $this->locale = $data['locale'] ?? null;
+        $this->mode = $data['mode'] ?? null;
         $this->currency = $data['currency'] ?? null;
         $this->fraction = $data['fraction'] ?? null;
     }
