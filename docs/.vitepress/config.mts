@@ -10,7 +10,7 @@ export default defineConfig({
     themeConfig: {
         logo: 'logo.png',
         nav: [
-            {text: 'v4.0.0 (2023/10/19)', link: '/'},
+            {text: 'v4.1.0 (2023/11/03)', link: '/'},
         ],
         sidebar: [
             {
