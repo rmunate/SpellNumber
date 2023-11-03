@@ -43,7 +43,7 @@ class SpellNumber extends BaseSpellNumber
     {
         $this->value = $value;
         $this->type = $type;
-        $this->locale = config('spell-number.default.lang') ?? Langs::getLocaleLaravel();
+        $this->locale = config('spell-number.default.lang') ?? config('spell-number.default.locale') ?? Langs::getLocaleLaravel();
         $this->currency = config('spell-number.default.currency') ?? 'dollars';
         $this->fraction = config('spell-number.default.fraction') ?? 'cents';
     }

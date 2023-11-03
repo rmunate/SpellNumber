@@ -2,28 +2,32 @@
 outline: deep
 ---
 
-# Numbers To Letters
+# Numbers To Ordinal
+
+You may need to list some data within your system, if so, this section is your solution.
+
+This package included the option to use ordinal numbers for this purpose.
+
+You can only use this method with integers, remember to ensure that the value meets this type, otherwise we may have unexpected responses.
 
 ## Method Value
 
-### Integers
-
-You can easily convert whole numbers to words by defining the locale to be applied. If you do not define a locale, "en" (English) will be applied by default. Remember that if you export the vendor configuration file, it will not require this definition.
+You can easily convert integers. If you do not define a locale, "en" (English) will be applied by default. Remember that if you export the provider configuration file, it will not require this definition.
 
 ```php
 use Rmunate\Utilities\SpellNumber;
 
-SpellNumber::value(100)->locale('en')->toLetters();
-// "One Hundred"
+SpellNumber::value(2)->locale('en')->toOrdinal();
+// "Second"
 
-SpellNumber::value(100)->locale('es')->toLetters();
-// "Cien"
+SpellNumber::value(2)->locale('en')->toOrdinal(SpellNumber::ORDINAL_DEFAULT);
+// "Second"
 
-SpellNumber::value(100)->locale('fa')->toLetters();
-// "صد"
+SpellNumber::value(2)->locale('es')->toOrdinal(SpellNumber::ORDINAL_MALE);
+// "Segundo"
 
-SpellNumber::value(100)->locale('hi')->toLetters();
-// "एक सौ"
+SpellNumber::value(2)->locale('es')->toOrdinal(SpellNumber::ORDINAL_FEMALE);
+// "Segunda"
 ```
 
 ## Method Integer
@@ -34,9 +38,29 @@ Remember to ensure that the input value is of type `int`.
 ```php
 use Rmunate\Utilities\SpellNumber;
 
-SpellNumber::integer(100)->locale('en')->toLetters();
-// "One Hundred"
+SpellNumber::integer(2)->locale('en')->toOrdinal();
+// "Second"
 
-SpellNumber::integer(2)->locale('es')->toLetters();
+SpellNumber::integer(2)->locale('en')->toOrdinal(SpellNumber::ORDINAL_DEFAULT);
+// "Second"
+
+SpellNumber::integer(2)->locale('es')->toOrdinal(SpellNumber::ORDINAL_MALE);
 // "Segundo"
+
+SpellNumber::integer(2)->locale('es')->toOrdinal(SpellNumber::ORDINAL_FEMALE);
+// "Segunda"
+```
+
+## Especific Locale
+
+If you want to use a specific locale, you should always use the constant `SpellNumber::SPECIFIC_LOCALE`
+
+```php
+use Rmunate\Utilities\SpellNumber;
+
+SpellNumber::value(2)->locale('en_US', SpellNumber::SPECIFIC_LOCALE)->toOrdinal();
+// "Second"
+
+SpellNumber::integer(2)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->toOrdinal(SpellNumber::ORDINAL_FEMALE)
+// "Segunda"
 ```
