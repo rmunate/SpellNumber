@@ -3,18 +3,28 @@
 namespace Rmunate\Utilities;
 
 use Illuminate\Support\Str;
+use Rmunate\Utilities\Langs\Langs;
+use Illuminate\Support\Traits\Macroable;
+use Rmunate\Utilities\Miscellaneous\Words;
 use Rmunate\Utilities\Bases\BaseSpellNumber;
 use Rmunate\Utilities\Callback\DataResponse;
-use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
-use Rmunate\Utilities\Langs\Langs;
 use Rmunate\Utilities\Miscellaneous\Utilities;
-use Rmunate\Utilities\Miscellaneous\Words;
 use Rmunate\Utilities\Validator\Traits\CommonValidate;
 use Rmunate\Utilities\Wrappers\NumberFormatterWrapper;
+use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
 
 class SpellNumber extends BaseSpellNumber
 {
     use CommonValidate;
+    use Macroable;
+
+    /* Constants Locale */
+    public const SPECIFIC_LOCALE = true;
+
+    /* Constants Ordinal Text */
+    public const ORDINAL_DEFAULT = '%spellout-ordinal';
+    public const ORDINAL_MALE = '%spellout-ordinal-masculine';
+    public const ORDINAL_FEMALE = '%spellout-ordinal-feminine';
 
     /* Propierties */
     private $value;
@@ -47,11 +57,14 @@ class SpellNumber extends BaseSpellNumber
      *
      * @return SpellNumber The SpellNumber instance with the updated locale.
      */
-    public function locale(string $locale)
+    public function locale(string $locale, bool $specific_locale = false)
     {
-        if (!Utilities::isValidLocale($locale)) {
-            throw SpellNumberExceptions::create('The provided value is not valid. You can use the getAllLocales() method to see the available options.');
+        if ($specific_locale === false) {
+            if (!Utilities::isValidLocale($locale)) {
+                throw SpellNumberExceptions::create('The provided value is not valid. You can use the getAllLocales() method to see the available options.');
+            }
         }
+
         $this->locale = $locale;
 
         return $this;
@@ -102,7 +115,8 @@ class SpellNumber extends BaseSpellNumber
                 'type'     => $this->type,
                 'value'    => $this->value,
                 'words'    => $words,
-                'lang'     => $this->locale,
+                'lang'     => Utilities::extractPrimaryLocale($this->locale),
+                'locale'   => $this->locale,
                 'currency' => null,
                 'fraction' => null,
             ]));
@@ -128,13 +142,55 @@ class SpellNumber extends BaseSpellNumber
                 'type'     => $this->type,
                 'value'    => $this->value,
                 'words'    => $words,
-                'lang'     => $this->locale,
+                'lang'     => Utilities::extractPrimaryLocale($this->locale),
+                'locale'   => $this->locale,
                 'currency' => $this->currency,
                 'fraction' => $this->fraction,
             ]));
         }
 
         return ($this->type == 'integer') ? Str::title($this->integerToMoney()) : Str::title($this->doubleToMoney());
+    }
+
+    /**
+     * Convert the numeric value to ordinal representation.
+     * 
+     * @return string The textual representation of the ordinal value.
+     */
+    public function toOrdinal($attr = '%spellout-ordinal')
+    {
+        $callback = config('spell-number.callback_output');
+
+        if (!empty($callback) && is_callable($callback)) {
+            $words = Str::title($this->integerToOrdinal($attr));
+
+            return $callback(new DataResponse([
+                'method'   => 'toOrdinal',
+                'type'     => $this->type,
+                'value'    => $this->value,
+                'words'    => $words,
+                'lang'     => Utilities::extractPrimaryLocale($this->locale),
+                'locale'   => $this->locale,
+            ]));
+        }
+
+        return Str::title($this->integerToOrdinal($attr));
+    }
+
+    /**
+     * Convert the integer numeric value to its ordinal textual representation.
+     *
+     * @return string The textual representation of the ordinal value.
+     */
+    private function integerToOrdinal($attr)
+    {
+        if ($this->type == 'double') {
+            throw SpellNumberExceptions::create("To convert to ordinal numbers, an integer value is required as input");
+        }
+
+        $formatter = NumberFormatterWrapper::format($this->value, $this->locale, true, $attr);
+
+        return $formatter;
     }
 
     /**

@@ -28,6 +28,7 @@ export default defineConfig({
                     {text: 'Languages Available', link: '/usage/languages-available.md'},
                     {text: 'Numbers To Letters', link: '/usage/numbers-to-letters'},
                     {text: 'Numbers To Money', link: '/usage/numbers-to-money'},
+                    {text: 'Numbers To Ordinal', link: '/usage/numbers-to-ordinal'},
                     {text: 'Config File', link: '/usage/config-file'},
                     {text: 'Config Custom Callback', link: '/usage/config-custom-callback'},
                 ]

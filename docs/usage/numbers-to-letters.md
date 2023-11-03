@@ -71,3 +71,20 @@ SpellNumber::float('12345.230')->locale('en')->toLetters();
 SpellNumber::float('12345.230')->locale('es')->toLetters();
 // "Doce Mil Trescientos Cuarenta Y Cinco Con Doscientos Treinta"
 ```
+
+## Especific Locale
+
+If you want to use a specific locale, you should always use the constant `SpellNumber::SPECIFIC_LOCALE`
+
+```php
+use Rmunate\Utilities\SpellNumber;
+
+SpellNumber::value(100)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->toLetters();
+// "Cien"
+
+SpellNumber::integer(100)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->toLetters();
+// "Cien"
+
+SpellNumber::float('12345.230')->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->toLetters();
+// "Doce Mil Trescientos Cuarenta Y Cinco Con Doscientos Treinta"
+```

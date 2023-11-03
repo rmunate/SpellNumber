@@ -15,13 +15,17 @@ final class NumberFormatterWrapper
      *
      * @return string|null The spelled-out representation of the number, or null on failure.
      */
-    public static function format(float|int $value, string $locale = null)
+    public static function format(float|int $value, string $locale = null, bool $ruleSet = false, ?string $attr = null)
     {
         // If no locale is provided, use the default locale from the environment.
         $locale = $locale ?: Langs::getLocaleLaravel();
 
         // Create a new NumberFormatter instance with the specified locale for spelling out numbers.
         $numberFormatter = new NumberFormatter($locale, NumberFormatter::SPELLOUT);
+
+        if ($ruleSet) {
+            $numberFormatter->setTextAttribute(NumberFormatter::DEFAULT_RULESET, $attr);
+        }
 
         // Format the given numeric value as a spelled-out string.
         $value = $numberFormatter->format($value);

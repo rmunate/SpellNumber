@@ -3,6 +3,7 @@
 namespace Rmunate\Utilities\Langs;
 
 use Illuminate\Support\Facades\App;
+use Rmunate\Utilities\Miscellaneous\Utilities;
 
 final class Langs
 {
@@ -11,7 +12,7 @@ final class Langs
      *
      * @var array
      */
-    public const TIMEZONES_AVAILABLE = [
+    public const LOCALES_AVAILABLE = [
         'de' => 'German',     // German from Germany.
         'en' => 'English',    // English from the United States.
         'es' => 'Spanish',    // Spanish from Spain.
@@ -66,10 +67,9 @@ final class Langs
      */
     public static function getLocaleLaravel()
     {
-        $localeLaravel = App::getLocale();
-        $isoLang = substr($localeLaravel, 0, 2);
+        $isoLang = Utilities::extractPrimaryLocale(App::getLocale());
 
-        $availables = array_keys(self::TIMEZONES_AVAILABLE);
+        $availables = array_keys(self::LOCALES_AVAILABLE);
 
         // Return especific timezone
         if (in_array($isoLang, $availables)) {

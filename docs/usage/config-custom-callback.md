@@ -29,6 +29,7 @@ dd($data);
 //   #method: "toMoney"
 //   #type: "double"
 //   #lang: "en"
+//   #locale: "en_US"
 //   #currency: "Dollars"
 //   #fraction: "Cents"
 //   +value: "12345.230"

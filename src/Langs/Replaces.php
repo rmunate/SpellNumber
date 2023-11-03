@@ -6,6 +6,7 @@ final class Replaces
 {
     /**
      * Replacements where the currency needs to be defined at the end.
+     * The primary value must be there, that is, "es" instead of "es_ES" or similar.
      */
     public const TO_MONEY = [
         'de' => [
@@ -42,6 +43,7 @@ final class Replaces
 
     /**
      * These replacements will be applied generally to the output each language.
+     * The primary value must be there, that is, "es" instead of "es_ES" or similar.
      */
     public const GENERAL = [
         'es' => [

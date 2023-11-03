@@ -4,6 +4,7 @@ namespace Rmunate\Utilities\Miscellaneous;
 
 use Illuminate\Support\Str;
 use Rmunate\Utilities\Langs\Replaces;
+use Rmunate\Utilities\Miscellaneous\Utilities;
 
 final class Words
 {
@@ -18,6 +19,9 @@ final class Words
      */
     public static function locale(string $value, string $locale, string $current)
     {
+        // Primary Locale
+        $locale = Utilities::extractPrimaryLocale($locale);
+
         // Replace final strings for each language.
         $replacesLocale = Replaces::TO_MONEY[$locale] ?? [];
         foreach ($replacesLocale as $search => $replace) {

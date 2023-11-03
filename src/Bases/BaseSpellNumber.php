@@ -57,13 +57,21 @@ abstract class BaseSpellNumber
     }
 
     /**
-     * Retrieves a list of all available locales supported by the NumberFormatter class.
+     * Returns the list of available premises according to PHP
      *
-     * @return array An array containing all available locales.
+     * @return array An array containing all locales.
      */
     public static function getAllLocales()
     {
-        return array_keys(Langs::TIMEZONES_AVAILABLE);
+        try {
+            $availableLocales = \ResourceBundle::getLocales('');
+
+            return $availableLocales;
+
+        } catch (\Throwable $th) {
+            
+            return array_keys(Langs::LOCALES_AVAILABLE);
+        }
     }
 
     /**
@@ -71,9 +79,9 @@ abstract class BaseSpellNumber
      *
      * @return array An array containing all available locales.
      */
-    public static function getLocales()
+    public static function getAvailableLocales()
     {
-        return array_keys(Langs::TIMEZONES_AVAILABLE);
+        return array_keys(Langs::LOCALES_AVAILABLE);
     }
 
     /**
@@ -81,8 +89,30 @@ abstract class BaseSpellNumber
      *
      * @return array An array containing all available locales.
      */
+    public static function getAvailableLanguages()
+    {
+        return Langs::LOCALES_AVAILABLE;
+    }
+
+    /**
+     * DEPRECATED - Delete Method Soon
+     * Retrieves a list of all available locales supported by the NumberFormatter class.
+     *
+     * @return array An array containing all available locales.
+     */
+    public static function getLocales()
+    {
+        return self::getAvailableLocales();
+    }
+
+    /**
+     * DEPRECATED - Delete Method Soon
+     * Retrieves a list of all available TimeZones by the NumberFormatter class.
+     *
+     * @return array An array containing all available locales.
+     */
     public static function getLanguages()
     {
-        return Langs::TIMEZONES_AVAILABLE;
+        return self::getAvailableLanguages();
     }
 }

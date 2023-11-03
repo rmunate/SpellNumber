@@ -2,11 +2,12 @@
 
 namespace Rmunate\Utilities\Callback;
 
-final class DataResponse
+class DataResponse
 {
     protected $method;
     protected $type;
     protected $lang;
+    protected $locale;
     protected $currency;
     protected $fraction;
     public $value;
@@ -19,13 +20,14 @@ final class DataResponse
      */
     public function __construct(array $data)
     {
-        $this->method = $data['method'];
-        $this->type = $data['type'];
-        $this->value = $data['value'];
-        $this->words = $data['words'];
-        $this->lang = $data['lang'];
-        $this->currency = $data['currency'];
-        $this->fraction = $data['fraction'];
+        $this->method = $data['method'] ?? null;
+        $this->type = $data['type'] ?? null;
+        $this->value = $data['value'] ?? null;
+        $this->words = $data['words'] ?? null;
+        $this->lang = $data['lang'] ?? null;
+        $this->locale = $data['locale'] ?? null;
+        $this->currency = $data['currency'] ?? null;
+        $this->fraction = $data['fraction'] ?? null;
     }
 
     /**
@@ -76,6 +78,16 @@ final class DataResponse
     public function getLang()
     {
         return $this->lang;
+    }
+
+    /**
+     * Get the locale associated with the response.
+     *
+     * @return string The response locale.
+     */
+    public function getLocale()
+    {
+        return $this->locale;
     }
 
     /**

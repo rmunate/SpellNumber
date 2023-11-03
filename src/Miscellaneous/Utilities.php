@@ -115,7 +115,7 @@ final class Utilities
      */
     public static function isValidLocale($locale)
     {
-        $timezones = array_keys(Langs::TIMEZONES_AVAILABLE);
+        $timezones = array_keys(Langs::LOCALES_AVAILABLE);
 
         return in_array($locale, $timezones);
     }
@@ -180,5 +180,16 @@ final class Utilities
         };
 
         return $result;
+    }
+
+    /**
+     * Extracts the main value of the "Locale" example "es_MX" extracts "es"
+     * @param mixed $string
+     * 
+     * @return string
+     */
+    public static function extractPrimaryLocale($string)
+    {
+        return mb_strtolower(substr($string, 0, 2));
     }
 }

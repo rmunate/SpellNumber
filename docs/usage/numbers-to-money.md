@@ -69,3 +69,20 @@ SpellNumber::float('12345.230')->locale('es')->currency('Pesos')->fraction('Cent
 SpellNumber::float('12345.230')->locale('en')->currency('Dollars')->fraction('Cents')->toMoney();
 //"Twelve Thousand Three Hundred Forty-Five Dollars And Two Hundred Thirty Cents"
 ```
+
+## Especific Locale
+
+If you want to use a specific locale, you should always use the constant `SpellNumber::SPECIFIC_LOCALE`
+
+```php
+use Rmunate\Utilities\SpellNumber;
+
+SpellNumber::value(100)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->currency('Pesos')->toMoney();
+// "Cien Pesos"
+
+SpellNumber::integer(100)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->currency('Pesos')->toMoney();
+// "Cien Pesos"
+
+SpellNumber::float('12345.230')->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->currency('Pesos')->fraction('Centavos')->toMoney();
+// "Doce Mil Trescientos Cuarenta Y Cinco Pesos Con Doscientos Treinta Centavos"
+```
