@@ -15,6 +15,7 @@ To whom we thank for supporting making programming easier.
 - [Jens Twesmann](https://github.com/jetwes) (German Language)
 - [Gabriel Rausch](https://github.com/gdsrmygdsrjr) (Zero Decimal Correction)
 - [Alejandro Diaz](https://github.com/alejandrodiazpinilla) (Readme And Icon)
+- [Frank Sepulveda](https://github.com/socieboy) (Ordinal Texts)
 
 ## License
 This project is under the [MIT License](https://choosealicense.com/licenses/mit/).
