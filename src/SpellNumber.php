@@ -61,7 +61,7 @@ class SpellNumber extends BaseSpellNumber
     {
         if ($specific_locale === false) {
             if (!Utilities::isValidLocale($locale)) {
-                throw SpellNumberExceptions::create('The provided value is not valid. You can use the getAllLocales() method to see the available options.');
+                throw SpellNumberExceptions::create('The provided value is not valid. You can use the "SpellNumber::getAvailableLocales()" method to see the available options or pass the "SpellNumber::SPECIFIC_LOCALE" constant as a second parameter to allow specific or different usage.');
             }
         }
 
