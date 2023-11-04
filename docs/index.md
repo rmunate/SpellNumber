@@ -1,4 +1,4 @@
-![logo-spell-number](logo-full-scream.png)
+![logo-spell-number](./public/logo-full-scream.png)
 
 ## Introduction
 
