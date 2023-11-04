@@ -1,6 +1,5 @@
 import {defineConfig} from 'vitepress'
 
-// https://vitepress.dev/reference/site-config
 export default defineConfig({
     title: "Laravel SpellNumber",
     description: "Easily convert numbers to words in Laravel Framework.",

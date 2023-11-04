@@ -6,7 +6,7 @@ return [
     |--------------------------------------------------------------------------
     | Global Configuration for Number to Words Conversion.
     |--------------------------------------------------------------------------
-    |
+    | See https://rmunate.github.io/SpellNumber/
     | Define a global configuration to make the translation of values to words easier and faster.
     |
     */
