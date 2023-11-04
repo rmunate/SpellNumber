@@ -44,6 +44,7 @@ To whom we thank for supporting making programming easier.
 
 - [Ashok Devatwal](https://github.com/ashokdevatwal) (Hindi Language)
 - [Olsza](https://github.com/olsza) (Polish Language)
+- [Siros Fakhri](https://github.com/sirosfakhri) (Farsi Language)
 - [Jens Twesmann](https://github.com/jetwes) (German Language)
 - [Gabriel Rausch](https://github.com/gdsrmygdsrjr) (Zero Decimal Correction)
 - [Alejandro Diaz](https://github.com/alejandrodiazpinilla) (Readme And Icon)

@@ -18,6 +18,13 @@ const members = [
       { icon: 'twitter', link: 'https://twitter.com/rmunate' },
     ]
   },{
+    avatar: 'https://avatars.githubusercontent.com/u/56381478?v=4',
+    name: 'Siros Fakhri',
+    title: 'Developer | Iran/Tabriz',
+    links: [
+      { icon: 'github', link: 'https://github.com/sirosfakhri'},
+    ]
+  },{
     avatar: 'https://avatars.githubusercontent.com/u/18355852?v=4',
     name: 'Er. Ashok Devatwal',
     title: 'Developer | Alwar-Rajasthan',
