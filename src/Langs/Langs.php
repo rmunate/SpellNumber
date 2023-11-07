@@ -2,7 +2,7 @@
 
 namespace Rmunate\Utilities\Langs;
 
-use Illuminate\Support\Facades\App;
+
 use Rmunate\Utilities\Traits\Locale;
 use Rmunate\Utilities\Miscellaneous\Utilities;
 

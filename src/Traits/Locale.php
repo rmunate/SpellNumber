@@ -2,6 +2,10 @@
 
 namespace Rmunate\Utilities\Traits;
 
+use Rmunate\Utilities\Langs\Langs;
+use Illuminate\Support\Facades\App;
+use Rmunate\Utilities\Miscellaneous\Utilities;
+
 trait Locale
 {
     /**
@@ -12,7 +16,7 @@ trait Locale
     {
         $isoLang = Utilities::extractPrimaryLocale(App::getLocale());
 
-        $availables = array_keys(self::LOCALES_AVAILABLE);
+        $availables = array_keys(Langs::LOCALES_AVAILABLE);
 
         // Return especific timezone
         if (in_array($isoLang, $availables)) {
