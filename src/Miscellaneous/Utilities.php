@@ -130,8 +130,9 @@ final class Utilities
     public static function connector($locale)
     {
         $connector = Langs::LOCALES_CONNECTORS;
+        $locale = self::extractPrimaryLocale($locale);
 
-        return $connector[$locale];
+        return $connector[$locale] ?? '?';
     }
 
     /**
@@ -144,8 +145,9 @@ final class Utilities
     public static function connectorMoney($locale)
     {
         $connector = Langs::LOCALES_CONNECTORS_MONEY;
+        $locale = self::extractPrimaryLocale($locale);
 
-        return $connector[$locale];
+        return $connector[$locale] ?? '?';
     }
 
     /**

@@ -12,41 +12,55 @@ final class Words
      *
      * @param string $value   The original text string.
      * @param string $locale  The language of the text.
-     * @param string $current The current currency.
+     * @param string $type    The method.
      *
      * @return string The adjusted text with the replacements performed.
      */
-    public static function locale(string $value, string $locale, string $current)
+    public static function replaceLocale(string $value, string $locale, string $type)
     {
         // Primary Locale
         $locale = Utilities::extractPrimaryLocale($locale);
 
+        //Value
+        $value = Str::lower($value);
+
         // Replace final strings for each language.
-        $replacesLocale = Replaces::TO_MONEY[$locale] ?? [];
+        $replacesLocale = Replaces::constant($type)[$locale] ?? [];
         foreach ($replacesLocale as $search => $replace) {
-            if (substr_compare($value, $search, -strlen($search)) === 0) {
-                $value = str_replace($search, $replace, $value);
-            }
+            $search = Str::lower($search);
+            $replace = Str::lower($replace);
+            $value = str_replace($search, $replace, $value);
         }
 
-        // Assign the currency value.
-        $replacesGeneral = Replaces::GENERAL[$locale] ?? [];
-        $value = Str::lower($value.' '.$current);
-        foreach ($replacesGeneral as $search => $replace) {
-            if (substr_compare($value, $search, -strlen($search)) === 0) {
-                $value = str_replace($search, $replace, $value);
-            }
-        }
+        // Return the adjusted text.
+        return Str::title($value);
+    }
+
+    /**
+     * Perform replacements in the given text based on the language and current currency from config file.
+     *
+     * @param string $value   The original text string.
+     * @param string $locale  The language of the text.
+     *
+     * @return string The adjusted text with the replacements performed.
+     */
+    public static function replaceFromConfig(string $value, string $locale)
+    {
+        // Primary Locale
+        $locale = Utilities::extractPrimaryLocale($locale);
+
+        //Value
+        $value = Str::lower($value);
 
         //From Config.
         $replacesLocaleConfig = config("spell-number.replacements.$locale") ?? [];
         foreach ($replacesLocaleConfig as $search => $replace) {
-            if (substr_compare($value, $search, -strlen($search)) === 0) {
-                $value = str_replace($search, $replace, $value);
-            }
+            $search = Str::lower($search);
+            $replace = Str::lower($replace);
+            $value = str_replace($search, $replace, $value);
         }
 
         // Return the adjusted text.
-        return $value;
+        return Str::title($value);
     }
 }

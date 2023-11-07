@@ -203,8 +203,9 @@ class SpellNumber extends BaseSpellNumber
         }
 
         $formatter = NumberFormatterWrapper::format($this->value, $this->locale, true, $attr);
+        $formatter = Words::replaceLocale($formatter, $this->locale, self::TO_ORDINAL);
 
-        return $formatter;
+        return Words::replaceFromConfig($formatter, $this->locale);
     }
 
     /**
@@ -215,8 +216,9 @@ class SpellNumber extends BaseSpellNumber
     private function integerToLetters()
     {
         $formatter = NumberFormatterWrapper::format($this->value, $this->locale);
+        $formatter = Words::replaceLocale($formatter, $this->locale, self::TO_LETTERS);
 
-        return $formatter;
+        return Words::replaceFromConfig($formatter, $this->locale);
     }
 
     /**
@@ -237,7 +239,10 @@ class SpellNumber extends BaseSpellNumber
         $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale);
         $letters2 = NumberFormatterWrapper::format($parts[1], $this->locale);
 
-        return sprintf('%s %s %s', $letters1, Utilities::connector($this->locale), $letters2);
+        $output = sprintf('%s %s %s', $letters1, Utilities::connector($this->locale), $letters2);
+        $output = Words::replaceLocale($output, $this->locale, self::TO_LETTERS);
+
+        return Words::replaceFromConfig($output, $this->locale);
     }
 
     /**
@@ -247,10 +252,10 @@ class SpellNumber extends BaseSpellNumber
      */
     private function integerToMoney()
     {
-        $letters = NumberFormatterWrapper::format($this->value, $this->locale);
-        $letters = Words::locale($letters, $this->locale, $this->currency);
+        $letters = NumberFormatterWrapper::format($this->value, $this->locale) . " " . $this->currency;
+        $letters = Words::replaceLocale($letters, $this->locale, self::TO_MONEY);
 
-        return $letters;
+        return Words::replaceFromConfig($letters, $this->locale);
     }
 
     /**
@@ -268,13 +273,13 @@ class SpellNumber extends BaseSpellNumber
 
         $parts[1] = Utilities::decimal($parts[1]);
 
-        $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale);
-        $letters1 = Words::locale($letters1, $this->locale, $this->currency);
+        $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale) . " " . $this->currency;
+        $letters2 = NumberFormatterWrapper::format($parts[1], $this->locale) . " " . $this->fraction;
+        
+        $output = $letters1.' '.Utilities::connector($this->locale).' '.$letters2;
+        $output = Words::replaceLocale($output, $this->locale, self::TO_MONEY);
 
-        $letters2 = NumberFormatterWrapper::format($parts[1], $this->locale);
-        $letters2 = Words::locale($letters2, $this->locale, $this->fraction);
-
-        return Str::title($letters1.' '.Utilities::connector($this->locale).' '.$letters2);
+        return Words::replaceFromConfig($output, $this->locale); 
     }
 
     /**
