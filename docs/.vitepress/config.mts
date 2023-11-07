@@ -9,7 +9,7 @@ export default defineConfig({
     themeConfig: {
         logo: 'logo.png',
         nav: [
-            {text: 'v4.1.0 (2023/11/03)', link: '/'},
+            {text: 'v4.1.1 (2023/11/07)', link: '/'},
         ],
         sidebar: [
             {
