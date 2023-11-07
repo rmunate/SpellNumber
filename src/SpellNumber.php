@@ -252,7 +252,7 @@ class SpellNumber extends BaseSpellNumber
      */
     private function integerToMoney()
     {
-        $letters = NumberFormatterWrapper::format($this->value, $this->locale) . " " . $this->currency;
+        $letters = NumberFormatterWrapper::format($this->value, $this->locale).' '.$this->currency;
         $letters = Words::replaceLocale($letters, $this->locale, self::TO_MONEY);
 
         return Words::replaceFromConfig($letters, $this->locale);
@@ -273,13 +273,13 @@ class SpellNumber extends BaseSpellNumber
 
         $parts[1] = Utilities::decimal($parts[1]);
 
-        $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale) . " " . $this->currency;
-        $letters2 = NumberFormatterWrapper::format($parts[1], $this->locale) . " " . $this->fraction;
-        
+        $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale).' '.$this->currency;
+        $letters2 = NumberFormatterWrapper::format($parts[1], $this->locale).' '.$this->fraction;
+
         $output = $letters1.' '.Utilities::connector($this->locale).' '.$letters2;
         $output = Words::replaceLocale($output, $this->locale, self::TO_MONEY);
 
-        return Words::replaceFromConfig($output, $this->locale); 
+        return Words::replaceFromConfig($output, $this->locale);
     }
 
     /**

@@ -2,8 +2,8 @@
 
 namespace Rmunate\Utilities\Traits;
 
-use Rmunate\Utilities\Langs\Langs;
 use Illuminate\Support\Facades\App;
+use Rmunate\Utilities\Langs\Langs;
 use Rmunate\Utilities\Miscellaneous\Utilities;
 
 trait Locale

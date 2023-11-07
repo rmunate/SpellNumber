@@ -2,14 +2,12 @@
 
 namespace Rmunate\Utilities\Langs;
 
-
 use Rmunate\Utilities\Traits\Locale;
-use Rmunate\Utilities\Miscellaneous\Utilities;
 
 final class Langs
 {
     use Locale;
-    
+
     /**
      * List of time zones available in the package.
      *
@@ -63,5 +61,4 @@ final class Langs
         'pt' => 'de',   // Portuguese from Portugal: "de"
         'ro' => 'de',   // Romanian from Romania: "de"
     ];
-
 }

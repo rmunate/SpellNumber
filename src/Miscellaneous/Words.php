@@ -10,9 +10,9 @@ final class Words
     /**
      * Perform replacements in the given text based on the language and current currency.
      *
-     * @param string $value   The original text string.
-     * @param string $locale  The language of the text.
-     * @param string $type    The method.
+     * @param string $value  The original text string.
+     * @param string $locale The language of the text.
+     * @param string $type   The method.
      *
      * @return string The adjusted text with the replacements performed.
      */
@@ -39,8 +39,8 @@ final class Words
     /**
      * Perform replacements in the given text based on the language and current currency from config file.
      *
-     * @param string $value   The original text string.
-     * @param string $locale  The language of the text.
+     * @param string $value  The original text string.
+     * @param string $locale The language of the text.
      *
      * @return string The adjusted text with the replacements performed.
      */
