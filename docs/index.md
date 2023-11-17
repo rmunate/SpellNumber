@@ -15,6 +15,9 @@ hero:
     - theme: alt
       text: View on GitHub 
       link: https://github.com/rmunate/SpellNumber
+    - theme: alt
+      text: View on Youtube 
+      link: https://www.youtube.com/watch?v=jm7_ypPZbjk&list=PL-SK4hjbvgxLmNUAyDpUa44cCIx4hVTqE
 
 features:
   - icon: 📝

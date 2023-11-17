@@ -7,6 +7,10 @@ export default defineConfig({
     lastUpdated: true,
     base: '/SpellNumber',
     themeConfig: {
+        footer: {
+            message: 'Released under the MIT License.',
+            copyright: 'Copyright © 2021-2023 Raul Mauricio Uñate'
+        },
         editLink: {
             pattern: 'https://github.com/rmunate/SpellNumber/tree/main/docs/:path'
         },
