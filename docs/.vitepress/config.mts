@@ -55,23 +55,23 @@ export default defineConfig({
     head: [
         ['link', { 
                 rel: 'stylesheet', 
-                href: '/css/style.css' 
+                href: '/SpellNumber/css/style.css' 
             }
         ],
         ['link', {
                 rel: 'icon',
-                href: '/img/logo.png',
+                href: '/SpellNumber/img/logo.png',
                 type: 'image/png'
             }
         ],
         ['meta', {
                 property: 'og:image',
-                content: '/SpellNumber/logo-github.png' 
+                content: '/SpellNumber/img/logo-github.png' 
             }
         ],
         ['meta', {
                 property: 'og:image:secure_url',
-                content: '/SpellNumber/logo-github.png'
+                content: '/SpellNumber/img/logo-github.png'
             }
         ],
         ['meta', {
@@ -91,7 +91,7 @@ export default defineConfig({
         ],
         ['meta', {
                 property: 'og:description',
-                content: 'Easily convert numbers to words in Laravel Framework.'
+                content: 'Effortlessly Convert Numbers to Words in Laravel! 🚀'
             }
         ],
         ['meta', {
