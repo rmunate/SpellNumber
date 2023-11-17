@@ -1,4 +1,6 @@
 ---
+title: Macroable
+editLink: true
 outline: deep
 ---
 

@@ -1,4 +1,6 @@
 ---
+title: Contributing
+editLink: true
 outline: deep
 ---
 

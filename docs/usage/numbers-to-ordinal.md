@@ -1,4 +1,6 @@
 ---
+title: Numbers To Ordinal
+editLink: true
 outline: deep
 ---
 

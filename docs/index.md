@@ -1,9 +1,29 @@
-![logo-spell-number](./public/logo-full-scream.png)
+---
+layout: home
 
-## Introduction
+hero:
+  name: Laravel 
+  text: Spell Number
+  tagline: Effortlessly Convert Numbers to Words in Laravel! 🚀
+  image:
+    src: /img/logo.png
+    alt: SpellNumber
+  actions:
+    - theme: brand
+      text: Get Started
+      link: /getting-started/introduction
+    - theme: alt
+      text: View on GitHub 
+      link: https://github.com/rmunate/SpellNumber
 
-Easily convert numbers to words in Laravel using this library, which leverages the native `PHP INTL` extension to perform conversion effortlessly. With this library, you can convert numbers to words in various languages and also obtain the value in currency format according to the selected language. 
-
-Supported languages include English, Spanish, Portuguese, French, Italian, Romanian, Hindi, Polish and Persian (Farsi).
-
-**This library is compatible with PHP +8.0 and Laravel versions 8.0 and higher**
+features:
+  - icon: 📝
+    title: Convert to Words
+    details: Effortlessly convert numbers to words. Choose whether you want to translate an integer or a floating-point number; we're ready for any scenario.
+  - icon: 💵
+    title: Words in Currency Format
+    details: Represent a currency value in words easily by specifying the currency and its fraction.
+  - icon: 🔢
+    title: Convert to Ordinals
+    details: Planning to use the values for ordering? We've got you covered—easily transform your values into ordinal numbers.
+---

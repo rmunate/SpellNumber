@@ -1,4 +1,6 @@
 ---
+title: Bug Report
+editLink: true
 outline: deep
 ---
 

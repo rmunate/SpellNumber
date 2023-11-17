@@ -7,7 +7,10 @@ export default defineConfig({
     lastUpdated: true,
     base: '/SpellNumber',
     themeConfig: {
-        logo: 'logo.png',
+        editLink: {
+            pattern: 'https://github.com/rmunate/SpellNumber/tree/main/docs/:path'
+        },
+        logo: '/img/logo.png',
         nav: [
             {text: 'v4.1.1 (2023/11/07)', link: '/'},
         ],
@@ -16,7 +19,7 @@ export default defineConfig({
                 text: 'Getting Started',
                 collapsed: false,
                 items: [
-                    {text: 'Introduction', link: '/'},
+                    {text: 'Introduction', link: '/getting-started/introduction'},
                     {text: 'Installation', link: '/getting-started/installation'},
                     {text: 'Publish Vendor', link: '/getting-started/publish-vendor'},
                 ]
@@ -50,9 +53,14 @@ export default defineConfig({
         }
     },
     head: [
+        ['link', { 
+                rel: 'stylesheet', 
+                href: '/css/style.css' 
+            }
+        ],
         ['link', {
                 rel: 'icon',
-                href: '/SpellNumber/logo.png',
+                href: '/img/logo.png',
                 type: 'image/png'
             }
         ],

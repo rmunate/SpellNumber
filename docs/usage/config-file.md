@@ -1,4 +1,6 @@
 ---
+title: Config File
+editLink: true
 outline: deep
 ---
 

@@ -1,4 +1,6 @@
 ---
+title: Configuration File
+editLink: true
 outline: deep
 ---
 

@@ -1,0 +1,11 @@
+:root {
+    --vp-home-hero-name-color: #09a292;
+    --vp-button-brand-border: #427d84;
+    --vp-button-brand-bg: #4c99a2;
+    --vp-button-brand-hover-bg: #01403d;
+    --vp-c-brand-1: #09a292;
+}
+
+.tagline{
+    font-size: 22px !important;
+}

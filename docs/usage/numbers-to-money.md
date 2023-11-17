@@ -1,4 +1,6 @@
 ---
+title: Numbers To Money
+editLink: true
 outline: deep
 ---
 

@@ -1,4 +1,6 @@
 ---
+title: Supported Languages
+editLink: true
 outline: deep
 ---
 
