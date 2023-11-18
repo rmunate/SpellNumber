@@ -24,6 +24,7 @@ final class Langs
         'pl' => 'Polish',     // Polish from Poland.
         'pt' => 'Portuguese', // Portuguese from Portugal.
         'ro' => 'Romanian',   // Romanian from Romania.
+        'vi' => 'Vietnamese', // Vietnamese from Vietnam.
     ];
 
     /**
@@ -42,6 +43,7 @@ final class Langs
         'pl' => 'i',    // Polish from Poland: "i"
         'pt' => 'com',  // Portuguese from Portugal: "com"
         'ro' => 'cu',   // Romanian from Romania: "cu"
+        'vi' => 'và',   // Vietnamese from Vietnam: "và"
     ];
 
     /**
@@ -60,5 +62,6 @@ final class Langs
         'pl' => 'i',    // Polish from Poland: "i"
         'pt' => 'de',   // Portuguese from Portugal: "de"
         'ro' => 'de',   // Romanian from Romania: "de"
+        'vi' => 'của',  // Vietnamese from Vietnam: "của"
     ];
 }

@@ -49,6 +49,7 @@ To whom we thank for supporting making programming easier.
 - [Gabriel Rausch](https://github.com/gdsrmygdsrjr) (Zero Decimal Correction)
 - [Alejandro Diaz](https://github.com/alejandrodiazpinilla) (Readme And Icon)
 - [Frank Sepulveda](https://github.com/socieboy) (Ordinal Texts)
+- [Ngo Quoc Dat](https://github.com/datlechin) (Vietnamese Language)
 
 ## License
 This project is under the [MIT License](https://choosealicense.com/licenses/mit/).
