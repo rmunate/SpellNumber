@@ -83,6 +83,9 @@ final class Replaces
             'ilion'   => 'ilion De',
             'ilioane' => 'ilioane De',
         ],
+        'vi' => [
+            'illion' => 'illion Của',
+        ],
     ];
 
     /**
@@ -120,6 +123,9 @@ final class Replaces
         'ro' => [
             //...
         ],
+        'vi' => [
+            //...
+        ],
     ];
 
     /**
@@ -155,6 +161,9 @@ final class Replaces
             //...
         ],
         'ro' => [
+            //...
+        ],
+        'vi' => [
             //...
         ],
     ];
