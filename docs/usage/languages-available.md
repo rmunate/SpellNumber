@@ -6,7 +6,7 @@ outline: deep
 
 # Supported Languages
 
-We currently have 10 preset languages to easily work with this package. _Although you can use other configurations with arbitrary outputs_, we list the pre-configured languages below:
+We currently have 11 preset languages to easily work with this package. _Although you can use other configurations with arbitrary outputs_, we list the pre-configured languages below:
 
 - German.
 - English.
@@ -18,6 +18,7 @@ We currently have 10 preset languages to easily work with this package. _Althoug
 - Polish.
 - Portuguese.
 - Romanian.
+- Vietnamese.
 
 If you want to get the supported languages directly from the package, you have two ways to do it.
 
@@ -40,6 +41,7 @@ SpellNumber::getAvailableLocales();
 //   7 => "pl"
 //   8 => "pt"
 //   9 => "ro"
+//   10 => "vi"
 // ]
 ```
 
@@ -63,6 +65,7 @@ SpellNumber::getAvailableLanguages();
 //   "pl" => "Polish"
 //   "pt" => "Portuguese"
 //   "ro" => "Romanian"
+//   "vi" => "Vietnamese"
 // ]
 ```
 
