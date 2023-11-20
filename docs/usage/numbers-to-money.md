@@ -15,10 +15,10 @@ If you require that an integer have this transformation, you can do it in the fo
 
 ```php
 SpellNumber::value(100)->locale('en')->currency('Dollars')->toMoney();
-// "One Hundred Dollars"
+// "one hundred dollars"
 
 SpellNumber::value(100)->locale('es')->currency('Pesos')->toMoney();
-// "Cien Pesos"
+// "cien pesos"
 
 SpellNumber::value(100)->locale('fa')->currency('تومان')->toMoney();
 // "صد تومان"
@@ -35,16 +35,16 @@ This method can be useful for invoices, receipts, and similar scenarios. Obtain 
 
 ```php
 SpellNumber::value(100.12)->locale('en')->currency('Dollars')->fraction('Cents')->toMoney();
-// "One Hundred Dollars And Twelve Cents"
+// "one hundred dollars and twelve cents"
 
 SpellNumber::value(100.12)->locale('es')->currency('Pesos')->fraction('Centavos')->toMoney();
-// "Cien Pesos Con Doce Centavos"
+// "cien pesos con doce centavos"
 
 SpellNumber::value(100.12)->locale('hi')->currency('रूपये')->fraction('पैसे')->toMoney();
 // "एक सौ रूपये और बारह पैसे"
 
 SpellNumber::value(100.65)->locale('pl')->currency('złotych')->fraction('groszy')->toMoney();
-// "Sto Złotych I Sześćdziesiąt Pięć Groszy"
+// "sto złotych i sześćdziesiąt pięć groszy"
 ```
 
 ## Method Integer
@@ -54,10 +54,10 @@ Remember to ensure that the input value is of type `int`.
 
 ```php
 SpellNumber::integer(100)->locale('es')->currency('Pesos')->toMoney();
-// "Cien Pesos"
+// "cien pesos"
 
 SpellNumber::integer(100)->locale('en')->currency('Dollars')->toMoney();
-// "One Hundred Dollars"
+// "one hundred dollars"
 ```
 
 ## Method Float
@@ -66,10 +66,10 @@ Now, if you require it to be translated into letters of more than two decimal pl
 
 ```php
 SpellNumber::float('12345.230')->locale('es')->currency('Pesos')->fraction('Centavos')->toMoney();
-// "Doce Mil Trescientos Cuarenta Y Cinco Pesos Con Doscientos Treinta Centavos"
+// "doce mil trescientos cuarenta y cinco pesos con doscientos treinta centavos"
 
 SpellNumber::float('12345.230')->locale('en')->currency('Dollars')->fraction('Cents')->toMoney();
-//"Twelve Thousand Three Hundred Forty-Five Dollars And Two Hundred Thirty Cents"
+// "twelve thousand three hundred forty-five dollars and two hundred thirty cents"
 ```
 
 ## Especific Locale
@@ -80,11 +80,11 @@ If you want to use a specific locale, you should always use the constant `SpellN
 use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::value(100)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->currency('Pesos')->toMoney();
-// "Cien Pesos"
+// "cien pesos"
 
 SpellNumber::integer(100)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->currency('Pesos')->toMoney();
-// "Cien Pesos"
+// "cien pesos"
 
 SpellNumber::float('12345.230')->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->currency('Pesos')->fraction('Centavos')->toMoney();
-// "Doce Mil Trescientos Cuarenta Y Cinco Pesos Con Doscientos Treinta Centavos"
+// "doce mil trescientos cuarenta y cinco pesos con doscientos treinta centavos"
 ```

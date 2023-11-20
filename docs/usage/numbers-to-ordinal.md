@@ -20,16 +20,16 @@ You can easily convert integers. If you do not define a locale, "en" (English) w
 use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::value(2)->locale('en')->toOrdinal();
-// "Second"
+// "second"
 
 SpellNumber::value(2)->locale('en')->toOrdinal(SpellNumber::ORDINAL_DEFAULT);
-// "Second"
+// "second"
 
 SpellNumber::value(2)->locale('es')->toOrdinal(SpellNumber::ORDINAL_MALE);
-// "Segundo"
+// "segundo"
 
 SpellNumber::value(2)->locale('es')->toOrdinal(SpellNumber::ORDINAL_FEMALE);
-// "Segunda"
+// "segunda"
 ```
 
 ## Method Integer
@@ -41,16 +41,16 @@ Remember to ensure that the input value is of type `int`.
 use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::integer(2)->locale('en')->toOrdinal();
-// "Second"
+// "second"
 
 SpellNumber::integer(2)->locale('en')->toOrdinal(SpellNumber::ORDINAL_DEFAULT);
-// "Second"
+// "second"
 
 SpellNumber::integer(2)->locale('es')->toOrdinal(SpellNumber::ORDINAL_MALE);
-// "Segundo"
+// "segundo"
 
 SpellNumber::integer(2)->locale('es')->toOrdinal(SpellNumber::ORDINAL_FEMALE);
-// "Segunda"
+// "segunda"
 ```
 
 ## Especific Locale
@@ -61,8 +61,8 @@ If you want to use a specific locale, you should always use the constant `SpellN
 use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::value(2)->locale('en_US', SpellNumber::SPECIFIC_LOCALE)->toOrdinal();
-// "Second"
+// "second"
 
 SpellNumber::integer(2)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->toOrdinal(SpellNumber::ORDINAL_FEMALE)
-// "Segunda"
+// "segunda"
 ```

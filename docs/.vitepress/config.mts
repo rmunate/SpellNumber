@@ -26,6 +26,7 @@ export default defineConfig({
                     {text: 'Introduction', link: '/getting-started/introduction'},
                     {text: 'Installation', link: '/getting-started/installation'},
                     {text: 'Publish Vendor', link: '/getting-started/publish-vendor'},
+                    {text: 'Release Notes', link: '/getting-started/changelog'},
                 ]
             }, {
                 text: 'Usage',

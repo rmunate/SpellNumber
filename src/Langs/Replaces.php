@@ -14,7 +14,7 @@ final class Replaces
      */
     public const TO_MONEY = [
         'de' => [
-            'illion' => 'illion Von',
+            // 'illion' => 'illion Von',
         ],
         'en' => [
             'illion' => 'illion Of',

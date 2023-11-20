@@ -16,10 +16,10 @@ You can easily convert whole numbers to words by defining the locale to be appli
 use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::value(100)->locale('en')->toLetters();
-// "One Hundred"
+// "one hundred"
 
 SpellNumber::value(100)->locale('es')->toLetters();
-// "Cien"
+// "cien"
 
 SpellNumber::value(100)->locale('fa')->toLetters();
 // "صد"
@@ -36,10 +36,10 @@ If required, you can pass a floating point number as an argument to convert it t
 use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::value(123456789.12)->locale('en')->toLetters();
-// "One Hundred Twenty-Three Million Four Hundred Fifty-Six Thousand Seven Hundred Eighty-Nine And Twelve"
+// "one hundred twenty-three million four hundred fifty-six thousand seven hundred eighty-nine and twelve"
 
 SpellNumber::value(123456789.12)->locale('es')->toLetters();
-// "Ciento Veintitrés Millones Cuatrocientos Cincuenta Y Seis Mil Setecientos Ochenta Y Nueve Con Doce"
+// "ciento veintitrés millones cuatrocientos cincuenta y seis mil setecientos ochenta y nueve con doce"
 
 SpellNumber::value(123456789.12)->locale('hi')->toLetters();
 // "बारह करोड़ चौंतीस लाख छप्पन हज़ार सात सौ नवासी और बारह"
@@ -54,10 +54,10 @@ Remember to ensure that the input value is of type `int`.
 use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::integer(100)->locale('en')->toLetters();
-// "One Hundred"
+// "one hundred"
 
 SpellNumber::integer(100)->locale('es')->toLetters();
-// "Cien"
+// "cien"
 ```
 
 ## Method Float
@@ -68,10 +68,10 @@ Now, if you require it to be translated into letters of more than two decimal pl
 use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::float('12345.230')->locale('en')->toLetters();
-// "Twelve Thousand Three Hundred Forty-Five And Two Hundred Thirty"
+// "twelve thousand three hundred forty-five and two hundred thirty"
 
 SpellNumber::float('12345.230')->locale('es')->toLetters();
-// "Doce Mil Trescientos Cuarenta Y Cinco Con Doscientos Treinta"
+// "doce mil trescientos cuarenta y cinco con doscientos treinta"
 ```
 
 ## Especific Locale
@@ -82,11 +82,11 @@ If you want to use a specific locale, you should always use the constant `SpellN
 use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::value(100)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->toLetters();
-// "Cien"
+// "cien"
 
 SpellNumber::integer(100)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->toLetters();
-// "Cien"
+// "cien"
 
 SpellNumber::float('12345.230')->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->toLetters();
-// "Doce Mil Trescientos Cuarenta Y Cinco Con Doscientos Treinta"
+// "doce mil trescientos cuarenta y cinco con doscientos treinta"
 ```

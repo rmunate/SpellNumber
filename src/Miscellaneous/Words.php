@@ -2,7 +2,6 @@
 
 namespace Rmunate\Utilities\Miscellaneous;
 
-use Illuminate\Support\Str;
 use Rmunate\Utilities\Langs\Replaces;
 
 final class Words
@@ -22,18 +21,18 @@ final class Words
         $locale = Utilities::extractPrimaryLocale($locale);
 
         //Value
-        $value = Str::lower($value);
+        $value = mb_strtolower($value);
 
         // Replace final strings for each language.
         $replacesLocale = Replaces::constant($type)[$locale] ?? [];
         foreach ($replacesLocale as $search => $replace) {
-            $search = Str::lower($search);
-            $replace = Str::lower($replace);
+            $search = mb_strtolower($search);
+            $replace = mb_strtolower($replace);
             $value = str_replace($search, $replace, $value);
         }
 
         // Return the adjusted text.
-        return Str::title($value);
+        return $value;
     }
 
     /**
@@ -50,17 +49,17 @@ final class Words
         $locale = Utilities::extractPrimaryLocale($locale);
 
         //Value
-        $value = Str::lower($value);
+        $value = mb_strtolower($value);
 
         //From Config.
         $replacesLocaleConfig = config("spell-number.replacements.$locale") ?? [];
         foreach ($replacesLocaleConfig as $search => $replace) {
-            $search = Str::lower($search);
-            $replace = Str::lower($replace);
+            $search = mb_strtolower($search);
+            $replace = mb_strtolower($replace);
             $value = str_replace($search, $replace, $value);
         }
 
         // Return the adjusted text.
-        return Str::title($value);
+        return $value;
     }
 }

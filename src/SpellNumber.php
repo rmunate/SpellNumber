@@ -2,7 +2,6 @@
 
 namespace Rmunate\Utilities;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Rmunate\Utilities\Bases\BaseSpellNumber;
 use Rmunate\Utilities\Callback\DataResponse;
@@ -117,7 +116,7 @@ class SpellNumber extends BaseSpellNumber
         $callback = config('spell-number.callback_output');
 
         if (!empty($callback) && is_callable($callback)) {
-            $words = ($this->type == 'integer') ? Str::title($this->integerToLetters()) : Str::title($this->doubleToLetters());
+            $words = ($this->type == 'integer') ? $this->integerToLetters() : $this->doubleToLetters();
 
             return $callback(new DataResponse([
                 'method'   => 'toLetters',
@@ -131,7 +130,7 @@ class SpellNumber extends BaseSpellNumber
             ]));
         }
 
-        return ($this->type == 'integer') ? Str::title($this->integerToLetters()) : Str::title($this->doubleToLetters());
+        return ($this->type == 'integer') ? $this->integerToLetters() : $this->doubleToLetters();
     }
 
     /**
@@ -144,7 +143,7 @@ class SpellNumber extends BaseSpellNumber
         $callback = config('spell-number.callback_output');
 
         if (!empty($callback) && is_callable($callback)) {
-            $words = ($this->type == 'integer') ? Str::title($this->integerToMoney()) : Str::title($this->doubleToMoney());
+            $words = ($this->type == 'integer') ? $this->integerToMoney() : $this->doubleToMoney();
 
             return $callback(new DataResponse([
                 'method'   => 'toMoney',
@@ -158,7 +157,7 @@ class SpellNumber extends BaseSpellNumber
             ]));
         }
 
-        return ($this->type == 'integer') ? Str::title($this->integerToMoney()) : Str::title($this->doubleToMoney());
+        return ($this->type == 'integer') ? $this->integerToMoney() : $this->doubleToMoney();
     }
 
     /**
@@ -175,7 +174,7 @@ class SpellNumber extends BaseSpellNumber
         $callback = config('spell-number.callback_output');
 
         if (!empty($callback) && is_callable($callback)) {
-            $words = Str::title($this->integerToOrdinal($attr));
+            $words = $this->integerToOrdinal($attr);
 
             return $callback(new DataResponse([
                 'method'   => 'toOrdinal',
@@ -188,7 +187,7 @@ class SpellNumber extends BaseSpellNumber
             ]));
         }
 
-        return Str::title($this->integerToOrdinal($attr));
+        return $this->integerToOrdinal($attr);
     }
 
     /**
