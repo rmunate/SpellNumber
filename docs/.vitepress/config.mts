@@ -4,7 +4,7 @@ export default defineConfig({
     title: "Laravel SpellNumber",
     description: "Easily convert numbers to words in Laravel Framework.",
     lang: 'en-US',
-    lastUpdated: true,
+    lastUpdated: false,
     base: '/SpellNumber',
     themeConfig: {
         footer: {
