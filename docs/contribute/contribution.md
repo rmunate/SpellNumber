@@ -68,6 +68,13 @@ const members = [
     links: [
       { icon: 'github', link: 'https://github.com/socieboy'},
     ]
+  },{
+    avatar: 'https://avatars.githubusercontent.com/u/56961917?v=4',
+    name: 'Ngô Quốc Đạt',
+    title: 'Developer | Ho Chi Minh, Vietnam',
+    links: [
+      { icon: 'github', link: 'https://github.com/datlechin'},
+    ]
   }
 ]
 </script>
