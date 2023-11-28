@@ -17,7 +17,7 @@ final class Replaces
             // 'illion' => 'illion Von',
         ],
         'en' => [
-            'illion' => 'illion Of',
+            'illion' => 'illion of',
         ],
         'es' => [
             'veintiuno'         => 'veintiún',
@@ -62,29 +62,29 @@ final class Replaces
             'ilion' => 'میلیون و',
         ],
         'fr' => [
-            'illion'  => 'illion De',
-            'illions' => 'illions De',
+            'illion'  => 'illion de',
+            'illions' => 'illions de',
         ],
         'hi' => [
             //...
         ],
         'it' => [
-            'ilione' => 'ilione Di',
-            'ilioni' => 'ilioni Di',
+            'ilione' => 'ilione di',
+            'ilioni' => 'ilioni di',
         ],
         'pl' => [
             //...
         ],
         'pt' => [
-            'ilhão'  => 'ilhão De',
-            'ilhões' => 'ilhões De',
+            'ilhão'  => 'ilhão de',
+            'ilhões' => 'ilhões de',
         ],
         'ro' => [
-            'ilion'   => 'ilion De',
-            'ilioane' => 'ilioane De',
+            'ilion'   => 'ilion de',
+            'ilioane' => 'ilioane de',
         ],
         'vi' => [
-            'illion' => 'illion Của',
+            'illion' => 'illion của',
         ],
     ];
 

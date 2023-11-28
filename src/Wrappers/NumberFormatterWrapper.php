@@ -30,6 +30,6 @@ final class NumberFormatterWrapper
         // Format the given numeric value as a spelled-out string.
         $value = $numberFormatter->format($value);
 
-        return str_replace("\u{AD}", '', $value);
+        return str_replace(["\u{AD}", "\u{200B}"], '', $value);
     }
 }

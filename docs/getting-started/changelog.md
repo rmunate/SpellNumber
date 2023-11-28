@@ -35,3 +35,9 @@ return [
   }, 
 ]
 ```
+
+## [4.2.2] - 2023-11-28
+
+### Changed
+
+- **Zero-width spaces:** Characters (\u{AD}, \u{200B}) are removed from the translation outputs.
