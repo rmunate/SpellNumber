@@ -45,7 +45,7 @@ final class Langs
         'pt' => 'com',  // Portuguese from Portugal: "com"
         'ro' => 'cu',   // Romanian from Romania: "cu"
         'vi' => 'và',   // Vietnamese from Vietnam: "và"
-        'tr' => 've',   // Turkish from Turkey: "tr"
+        'tr' => 've',   // Turkish from Turkey: "ve"
     ];
 
     /**
