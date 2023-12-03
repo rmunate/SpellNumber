@@ -86,6 +86,9 @@ final class Replaces
         'vi' => [
             'illion' => 'illion của',
         ],
+        'tr' => [
+            //...
+        ],
     ];
 
     /**
@@ -126,6 +129,9 @@ final class Replaces
         'vi' => [
             //...
         ],
+        'tr' => [
+            //...
+        ],
     ];
 
     /**
@@ -164,6 +170,9 @@ final class Replaces
             //...
         ],
         'vi' => [
+            //...
+        ],
+        'tr' => [
             //...
         ],
     ];
