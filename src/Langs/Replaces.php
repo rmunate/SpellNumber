@@ -166,6 +166,9 @@ final class Replaces
         'vi' => [
             //...
         ],
+        'tr' => [
+            //...
+        ],
     ];
 
     /**
@@ -204,6 +207,9 @@ final class Replaces
             //...
         ],
         'vi' => [
+            //...
+        ],
+        'tr' => [
             //...
         ],
     ];

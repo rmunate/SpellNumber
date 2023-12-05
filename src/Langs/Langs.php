@@ -25,7 +25,7 @@ final class Langs
         'pt' => 'Portuguese', // Portuguese from Portugal.
         'ro' => 'Romanian',   // Romanian from Romania.
         'vi' => 'Vietnamese', // Vietnamese from Vietnam.
-        'tr' => 'Turkish',    // Turkish from Turkey.
+        'tr' => 'Türkçe', // Turkish from Turkey.
     ];
 
     /**

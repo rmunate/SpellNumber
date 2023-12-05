@@ -6,7 +6,7 @@ outline: deep
 
 # Supported Languages
 
-We currently have 11 preset languages to easily work with this package. _Although you can use other configurations with arbitrary outputs_, we list the pre-configured languages below:
+We currently have 12 preset languages to easily work with this package. _Although you can use other configurations with arbitrary outputs_, we list the pre-configured languages below:
 
 - German.
 - English.
@@ -19,6 +19,7 @@ We currently have 11 preset languages to easily work with this package. _Althoug
 - Portuguese.
 - Romanian.
 - Vietnamese.
+- Turkish.
 
 If you want to get the supported languages directly from the package, you have two ways to do it.
 
@@ -30,7 +31,7 @@ use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::getAvailableLocales();
 
-// array:10 [▼
+// array:12 [▼
 //   0 => "de"
 //   1 => "en"
 //   2 => "es"
@@ -42,6 +43,7 @@ SpellNumber::getAvailableLocales();
 //   8 => "pt"
 //   9 => "ro"
 //   10 => "vi"
+//   11 => "tr"
 // ]
 ```
 
@@ -54,7 +56,7 @@ use Rmunate\Utilities\SpellNumber;
 
 SpellNumber::getAvailableLanguages();
 
-// array:10 [▼ 
+// array:12 [▼ 
 //   "de" => "German"
 //   "en" => "English"
 //   "es" => "Spanish"
@@ -66,12 +68,13 @@ SpellNumber::getAvailableLanguages();
 //   "pt" => "Portuguese"
 //   "ro" => "Romanian"
 //   "vi" => "Vietnamese"
+//   "tr" => "Turkish"
 // ]
 ```
 
 ## Other Locales
 
-If you would like to try a language other than the 10 previously mentioned, you can consult the different values that you can supply to the package to try to generate the output translated to said area and language.
+If you would like to try a language other than the 12 previously mentioned, you can consult the different values that you can supply to the package to try to generate the output translated to said area and language.
 
 In order to use any of these options, you must use the constant `SpellNumber::SPECIFIC_LOCALE` in the `locale` method, example `->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)`.
 

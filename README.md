@@ -50,6 +50,7 @@ To whom we thank for supporting making programming easier.
 - [Alejandro Diaz](https://github.com/alejandrodiazpinilla) (Readme And Icon)
 - [Frank Sepulveda](https://github.com/socieboy) (Ordinal Texts)
 - [Ngô Quốc Đạt](https://github.com/datlechin) (Vietnamese Language)
+- [Mustafa Yusuf Özcan](https://github.com/mustafayusufozcan) (Turkish Language)
 
 ## License
 This project is under the [MIT License](https://choosealicense.com/licenses/mit/).
