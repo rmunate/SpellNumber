@@ -93,6 +93,7 @@ final class Utilities
     {
         // Implementation for checking if the value does not exceed the maximum is provided here.
         if (self::isValidString($value) || self::isValidDouble($value)) {
+
             $parts = explode('.', $value);
             $integerPart = intval($parts[0]);
             $decimalPart = intval($parts[1] ?? 0);
@@ -107,81 +108,35 @@ final class Utilities
     }
 
     /**
-     * Check if the given locale is valid and supported.
-     *
-     * @param string $locale The locale code to check.
-     *
-     * @return bool True if the locale is valid and supported, false otherwise.
-     */
-    public static function isValidLocale($locale)
-    {
-        $timezones = array_keys(Langs::LOCALES_AVAILABLE);
-
-        return in_array($locale, $timezones);
-    }
-
-    /**
      * Get the connector for the given locale to use in regular sentences.
-     *
-     * @param string $locale The locale code to get the connector for.
-     *
-     * @return string The connector for the given locale.
      */
-    public static function connector($locale)
+    public static function connector(?string $connector, string $locale, string $partOne, string $partTwo)
     {
-        $connector = Langs::LOCALES_CONNECTORS;
-        $locale = self::extractPrimaryLocale($locale);
+        if (!is_null($connector)) {
+            
+            //Custom
+            if ($connector === false || $connector === "") {
+                $output = sprintf('%s %s', $partOne, $partTwo);
+            } else if (in_array($connector, [".", ","])) {
+                $output = sprintf('%s%s %s', $partOne, trim($connector), $partTwo);
+            } else {
+                $output = sprintf('%s %s %s', $partOne, trim($connector), $partTwo);
+            }
 
-        return $connector[$locale] ?? '?';
-    }
+        } else {
 
-    /**
-     * Get the connector for the given locale to use in sentences related to money.
-     *
-     * @param string $locale The locale code to get the money connector for.
-     *
-     * @return string The money connector for the given locale.
-     */
-    public static function connectorMoney($locale)
-    {
-        $connector = Langs::LOCALES_CONNECTORS_MONEY;
-        $locale = self::extractPrimaryLocale($locale);
+            //This Package
+            $locale = self::extractPrimaryLocale($locale);
+            $connectorPackage = Langs::LOCALES_CONNECTORS[$locale] ?? null;
 
-        return $connector[$locale] ?? '?';
-    }
+            if (is_null($connectorPackage) || $connectorPackage === false || $connectorPackage == "") {
+                $output = sprintf('%s ? %s', $partOne, $partTwo);
+            } else {
+                $output = sprintf('%s %s %s', $partOne, $connectorPackage, $partTwo);
+            }
+        }
 
-    /**
-     * Set the numeric value where the trailing zero is removed.
-     *
-     * @param mixed $value
-     *
-     * @return mixed
-     */
-    public static function decimal($value)
-    {
-        $result = match ($value) {
-            '01'    => 1,
-            '1'     => 10,
-            '02'    => 2,
-            '2'     => 20,
-            '03'    => 3,
-            '3'     => 30,
-            '04'    => 4,
-            '4'     => 40,
-            '05'    => 5,
-            '5'     => 50,
-            '06'    => 6,
-            '6'     => 60,
-            '07'    => 7,
-            '7'     => 70,
-            '08'    => 8,
-            '8'     => 80,
-            '09'    => 9,
-            '9'     => 90,
-            default => $value,
-        };
-
-        return $result;
+        return $output;
     }
 
     /**
@@ -193,7 +148,11 @@ final class Utilities
      */
     public static function extractPrimaryLocale($string)
     {
-        return mb_strtolower(substr($string, 0, 2));
+        if (strlen($string) > 2) {
+            $string = substr($string, 0, 2);
+        }
+
+        return mb_strtolower($string);
     }
 
     /**
@@ -206,17 +165,17 @@ final class Utilities
     public static function textOrdinalMode(?string $value)
     {
         return match ($value) {
-            'default'                     => '%spellout-ordinal',
             'male'                        => '%spellout-ordinal-masculine',
-            'female'                      => '%spellout-ordinal-feminine',
             'masculine'                   => '%spellout-ordinal-masculine',
-            'feminine'                    => '%spellout-ordinal-feminine',
-            '%spellout-ordinal'           => '%spellout-ordinal',
             '%spellout-ordinal-masculine' => '%spellout-ordinal-masculine',
-            '%spellout-ordinal-feminine'  => '%spellout-ordinal-feminine',
-            'ordinal'                     => '%spellout-ordinal',
             'ordinal-masculine'           => '%spellout-ordinal-masculine',
+            'feminine'                    => '%spellout-ordinal-feminine',
+            'female'                      => '%spellout-ordinal-feminine',
+            '%spellout-ordinal-feminine'  => '%spellout-ordinal-feminine',
             'ordinal-feminine'            => '%spellout-ordinal-feminine',
+            'default'                     => '%spellout-ordinal',
+            '%spellout-ordinal'           => '%spellout-ordinal',
+            'ordinal'                     => '%spellout-ordinal',
             default                       => '%spellout-ordinal',
         };
     }
@@ -235,5 +194,26 @@ final class Utilities
             '%spellout-ordinal-feminine'  => 'female',
             '%spellout-ordinal'           => 'default',
         };
+    }
+
+    /**
+     * Checks if a string ends with a specified substring.
+     *
+     * @param string $haystack The complete string.
+     * @param string $needle   The substring to check for at the end.
+     *
+     * @return bool True if the string ends with the specified substring, false otherwise.
+     */
+    function static endsWith($haystack, $needle) {
+        // Get the length of the substring.
+        $length = strlen($needle);
+
+        // If the length of the substring is zero, the string technically ends with it.
+        if ($length == 0) {
+            return true;
+        }
+
+        // Compare the end of the string with the specified substring.
+        return (substr($haystack, -$length) === $needle);
     }
 }

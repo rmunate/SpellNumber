@@ -21,7 +21,7 @@ final class SpellNumberExceptions extends Exception
     public static function create($message, $code = 0, Throwable $previous = null)
     {
         return new self(
-            'Rmunate\Utilities\SpellNumber::class - '.$message.'- See https://rmunate.github.io/SpellNumber/',
+            '\Rmunate\Utilities\SpellNumber::class - '.$message.' - See https://rmunate.github.io/SpellNumber/',
             $code,
             $previous
         );

@@ -2,13 +2,6 @@
 
 namespace Rmunate\Utilities\Bases;
 
-/**
- * This class serves as a base validator for common data types.
- *
- * @method static BaseValidator mixed().
- * @method static BaseValidator integer().
- * @method static BaseValidator float().
- */
 abstract class BaseSpellNumberValidator
 {
     /**

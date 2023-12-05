@@ -7,8 +7,8 @@ return [
     | Global Configuration for Number to Words Conversion.
     |--------------------------------------------------------------------------
     |
-    | See https://rmunate.github.io/SpellNumber/
-    | Define a global configuration to make the translation of values to words easier and faster.
+    | Visit https://rmunate.github.io/SpellNumber/ for detailed documentation.
+    | Define a global configuration to facilitate and expedite the translation of values to words.
     |
     */
 
@@ -20,26 +20,10 @@ return [
         |--------------------------------------------------------------------------
         |
         | Define the language over which values will be translated to words.
-        | Remember that you only have the following options available:
-        | 'de', 'en', 'es', 'fa', 'fr', 'hi', 'it', 'pl', 'pt', 'ro'.
         |
         */
 
         'locale' => 'en',
-
-        /*
-        |--------------------------------------------------------------------------
-        | Try using a "locale" not listed in the previous option.
-        |--------------------------------------------------------------------------
-        |
-        | If you want to use an option different from those previously listed,
-        | you must set the following indicator to true, so that the conversion to the supplied
-        | location can be attempted. To list possible additional options to use with the package,
-        | you can run the function SpellNumber::getAllLocales();
-        |
-        */
-
-        'specific_locale' => false,
 
         /*
         |--------------------------------------------------------------------------
@@ -83,11 +67,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Sometimes you need to replace certain things in the number to words outputs.
+    | Global Output Replacements
     |--------------------------------------------------------------------------
     |
-    | If so, it's very easy to do.
-    | Use the structure of an associative array to apply these replacements to your outputs.
+    | If you need to make any replacements to the translation output, which is common
+    | in cases with abbreviated numbers or other language contractions, you can
+    | easily do so here through an associative array.
+    |
+    | Remember that the main index should match the locale you are using.
     |
     */
 
@@ -97,19 +84,4 @@ return [
         // ],
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Encountered a specific adjustment in the number to words output?.
-    |--------------------------------------------------------------------------
-    |
-    | Here, you have the option to adjust whatever you need, the best part!
-    | This adjustment will apply to all your number to words outputs.
-    |
-    */
-
-    'callback_output' => function ($data) {
-        // Your logic here...
-
-        return $data->getWords();
-    },
 ];

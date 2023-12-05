@@ -7,6 +7,38 @@ use Rmunate\Utilities\Langs\Langs;
 
 final class NumberFormatterWrapper
 {
+    private $value;
+    private $locale;
+    private $ruleset;
+
+    public function __construct($value)
+    {
+        $this->value = $value;
+    }
+
+    public function locale(string $locale)
+    {
+        $this->locale = $locale;
+        
+        return $this;
+    }
+
+    public function ruleset($ruleset)
+    {
+        $this->ruleset = $ruleset;
+        
+        return $this;
+    }
+
+    public function text()
+    {
+
+    }
+
+
+
+
+
     /**
      * Format a given numeric value as a spelled-out string.
      *

@@ -2,11 +2,6 @@
 
 namespace Rmunate\Utilities\Traits;
 
-/**
- * Trait Accesor.
- *
- * This trait provides a method to access constants of a class that uses it.
- */
 trait Accesor
 {
     /**
@@ -18,7 +13,6 @@ trait Accesor
      */
     public static function constant(string $name)
     {
-        // Use the constant() function to access the constant.
         return constant(get_called_class().'::'.$name);
     }
 }

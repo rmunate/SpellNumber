@@ -25,6 +25,7 @@ final class Langs
         'pt' => 'Portuguese', // Portuguese from Portugal.
         'ro' => 'Romanian',   // Romanian from Romania.
         'vi' => 'Vietnamese', // Vietnamese from Vietnam.
+        'tr' => 'Türkçe',     // Turkish from Turkey.
     ];
 
     /**
@@ -52,8 +53,6 @@ final class Langs
      * @var array
      */
     public const LOCALES_CONNECTORS_MONEY = [
-        'de' => 'von',  // German frm Germany: "von"
-        'en' => 'of',   // English from the United States: "of"
         'es' => 'de',   // Spanish from Spain: "de"
         'fa' => 'از',   // Farsi from Iran: "از"
         'fr' => 'de',   // French from France: "de"
