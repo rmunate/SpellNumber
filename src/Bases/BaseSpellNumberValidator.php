@@ -5,11 +5,12 @@ namespace Rmunate\Utilities\Bases;
 abstract class BaseSpellNumberValidator
 {
     /**
-     * Create a new instance of the BaseValidator class for the specified data type.
+     * Create a new instance of the SpellNumberValidator class for the specified data type.
      *
-     * @param string $type The data type to validate.
+     * @param string $type  The data type to validate.
+     * @param mixed  $value The value to validate.
      *
-     * @return BaseValidator
+     * @return SpellNumberValidator
      */
     public static function check(string $type, $value)
     {

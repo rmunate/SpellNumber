@@ -5,71 +5,65 @@ namespace Rmunate\Utilities\Bases;
 use Rmunate\Utilities\Langs\Langs;
 use Rmunate\Utilities\Validator\SpellNumberValidator;
 
+/**
+ * Base class for SpellNumber operations.
+ */
 abstract class BaseSpellNumber
 {   
     /**
-     * Creates an instance of the child class with the provided value for conversion.
+     * Return a new instance of SpellNumber after analyzing the data type to be processed.
      *
-     * @param mixed  $value  The numeric value to convert to words.
-     * @param string $locale The locale to use for conversion. Default is 'es_ES' (Spanish).
+     * @param mixed $value Value to process; should be integer or double.
      *
-     * @throws SpellNumberExceptions When the Intl extension is not available or the value is not valid (integer or double).
-     *
-     * @return static An instance of the child class.
+     * @return static SpellNumber class.
      */
     public static function value(mixed $value)
     {
         $type = SpellNumberValidator::check('mixed', $value)->result();
-
         return new static($value, $type);
     }
 
     /**
-     * Creates an instance of the child class with the provided integer value for conversion.
+     * Return an instance of the child class, indicating that it is an integer value.
      *
-     * @param int $value The integer value to convert to words.
+     * @param int $value Integer value to process.
      *
-     * @throws SpellNumberExceptions When the Intl extension is not available or the value is not a valid integer.
-     *
-     * @return static An instance of the child class.
+     * @return static SpellNumber class.
      */
     public static function integer(int $value)
     {
         SpellNumberValidator::check('integer', $value)->result();
-
         return new static($value, 'integer');
     }
 
     /**
-     * Creates an instance of the child class with the provided float value for conversion.
+     * Return an instance of the child class, indicating that the value to process is a double.
      *
-     * @param float $value The float value to convert to words.
+     * @param float $value Value to process.
      *
-     * @throws SpellNumberExceptions When the Intl extension is not available or the value is not a valid float.
-     *
-     * @return static An instance of the child class.
+     * @return static SpellNumber class.
      */
     public static function float(string|float $value)
     {
         SpellNumberValidator::check('double', $value)->result();
-
         return new static($value, 'double');
     }
 
     /**
-     * Creates an instance of the child class with the provided text value for conversion.
+     * Return an instance of the child class to convert from text to numbers.
      *
-     * @param string $text The text value to be processed.
+     * @param string $text Alphabetic value to convert to numbers.
      *
-     * @return static An instance of the child class configured for text processing.
+     * @return static SpellNumber class.
      */
     public static function text(string $text)
     {
+        SpellNumberValidator::check('text', $text)->result();
         return new static($text, 'text');
     }
 
     /**
-     * Creates an instance of the child class with the provided date value for conversion.
+     * Return an instance of the child class for date format processing.
      *
      * @param string $date The date value to be processed.
      *
@@ -77,27 +71,26 @@ abstract class BaseSpellNumber
      */
     public static function date(string $date)
     {
+        SpellNumberValidator::check('date', $date)->result();
         return new static($date, 'date');
     }
 
     /**
-     * Returns the list of available premises according to PHP.
+     * Return an array containing all locales.
      *
      * @return array An array containing all locales.
      */
     public static function getAllLocales()
     {
         try {
-            $availableLocales = \ResourceBundle::getLocales('');
-
-            return $availableLocales;
+            return \ResourceBundle::getLocales('');
         } catch (\Throwable $th) {
             return array_keys(Langs::LOCALES_AVAILABLE);
         }
     }
 
     /**
-     * Retrieves a list of all available locales supported by the NumberFormatter class.
+     * Return an array of languages with preconfigured text output settings.
      *
      * @return array An array containing all available locales.
      */
@@ -107,7 +100,7 @@ abstract class BaseSpellNumber
     }
 
     /**
-     * Retrieves a list of all available TimeZones by the NumberFormatter class.
+     * Return an array where each entry contains the language code and the full language name.
      *
      * @return array An array containing all available locales.
      */
@@ -117,8 +110,7 @@ abstract class BaseSpellNumber
     }
 
     /**
-     * This method allows querying the constants existing within SpellNumber
-     * along with their values for use in the package.
+     * Return a list of constants configured in the SpellNumber class.
      *
      * @param string|null $category The optional category of constants to retrieve.
      *

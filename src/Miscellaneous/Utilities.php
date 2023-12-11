@@ -3,8 +3,9 @@
 namespace Rmunate\Utilities\Miscellaneous;
 
 use Rmunate\Utilities\Langs\Langs;
+use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
 
-final class Utilities
+class Utilities
 {
     /**
      * Validate if a value is in scientific notation.
@@ -15,11 +16,7 @@ final class Utilities
      */
     public static function isScientificConnotation($value)
     {
-        if (preg_match('/[+\-]?\d+(\.\d+)?[Ee][+\-]?\d+/', $value)) {
-            return true;
-        }
-
-        return false;
+        return preg_match('/[+\-]?\d+(\.\d+)?[Ee][+\-]?\d+/', $value) === 1;
     }
 
     /**
@@ -91,9 +88,7 @@ final class Utilities
      */
     public static function isNotExceedMax($value)
     {
-        // Implementation for checking if the value does not exceed the maximum is provided here.
         if (self::isValidString($value) || self::isValidDouble($value)) {
-
             $parts = explode('.', $value);
             $integerPart = intval($parts[0]);
             $decimalPart = intval($parts[1] ?? 0);
@@ -109,23 +104,25 @@ final class Utilities
 
     /**
      * Get the connector for the given locale to use in regular sentences.
+     *
+     * @param string|null $connector The connector to use.
+     * @param string      $locale    The locale.
+     * @param string      $partOne   The first part of the sentence.
+     * @param string      $partTwo   The second part of the sentence.
+     *
+     * @return string The sentence with the connector.
      */
     public static function connector(?string $connector, string $locale, string $partOne, string $partTwo)
     {
         if (!is_null($connector)) {
-            
-            //Custom
             if ($connector === false || $connector === "") {
                 $output = sprintf('%s %s', $partOne, $partTwo);
-            } else if (in_array($connector, [".", ","])) {
+            } elseif (in_array($connector, [".", ","])) {
                 $output = sprintf('%s%s %s', $partOne, trim($connector), $partTwo);
             } else {
                 $output = sprintf('%s %s %s', $partOne, trim($connector), $partTwo);
             }
-
         } else {
-
-            //This Package
             $locale = self::extractPrimaryLocale($locale);
             $connectorPackage = Langs::LOCALES_CONNECTORS[$locale] ?? null;
 
@@ -204,16 +201,33 @@ final class Utilities
      *
      * @return bool True if the string ends with the specified substring, false otherwise.
      */
-    function static endsWith($haystack, $needle) {
-        // Get the length of the substring.
+    public static function endsWith($haystack, $needle)
+    {
         $length = strlen($needle);
 
-        // If the length of the substring is zero, the string technically ends with it.
         if ($length == 0) {
             return true;
         }
 
-        // Compare the end of the string with the specified substring.
         return (substr($haystack, -$length) === $needle);
+    }
+
+    /**
+     * Check if a string is included in an array, and throw an exception if not.
+     *
+     * @param string $string    The string to check for inclusion.
+     * @param array  $includes  The array to check for inclusion.
+     * @param string $exception The exception message to throw if the string is not included.
+     *
+     * @return bool True if the string is included, otherwise an exception is thrown.
+     * @throws SpellNumberExceptions Throws an exception if the string is not included in the array.
+     */
+    public static function includesOrException(string $string, array $includes, string $exception)
+    {
+        if (!in_array($string, $includes)) {
+            throw SpellNumberExceptions::create($exception);
+        }
+
+        return true;
     }
 }

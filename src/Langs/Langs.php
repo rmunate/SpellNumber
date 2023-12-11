@@ -2,12 +2,8 @@
 
 namespace Rmunate\Utilities\Langs;
 
-use Rmunate\Utilities\Traits\Locale;
-
-final class Langs
+class Langs
 {
-    use Locale;
-
     /**
      * List of time zones available in the package.
      *

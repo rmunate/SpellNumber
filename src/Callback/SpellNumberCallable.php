@@ -11,10 +11,25 @@ class SpellNumberCallable
      */
     public function __construct(array $data)
     {
-        // Populate object properties with data from the array.
         foreach ($data as $key => $value) {
             $this->{$key} = $value;
         }
+    }
+
+    /**
+     * Magic method to dynamically get property values.
+     *
+     * @param string $name The name of the property.
+     *
+     * @return mixed|false The property value or false if the property doesn't exist.
+     */
+    public function __get($name) {
+
+        if (property_exists($this, $name)) {
+            return ($name != "spell") ? $this->{$name} : false;
+        }
+
+        return false;
     }
 
     /**

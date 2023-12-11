@@ -4,11 +4,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Global Configuration for Number to Words Conversion.
+    | Global Configuration for SpellNumber v4.3.0 Output
     |--------------------------------------------------------------------------
     |
-    | Visit https://rmunate.github.io/SpellNumber/ for detailed documentation.
-    | Define a global configuration to facilitate and expedite the translation of values to words.
+    | Visit the official documentation at https://rmunate.github.io/SpellNumber/
+    | for detailed information on package usage.
     |
     */
 
@@ -16,10 +16,11 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | Default Locale for Number to Words Translation.
+        | Global Configuration for Locale
         |--------------------------------------------------------------------------
         |
-        | Define the language over which values will be translated to words.
+        | Defines the global output locale for package translations.
+        | By using this setting, you can omit the locale(...) method in package usage.
         |
         */
 
@@ -27,11 +28,12 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | Define the Currency.
+        | Define Global Output for Currency Type
         |--------------------------------------------------------------------------
         |
-        | Define the name of the currency to use globally.
-        | This will reduce the amount of code when using the library.
+        | Defines the global output for converting numbers to words in currency format.
+        | With this global configuration, you can avoid using the currency(...) method
+        | in package usage.
         |
         */
 
@@ -39,12 +41,12 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | Define the Fraction.
+        | Define Output for Currency Fraction
         |--------------------------------------------------------------------------
         |
-        | Define the name of the currency fraction to use globally.
-        | This will reduce the amount of code when using the library.
-        | Cents? What will you use?.
+        | Defines the global output for currency fractions when the supplied value is
+        | in floating-point format (double|float). With this configuration, you can avoid
+        | using the fraction(...) method in package usage.
         |
         */
 
@@ -52,12 +54,12 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | Output type ordinal texts
+        | Global Configuration for Ordinal Values
         |--------------------------------------------------------------------------
         |
-        | The output usually depends on the language to be used,
-        | so you can use any of the following three options.
-        |
+        | Defines the global output for ordinal numbers. This varies by language;
+        | for English, use 'default', while for romance languages, you may choose
+        | between masculine and feminine forms.
         | Options: 'default', 'male', 'female'
         |
         */
@@ -67,14 +69,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Global Output Replacements
+    | Replacements in Translation Output
     |--------------------------------------------------------------------------
     |
-    | If you need to make any replacements to the translation output, which is common
-    | in cases with abbreviated numbers or other language contractions, you can
-    | easily do so here through an associative array.
+    | Sometimes, in certain languages, the output may not be exact, or there might
+    | be changes due to regional variations, such as contracted or abbreviated numbers.
     |
-    | Remember that the main index should match the locale you are using.
+    | Here, you can define global replacements for outputs. Simply set the language
+    | as the index to apply changes.
     |
     */
 

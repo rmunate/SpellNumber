@@ -5,124 +5,33 @@ namespace Rmunate\Utilities;
 use Closure;
 use NumberFormatter;
 use IntlDateFormatter;
-use Rmunate\Utilities\Langs\Langs;
 use Illuminate\Support\Facades\App;
-use Rmunate\Utilities\Traits\Spell;
+use Rmunate\Utilities\Traits\Output;
 use Rmunate\Utilities\Traits\Constants;
 use Rmunate\Utilities\Traits\Processor;
 use Illuminate\Support\Traits\Macroable;
 use Rmunate\Utilities\Miscellaneous\Words;
 use Rmunate\Utilities\Bases\BaseSpellNumber;
-use Rmunate\Utilities\Callback\DataResponse;
 use Rmunate\Utilities\Miscellaneous\Utilities;
-use Rmunate\Utilities\Validator\Traits\CommonValidate;
-use Rmunate\Utilities\Wrappers\NumberFormatterWrapper;
-use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
+use Rmunate\Utilities\Callback\SpellNumberCallable;
 
 class SpellNumber extends BaseSpellNumber
 {
-    use CommonValidate;
-    use Constants;
+    use Output;
     use Processor;
     use Macroable;
-    use Spell;
-  
-    private $type;
-    private $value;
-    protected $locale;
-    protected $currency;
-    protected $fraction;
-    protected $connector;
-    protected $replacements;
+    use Constants;
 
-    /**
-     * Constructor.
-     *
-     * @param mixed  $value The numeric value to convert to words.
-     * @param string $type  The type of the value ('integer' or 'double').
-     */
-    public function __construct($value, string $type)
-    {
-        $this->value = $value;
-        $this->type = $type;
-        $this->locale = config('spell-number.default.locale') ?? App::getLocale();
-        $this->currency = config('spell-number.default.currency') ?? 'dollars';
-        $this->fraction = config('spell-number.default.fraction') ?? 'cents';
-        $this->connector = null;
-        $this->replacements = [];
-    }
 
-    /**
-     * Set the locale for the conversion.
-     *
-     * @param string $locale The locale to use for the conversion.
-     *
-     * @throws SpellNumberExceptions If the provided locale is not valid.
-     *
-     * @return SpellNumber The SpellNumber instance with the updated locale.
-     */
-    public function locale(string $locale, bool $specific_locale = true)
-    {
-        $this->locale = trim($locale);
 
-        return $this;
-    }
 
-    /**
-     * Set the currency for the conversion.
-     *
-     * @param string $currency The currency to use for the conversion.
-     *
-     * @return SpellNumber The SpellNumber instance with the updated currency.
-     */
-    public function currency(string $currency)
-    {
-        $this->currency = trim($currency);
 
-        return $this;
-    }
 
-    /**
-     * Set the fraction for the conversion.
-     *
-     * @param string $fraction The fraction to use for the conversion.
-     *
-     * @return SpellNumber The SpellNumber instance with the updated fraction.
-     */
-    public function fraction(string $fraction)
-    {
-        $this->fraction = trim($fraction);
 
-        return $this;
-    }
 
-    /**
-     * Set the replacements.
-     * 
-     * @param array $replacements
-     * 
-     * @return SpellNumber The SpellNumber instance with the updated replacements.
-     */
-    public function replacements(array $replacements)
-    {
-        $this->replacements = $replacements;
 
-        return $this;
-    }
 
-    /**
-     * Set the connector.
-     * 
-     * @param string $connector
-     * 
-     * @return SpellNumber The SpellNumber instance with the updated connector.
-     */
-    public function connector(string $connector)
-    {
-        $this->connector = trim($connector);
 
-        return $this;
-    }
 
 
 
@@ -145,35 +54,33 @@ class SpellNumber extends BaseSpellNumber
 
 
     
-    /**
-     * Convert the numeric value to words.
-     *
-     * @param Closure|null $callback Optional callback function to handle custom responses.
-     * @return string The textual representation of the numeric value.
-     */
-    public function toLetters(Closure $callback = null)
-    {
-        $words = ($this->type == 'integer') ? $this->integerToLetters() : $this->doubleToLetters();
 
-        if (!empty($callback) && is_callable($callback)) {
+    
 
-            return $callback(new SpellNumberCallable([
-                'method'    =>  'toLetters',
-                'type'      =>  $this->type,
-                'value'     =>  $this->value,
-                'locale'    =>  $this->locale,
-                'connector' =>  $this->connector,
-                'replaces'  =>  $this->replacements,
-                'output'     =>  $words,
-                'lang'      =>  Utilities::extractPrimaryLocale($this->locale),
-                'spell'     =>  function(string $method, ?string $modeOrdinal = null){
-                                    return $this->spell($method, $modeOrdinal);
-                                }
-            ]));
-        }
+    
 
-        return $words;
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
 
     /**
      * Convert the numeric value to a money representation.
@@ -207,40 +114,7 @@ class SpellNumber extends BaseSpellNumber
         return $words;
     }
 
-    /**
-     * Convert the numeric value to ordinal representation.
-     *
-     * @param string|null $attr Optional attribute for ordinal representation (e.g., 'male', 'female').
-     * @param Closure|null $callback Optional callback function to handle custom responses.
-     * @return string The textual representation of the ordinal value.
-     */
-    public function toOrdinal(?string $attr = null, Closure $callback = null)
-    {
-        $valueConfig = config('spell-number.default.ordinal_output');
-
-        $attr = Utilities::textOrdinalMode($attr ?? $valueConfig);
-
-        $words = $this->integerToOrdinal($attr);
-
-        if (!empty($callback) && is_callable($callback)) {
-
-            return $callback(new SpellNumberCallable([
-                'method'    =>  'toOrdinal',
-                'type'      =>  $this->type,
-                'value'     =>  $this->value,
-                'locale'    =>  $this->locale,
-                'replaces'  =>  $this->replacements,
-                'output'     =>  $words,
-                'lang'      =>  Utilities::extractPrimaryLocale($this->locale),
-                'mode'      =>  Utilities::textOrdinalModeHuman($attr),
-                'spell'     =>  function(string $method, ?string $modeOrdinal = null){
-                                    return $this-> spell($method, $modeOrdinal);
-                                }
-            ]));
-        }
-
-        return $words;
-    }
+    
 
 
 
@@ -282,62 +156,9 @@ class SpellNumber extends BaseSpellNumber
 
 
 
-    /**
-     * Convert the integer numeric value to its textual representation.
-     *
-     * @return string The textual representation of the integer numeric value.
-     */
-    private function integerToLetters()
-    {
-        // Text format
-        $formatter = NumberFormatterWrapper::format($this->value, $this->locale);
+    
 
-        // Replacements from the same package
-        $formatter = Words::replaceLocale($formatter, $this->locale, self::TO_LETTERS);
-
-        // Replacements from configuration
-        $formatter = Words::replaceFromConfig($formatter, $this->locale);
-
-        // Apply user-supplied replacements
-        $formatter = Words::replaceCustom($formatter, $this->replacements);
-
-        return $formatter;
-    }
-
-    /**
-     * Convert the double numeric value to its textual representation.
-     *
-     * @return string The textual representation of the double numeric value.
-     */
-    private function doubleToLetters()
-    {
-        // Ensure the second value after the decimal point is not 0
-        $parts = explode('.', $this->value);
-        if (!array_key_exists(1, $parts)) {
-            return $this->integerToLetters();
-        }
-
-        // Adjust the decimal value
-        $parts[1] = Utilities::decimal($parts[1]);
-
-        // Translate the values separately
-        $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale);
-        $letters2 = NumberFormatterWrapper::format($parts[1], $this->locale);
-
-        // Define the connector for the output
-        $output = Utilities::connector($this->connector, $this->locale, $letters1, $letters2);
-
-        // Replacements from the same package
-        $output = Words::replaceLocale($output, $this->locale, self::TO_LETTERS);
-
-        // Replacements from the configuration
-        $output = Words::replaceFromConfig($output, $this->locale);
-
-        // User-supplied replacements
-        $output = Words::replaceCustom($output, $this->replacements);
-
-        return $output;
-    }
+    
 
     /**
      * Convert the integer numeric value to its money representation.
@@ -432,37 +253,127 @@ class SpellNumber extends BaseSpellNumber
 
 
 
-
-
+    public $value;
+    public $type;
+    protected $locale;
+    protected $currency;
+    protected $fraction;
+    protected $connector;
+    protected $replacements;
 
     /**
-     * Converts spelled-out numbers to numeric values.
+     * Constructor.
      *
-     * @param Closure|null $callback An optional callback function to process the result.
+     * @param mixed  $value The numeric value to convert to words.
+     * @param string $type  The type of the value ('integer' or 'double').
+     */
+    public function __construct($value, string $type)
+    {
+        $this->value = $value;
+        $this->type = $type;
+        $this->locale = config('spell-number.default.locale') ?? App::getLocale();
+        $this->currency = config('spell-number.default.currency') ?? 'dollars';
+        $this->fraction = config('spell-number.default.fraction') ?? 'cents';
+        $this->connector = null;
+        $this->replacements = [];
+    }
+
+    /**
+     * Set the locale for the conversion.
      *
-     * @return mixed The numeric value or the result of the callback.
+     * @param string $locale The locale to use for the conversion.
      *
-     * @throws SpellNumberException If the provided value cannot be parsed.
+     * @throws SpellNumberExceptions If the provided locale is not valid.
+     *
+     * @return SpellNumber The SpellNumber instance with the updated locale.
+     */
+    public function locale(string $locale, ...$others)
+    {
+        $this->locale = trim($locale);
+
+        return $this;
+    }
+
+    /**
+     * Set the currency for the conversion.
+     *
+     * @param string $currency The currency to use for the conversion.
+     *
+     * @return SpellNumber The SpellNumber instance with the updated currency.
+     */
+    public function currency(string $currency)
+    {
+        $this->currency = trim($currency);
+
+        return $this;
+    }
+
+    /**
+     * Set the fraction for the conversion.
+     *
+     * @param string $fraction The fraction to use for the conversion.
+     *
+     * @return SpellNumber The SpellNumber instance with the updated fraction.
+     */
+    public function fraction(string $fraction)
+    {
+        $this->fraction = trim($fraction);
+
+        return $this;
+    }
+
+    /**
+     * Set the replacements.
+     * 
+     * @param array $replacements
+     * 
+     * @return SpellNumber The SpellNumber instance with the updated replacements.
+     */
+    public function replacements(array $replacements)
+    {
+        $this->replacements = $replacements;
+
+        return $this;
+    }
+
+    /**
+     * Set the connector.
+     * 
+     * @param string $connector
+     * 
+     * @return SpellNumber The SpellNumber instance with the updated connector.
+     */
+    public function connector(string $connector)
+    {
+        $this->connector = $connector;
+
+        return $this;
+    }
+
+    /**
+     * Convert a spelled-out number to its numeric representation.
+     *
+     * @param Closure|null $callback An optional callback to further process the numeric value.
+     *
+     * @return int|bool The numeric value if successful, or false if parsing fails.
+     * @throws SpellNumberExceptions Throws an exception if the type is not 'text'.
      */
     public function toNumbers(Closure $callback = null)
     {
-        if (!in_array($this->type, ["text"])) {
-            throw SpellNumberExceptions::create("The 'toNumbers' method requires the class initializer to be 'text()'");
-        }
-
-        // Use NumberFormatter to parse the spelled-out number
+        Utilities::includesOrException(
+            $this->type,
+            ["text"],
+            "The toNumbers() method requires the initializing method to be text() as it is intended for converting text to numbers."
+        );
+        
         $formatter = new NumberFormatter($this->locale, NumberFormatter::SPELLOUT);
         $numericValue = $formatter->parse($this->value);
-
-        // Check if parsing was successful
+        
         if (empty($numericValue) || $numericValue === false) {
-            // Throw an exception with an improved and English error message
-            throw SpellNumberExceptions::create("The provided value could not be read in '{$this->locale}', please check if it is correctly written.");
+            return false;
         }
-
-        // If a callback is provided and is callable, execute it
+        
         if (!empty($callback) && is_callable($callback)) {
-            // Return the result of the callback, passing a DataResponse object
             return $callback(new SpellNumberCallable([
                 'spell' => function (string $method, ?string $modeOrdinal = null) {
                     return $this->spell($method, $modeOrdinal);
@@ -472,49 +383,41 @@ class SpellNumber extends BaseSpellNumber
                 'locale' => $this->locale,
             ]));
         }
-
-        // If no callback, return the numeric value
+        
         return $numericValue;
     }
 
     /**
-     * Converts a decimal number to a Roman numeral.
+     * Convert an integer to a Roman numeral and perform replacements.
      *
-     * @param Closure|null $callback An optional callback function to process the result.
+     * @param Closure|null $callback An optional callback to further process the Roman numeral.
      *
-     * @return mixed The Roman numeral or the result of the callback.
+     * @return string The Roman numeral with replacements if successful.
+     * @throws SpellNumberExceptions Throws an exception if the type is not 'integer' or the value is out of an acceptable range.
      */
     public function toRomanNumeral(Closure $callback = null)
     {
-        if (!in_array($this->type, ["integer"])) {
-            throw SpellNumberExceptions::create("The 'toRomanNumeral' method requires the supplied value to be of integer type");
-        }
-
+        Utilities::includesOrException(
+            $this->type,
+            ["integer"],
+            "The toRomanNumeral() method requires the supplied value to be an integer and within an acceptable range for the expected output."
+        );
+        
         $formatter = new NumberFormatter('@numbers=roman', NumberFormatter::DECIMAL);
         $result = $formatter->format($this->value);
-
-        // Replacements from the configuration
-        $words = Words::replaceFromConfig($result, $this->locale);
-
-        // User-supplied replacements
-        $words = Words::replaceCustom($words, $this->replacements);
         
-        // If a callback is provided and is callable, execute it
         if (!empty($callback) && is_callable($callback)) {
-            // Return the result of the callback, passing a DataResponse object
             return $callback(new SpellNumberCallable([
                 'spell' => function (string $method, ?string $modeOrdinal = null) {
                     return $this->spell($method, $modeOrdinal);
                 },
-                'output' => $words,
+                'output' => $this->output($words),
                 'value' => $this->value,
                 'locale' => '@numbers=roman',
-                'replacements' => $this->replacements,
             ]));
         }
 
-        // If no callback, return the numeric value
-        return $words;
+        return $this->output($words);
     }
 
     /**
@@ -527,9 +430,11 @@ class SpellNumber extends BaseSpellNumber
      */
     public function toSummary(int $precision = 0, Closure $callback = null)
     {
-        if (!in_array($this->type, ["integer", "double"])) {
-            throw SpellNumberExceptions::create("The 'toSummary' method requires the supplied value to be of integer or float type");
-        }
+        Utilities::includesOrException(
+            $this->type,
+            ["integer", "double"],
+            "The toSummary() method requires the supplied value to be of integer or float type."
+        );
 
         $units = [
             3 => 'K',
@@ -557,33 +462,25 @@ class SpellNumber extends BaseSpellNumber
         $formatter = new NumberFormatter($this->locale, NumberFormatter::DECIMAL);
         $formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, $precision);
         $result = $formatter->format($number);
-
         $result = trim(sprintf('%s%s', $result, $units[$displayExponent] ?? ''));
 
-        // Replacements from the configuration
         $words = Words::replaceFromConfig($result, $this->locale);
-
-        // User-supplied replacements
         $words = Words::replaceCustom($words, $this->replacements);
         
-        // If a callback is provided and is callable, execute it
         if (!empty($callback) && is_callable($callback)) {
-
-            // Return the result of the callback, passing a DataResponse object
             return $callback(new SpellNumberCallable([
                 'spell' => function (string $method, ?string $modeOrdinal = null) {
                     return $this->spell($method, $modeOrdinal);
                 },
-                'output' => $words,
+                'output' => $this->output($words),
                 'value' => $this->value,
                 'precision' => $precision,
                 'locale' => $this->locale,
                 'replacements' => $this->replacements,
             ]));
         }
-
-        // If no callback, return the numeric value
-        return $words;
+        
+        return $this->output($words);
     }
 
     /**
@@ -596,37 +493,28 @@ class SpellNumber extends BaseSpellNumber
      */
     public function toCurrency(?string $currency, Closure $callback = null)
     {
-        if (!in_array($this->type, ["integer", "double"])) {
-            throw SpellNumberExceptions::create("The 'toCurrency' method requires the supplied value to be of integer or float type");
-        }
+        Utilities::includesOrException(
+            $this->type,
+            ["integer", "double"],
+            "The toCurrency() method requires the supplied value to be of integer or float type."
+        );
 
         $formatter = new NumberFormatter($this->locale, NumberFormatter::CURRENCY);
-        $result = $formatter->formatCurrency($this->value, $currency);
-
-        // Replacements from the configuration
-        $words = Words::replaceFromConfig($result, $this->locale);
-
-        // User-supplied replacements
-        $words = Words::replaceCustom($words, $this->replacements);
+        $words = $formatter->formatCurrency($this->value, $currency);
         
-        // If a callback is provided and is callable, execute it
         if (!empty($callback) && is_callable($callback)) {
-
-            // Return the result of the callback, passing a DataResponse object
             return $callback(new SpellNumberCallable([
                 'spell' => function (string $method, ?string $modeOrdinal = null) {
                     return $this->spell($method, $modeOrdinal);
                 },
-                'output' => $words,
+                'output' => $this->output($words),
                 'value' => $this->value,
                 'currency' => $currency,
                 'locale' => $this->locale,
-                'replacements' => $this->replacements,
             ]));
         }
 
-        // If no callback, return the numeric value
-        return $words;
+        return $this->output($words);
     }
 
     /**
@@ -639,11 +527,21 @@ class SpellNumber extends BaseSpellNumber
      *
      * @throws SpellNumberException If the class initializer is not of type 'date('yyyy-mm-dd')'.
      */
-    public function inWords($pattern = 'dd MMMM yyyy', Closure $callback = null)
+    public function inWords(?string $pattern = null, Closure $callback = null)
     {
-        if (!in_array($this->type, ["date"])) {
-            throw SpellNumberExceptions::create("The 'inWords' method requiere que el inicializador de la clase sea 'date('yyyy-mm-dd')'");
-        }
+        Utilities::includesOrException(
+            $this->type,
+            ["date"],
+            "The inWords() method requires that the class initializer be date()."
+        );
+        
+        $pattern = match ($pattern) {
+            "%date-format-short" => 'MMMM d, yyyy',
+            "%date-format-medium" => 'EEE, MMM d, yyyy',
+            "%date-format-long" => 'EEE, d MMM yyyy',
+            "%date-format-full" => null,
+            default => $pattern,
+        };
 
         $formatter = new IntlDateFormatter(
             $this->locale,
@@ -656,21 +554,15 @@ class SpellNumber extends BaseSpellNumber
     
         $result = $formatter->format(strtotime($this->value));
 
-        // Replacements from the configuration
         $words = Words::replaceFromConfig($result, $this->locale);
-
-        // User-supplied replacements
         $words = Words::replaceCustom($words, $this->replacements);
         
-        // If a callback is provided and is callable, execute it
         if (!empty($callback) && is_callable($callback)) {
-
-            // Return the result of the callback, passing a DataResponse object
             return $callback(new SpellNumberCallable([
                 'spell' => function (string $method, ?string $modeOrdinal = null) {
                     return $this->spell($method, $modeOrdinal);
                 },
-                'output' => $words,
+                'output' => $this->output($words),
                 'value' => $this->value,
                 'locale' => $this->locale,
                 'pattern' => $pattern,
@@ -678,8 +570,7 @@ class SpellNumber extends BaseSpellNumber
             ]));
         }
 
-        // If no callback, return the numeric value
-        return $words;
+        return $this->output($words);
     }
 
     /**
@@ -694,30 +585,29 @@ class SpellNumber extends BaseSpellNumber
      */
     public function toPercent(int $digits = 2, Closure $callback = null)
     {
-        if (!in_array($this->type, ["integer", "double"])) {
-            throw SpellNumberExceptions::create("The 'toPercent' method requires the supplied value to be of integer or float type");
-        }
+        Utilities::includesOrException(
+            $this->type,
+            ["integer", "double"],
+            "The toPercent() method requires the supplied value to be of integer or float type."
+        );
 
         $formatter = new NumberFormatter($this->locale, NumberFormatter::PERCENT);
         $formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, $digits);
         $words = $formatter->format($this->value);
 
-        // If a callback is provided and is callable, execute it
         if (!empty($callback) && is_callable($callback)) {
-            // Return the result of the callback, passing a DataResponse object
             return $callback(new SpellNumberCallable([
                 'spell'     => function (string $method, ?string $modeOrdinal = null) {
                     return $this->spell($method, $modeOrdinal);
                 },
-                'output'     => $words,
+                'output'     => $this->output($words),
                 'value'     => $this->value,
                 'digits'    => $this->digits,
                 'locale'    => $this->locale,
             ]));
         }
 
-        // If no callback, return the numeric value
-        return $words;
+        return $this->output($words);
     }
 
     /**
@@ -731,28 +621,27 @@ class SpellNumber extends BaseSpellNumber
      */
     public function toScientific(Closure $callback = null)
     {
-        if (!in_array($this->type, ["integer", "double"])) {
-            throw SpellNumberExceptions::create("The 'toScientific' method requires the supplied value to be of integer or float type");
-        }
+        Utilities::includesOrException(
+            $this->type,
+            ["integer", "double"],
+            "The toScientific() method requires the supplied value to be of integer or float type."
+        );
 
         $formatter = new NumberFormatter($this->locale, NumberFormatter::SCIENTIFIC);
         $words = $formatter->format($this->value);
 
-        // If a callback is provided and is callable, execute it
         if (!empty($callback) && is_callable($callback)) {
-            // Return the result of the callback, passing a DataResponse object
             return $callback(new SpellNumberCallable([
                 'spell' => function (string $method, ?string $modeOrdinal = null) {
                     return $this->spell($method, $modeOrdinal);
                 },
-                'output' => $words,
+                'output' => $this->output($words),
                 'value' => $this->value,
                 'locale' => $this->locale,
             ]));
         }
 
-        // If no callback, return the numeric value
-        return $words;
+        return $this->output($words);
     }
 
     /**
@@ -764,29 +653,87 @@ class SpellNumber extends BaseSpellNumber
      *
      * @throws SpellNumberException If the supplied value is not of integer or float type.
      */
-    public function toClock(Closure $callback = null){
-
-        if (!in_array($this->type, ["integer", "double"])) {
-            throw SpellNumberExceptions::create("The 'toClock' method requires the supplied value to be of integer or float type");
-        }
+    public function toClock(Closure $callback = null)
+    {
+        Utilities::includesOrException(
+            $this->type,
+            ["integer", "double"],
+            "The toClock() method requires the supplied value to be of integer or float type."
+        );
 
         $formatter = new NumberFormatter($this->locale, NumberFormatter::DURATION);
         $words = $formatter->format($this->value);
         
-        // If a callback is provided and is callable, execute it
         if (!empty($callback) && is_callable($callback)) {
-            // Return the result of the callback, passing a DataResponse object
             return $callback(new SpellNumberCallable([
                 'spell' => function (string $method, ?string $modeOrdinal = null) {
                     return $this->spell($method, $modeOrdinal);
                 },
-                'output' => $words,
+                'output' => $this->output($words),
                 'value' => $this->value,
                 'locale' => $this->locale,
             ]));
         }
 
-        // If no callback, return the numeric value
-        return $words;
+        return $this->output($words);
+    }
+
+    /**
+     * Convert the numeric value to ordinal representation.
+     *
+     * @param string|null $attr Optional attribute for ordinal representation (e.g., 'male', 'female').
+     * @param Closure|null $callback Optional callback function to handle custom responses.
+     * @return string The textual representation of the ordinal value.
+     */
+    public function toOrdinal(?string $attr = null, Closure $callback = null)
+    {
+        $valueConfig = config('spell-number.default.ordinal_output');
+
+        $attr = Utilities::textOrdinalMode($attr ?? $valueConfig);
+
+        $words = $this->integerToOrdinal($attr);
+
+        if (!empty($callback) && is_callable($callback)) {
+
+            return $callback(new SpellNumberCallable([
+                'value'     =>  $this->value,
+                'locale'    =>  $this->locale,
+                'replacements' => $this->replacements,
+                'output'    =>  $this->output($words),
+                'mode'      =>  Utilities::textOrdinalModeHuman($attr),
+                'spell'     =>  function(string $method, ?string $modeOrdinal = null){
+                                    return $this-> spell($method, $modeOrdinal);
+                                }
+            ]));
+        }
+
+        return $this->output($words);
+    }
+
+    /**
+     * Convert the numeric value to words.
+     *
+     * @param Closure|null $callback Optional callback function to handle custom responses.
+     * @return string The textual representation of the numeric value.
+     */
+    public function toLetters(Closure $callback = null)
+    {
+        $words = ($this->type == 'integer') ? $this->integerToLetters() : $this->doubleToLetters();
+
+        if (!empty($callback) && is_callable($callback)) {
+
+            return $callback(new SpellNumberCallable([
+                'value'     =>  $this->value,
+                'locale'    =>  $this->locale,
+                'connector' =>  $this->connector,
+                'replacements' => $this->replacements,
+                'output'     =>  $this->output($words),
+                'spell'     =>  function(string $method, ?string $modeOrdinal = null){
+                                    return $this->spell($method, $modeOrdinal);
+                                }
+            ]));
+        }
+
+        return $this->output($words);
     }
 }

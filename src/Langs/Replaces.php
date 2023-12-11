@@ -2,15 +2,16 @@
 
 namespace Rmunate\Utilities\Langs;
 
-use Rmunate\Utilities\Langs\Langs;
 use Rmunate\Utilities\Traits\Accesor;
 
-final class Replaces
+class Replaces
 {
     use Accesor;
 
     /**
      * Replacements for the currency formatting methods.
+     *
+     * @var array
      */
     public const TO_MONEY = [
         'de' => [
@@ -69,6 +70,8 @@ final class Replaces
 
     /**
      * Replacements for the number to words output methods.
+     *
+     * @var array
      */
     public const TO_LETTERS = [
         'de' => [
@@ -111,6 +114,8 @@ final class Replaces
 
     /**
      * Replacements for the ordinal number output methods.
+     *
+     * @var array
      */
     public const TO_ORDINAL = [
         'de' => [
@@ -150,5 +155,4 @@ final class Replaces
             //...
         ],
     ];
-
 }

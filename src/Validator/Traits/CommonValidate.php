@@ -22,13 +22,13 @@ trait CommonValidate
     }
 
     /**
-     * Validate that the "Intl" extension is loaded.
+     * Valida si la extension intl se encuentra cargada en el ambiente de PHP
      *
-     * @throws SpellNumberExceptions If the "Intl" extension is not installed or not available.
+     * @throws SpellNumberExceptions Si la extension no se encuentra cargada en el entrono-
      */
     private function validateExtension()
     {
-        if (!Utilities::validateExtension('Intl')) {
+        if (!Utilities::validateExtension('intl')) {
             throw SpellNumberExceptions::create('The INTL extension is not installed or not available. (https://www.php.net/manual/es/intl.installation.php)');
         }
 
