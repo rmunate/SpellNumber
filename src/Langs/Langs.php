@@ -34,7 +34,7 @@ class Langs
         'en' => 'and',  // English from the United States: "and"
         'es' => 'con',  // Spanish from Spain: "con"
         'fa' => 'ممیز', // Farsi from Iran: "ممیز"
-        'fr' => 'et',   // French from France: "et"
+        'fr' => 'virgule',   // French from France: "et"
         'hi' => 'और',   // Hindi from India: "और"
         'it' => 'con',  // Italian from Italy: "con"
         'pl' => 'i',    // Polish from Poland: "i"
