@@ -1,6 +1,7 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+
+use Orchestra\Testbench\TestCase;
 use Rmunate\Utilities\SpellNumber;
 
 class SpellNumberTest extends TestCase
