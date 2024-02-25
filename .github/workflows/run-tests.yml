@@ -31,4 +31,4 @@ jobs:
           composer update --prefer-stable --prefer-dist --no-interaction
 
       - name: Execute Tests
-        run: ./vendor/bin/phpunit ./test
+        run: ./vendor/bin/phpunit ./test --testdox
