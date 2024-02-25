@@ -2,6 +2,7 @@
 
 namespace Rmunate\Utilities\Validator;
 
+use Rmunate\Utilities\Bases\BaseSpellNumberValidator;
 use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
 use Rmunate\Utilities\Miscellaneous\Utilities;
 

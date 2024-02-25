@@ -4,6 +4,7 @@ namespace Rmunate\Utilities\Traits;
 
 use NumberFormatter;
 use Rmunate\Utilities\Miscellaneous\Utilities;
+use Rmunate\Utilities\Miscellaneous\Words;
 
 trait Processor
 {
@@ -26,7 +27,7 @@ trait Processor
         // Return the output value for INT.
         $formatter = new NumberFormatter($this->locale, NumberFormatter::SPELLOUT);
         $formatter->setTextAttribute(NumberFormatter::DEFAULT_RULESET, $attr);
-        $value = $formatter->format($this->value)
+        $value = $formatter->format($this->value);
         
         $value = Words::replaceLocale($value, $this->locale, "TO_ORDINAL");
         $value = Words::replaceFromConfig($value, $this->locale);
