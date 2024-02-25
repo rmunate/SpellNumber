@@ -134,6 +134,38 @@ class Utilities
         }
 
         return $output;
+    }/**
+     * Set the numeric value where the trailing zero is removed.
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    public static function decimal($value)
+    {
+        $result = match ($value) {
+            '01'    => 1,
+            '1'     => 10,
+            '02'    => 2,
+            '2'     => 20,
+            '03'    => 3,
+            '3'     => 30,
+            '04'    => 4,
+            '4'     => 40,
+            '05'    => 5,
+            '5'     => 50,
+            '06'    => 6,
+            '6'     => 60,
+            '07'    => 7,
+            '7'     => 70,
+            '08'    => 8,
+            '8'     => 80,
+            '09'    => 9,
+            '9'     => 90,
+            default => $value,
+        };
+
+        return $result;
     }
 
     /**

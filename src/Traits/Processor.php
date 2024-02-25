@@ -5,6 +5,7 @@ namespace Rmunate\Utilities\Traits;
 use NumberFormatter;
 use Rmunate\Utilities\Miscellaneous\Utilities;
 use Rmunate\Utilities\Miscellaneous\Words;
+use Rmunate\Utilities\Wrappers\NumberFormatterWrapper;
 
 trait Processor
 {
@@ -86,7 +87,7 @@ trait Processor
         $output = Utilities::connector($this->connector, $this->locale, $letters1, $letters2);
 
         // Replacements from the same package
-        $output = Words::replaceLocale($output, $this->locale, self::TO_LETTERS);
+        $output = Words::replaceLocale($output, $this->locale, "TO_LETTERS");
 
         // Replacements from the configuration
         $output = Words::replaceFromConfig($output, $this->locale);

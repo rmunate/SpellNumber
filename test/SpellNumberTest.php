@@ -1,6 +1,5 @@
 <?php
 
-
 use Orchestra\Testbench\TestCase;
 use Rmunate\Utilities\SpellNumber;
 
@@ -10,43 +9,43 @@ class SpellNumberTest extends TestCase
     public function testToLetters()
     {
         // English locale
-        $this->assertEquals(SpellNumber::value(100)->locale('en')->toLetters(), 'One Hundred');
+        $this->assertSame('one hundred', SpellNumber::value(100)->locale('en')->toLetters());
 
         // Spanish locale
-        $this->assertEquals(SpellNumber::value(100)->locale('es')->toLetters(), 'Cien');
+        $this->assertSame('cien', SpellNumber::value(100)->locale('es')->toLetters());
 
         // Farsi (Persian) locale
-        $this->assertEquals(SpellNumber::value(100)->locale('fa')->toLetters(), 'صد');
+        $this->assertSame('صد', SpellNumber::value(100)->locale('fa')->toLetters());
 
         // Hindi locale
-        $this->assertEquals(SpellNumber::value(100)->locale('hi')->toLetters(), 'एक सौ');
+        $this->assertSame('एक सौ', SpellNumber::value(100)->locale('hi')->toLetters());
 
         // Test conversion of floating-point value to letters in English locale
-        $this->assertEquals(SpellNumber::value(123456789.12)->locale('en')->toLetters(), 'One Hundred Twenty-Three Million Four Hundred Fifty-Six Thousand Seven Hundred Eighty-Nine And Twelve');
+        $this->assertSame('one hundred twenty-three million four hundred fifty-six thousand seven hundred eighty-nine and twelve', SpellNumber::value(123456789.12)->locale('en')->toLetters());
 
         // Test conversion of integer to letters in English locale
-        $this->assertEquals(SpellNumber::integer(100)->locale('en')->toLetters(), 'One Hundred');
+        $this->assertSame('one hundred', SpellNumber::integer(100)->locale('en')->toLetters());
 
         // Test conversion of floating-point value to letters in English locale
-        $this->assertEquals(SpellNumber::float('12345.230')->locale('en')->toLetters(), 'Twelve Thousand Three Hundred Forty-Five And Two Hundred Thirty');
+        $this->assertSame('twelve thousand three hundred forty-five and two hundred thirty', SpellNumber::float('12345.230')->locale('en')->toLetters());
     }
 
     // Test conversion of numerical value to money representation in different locales
     public function testToMoney()
     {
         // English locale with 'Dollars' currency
-        $this->assertEquals(SpellNumber::value(100)->locale('en')->currency('Dollars')->toMoney(), 'One Hundred Dollars');
+        $this->assertSame('one hundred Dollars', SpellNumber::value(100)->locale('en')->currency('Dollars')->toMoney());
 
         // Spanish locale with 'Pesos' currency
-        $this->assertEquals(SpellNumber::value(100)->locale('es')->currency('Pesos')->toMoney(), 'Cien Pesos');
+        $this->assertSame('cien Pesos', SpellNumber::value(100)->locale('es')->currency('Pesos')->toMoney());
 
         // Hindi locale with 'रूपये' currency
-        $this->assertEquals(SpellNumber::value(100)->locale('hi')->currency('रूपये')->toMoney(), 'एक सौ रूपये');
+        $this->assertSame('एक सौ रूपये', SpellNumber::value(100)->locale('hi')->currency('रूपये')->toMoney());
 
         // Test conversion of integer to money representation in Spanish locale
-        $this->assertEquals(SpellNumber::integer(100)->locale('es')->currency('Pesos')->toMoney(), 'Cien Pesos');
+        $this->assertSame('cien Pesos', SpellNumber::integer(100)->locale('es')->currency('Pesos')->toMoney());
 
         // Test conversion of floating-point value to money representation in Spanish locale
-        $this->assertEquals(SpellNumber::float('12345.230')->locale('es')->currency('Pesos')->fraction('Centavos')->toMoney(), 'Doce Mil Trescientos Cuarenta Y Cinco Pesos Con Doscientos Treinta Centavos');
+        $this->assertSame('doce mil trescientos cuarenta y cinco Pesos con doscientos treinta Centavos', SpellNumber::float('12345.230')->locale('es')->currency('Pesos')->fraction('Centavos')->toMoney());
     }
 }

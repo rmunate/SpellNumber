@@ -14,6 +14,7 @@ use Rmunate\Utilities\Miscellaneous\Words;
 use Rmunate\Utilities\Bases\BaseSpellNumber;
 use Rmunate\Utilities\Miscellaneous\Utilities;
 use Rmunate\Utilities\Callback\SpellNumberCallable;
+use Rmunate\Utilities\Wrappers\NumberFormatterWrapper;
 
 class SpellNumber extends BaseSpellNumber
 {
@@ -171,7 +172,7 @@ class SpellNumber extends BaseSpellNumber
         $letters = NumberFormatterWrapper::format($this->value, $this->locale) . ' ' . $this->currency;
 
         // Replacements from the same package
-        $letters = Words::replaceLocale($letters, $this->locale, self::TO_MONEY);
+        $letters = Words::replaceLocale($letters, $this->locale, "TO_MONEY");
 
         // Replacements from the configuration
         $letters = Words::replaceFromConfig($letters, $this->locale);
@@ -206,7 +207,7 @@ class SpellNumber extends BaseSpellNumber
         $output = Utilities::connector($this->connector, $this->locale, $letters1, $letters2);
 
         // Replacements from the same package
-        $output = Words::replaceLocale($output, $this->locale, self::TO_MONEY);
+        $output = Words::replaceLocale($output, $this->locale, "TO_MONEY");
 
         // Replacements from the configuration
         $output = Words::replaceFromConfig($output, $this->locale);
