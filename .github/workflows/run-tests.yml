@@ -1,6 +1,6 @@
 name: Tests
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   tests:
@@ -10,7 +10,7 @@ jobs:
       matrix:
         php: [8.2, 8.1 8.0]
         laravel: [10.*, 9.*, 8.*]
-        stability: [prefer-stable]
+        testbench: [8.*, 7.*, 6.*]
         include:
           - laravel: 10.*
             php: 8.2
@@ -42,8 +42,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:^8.18" --no-interaction --no-update
-        composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+        composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+        composer update --prefer-stable --prefer-dist --no-interaction
 
     - name: Execute Tests
       run: ./vendor/bin/phpunit ./test
