@@ -4,6 +4,7 @@ namespace Rmunate\Utilities\Validator;
 
 use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
 use Rmunate\Utilities\Miscellaneous\Utilities;
+use Rmunate\Utilities\Bases\BaseSpellNumberValidator;
 
 class SpellNumberValidator extends BaseSpellNumberValidator
 {
