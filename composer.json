@@ -1,5 +1,5 @@
 {
-    "name": "rmunate/spell-number",
+    "name": "hardevine/spell-number",
     "description": "Easily convert numbers to letters, this library supports the native PHP INTL extension with which we can easily convert numbers to letters. This library provides us with the possibility of converting only to numbers or to currency formats depending on the language to be used, this package has support in the languages en: English, es: Spanish, pt: Portuguese, fr: French, it: Italian, ro: Romanian, fa: Farsi, hi: Hindi, pl: Polish.",
     "keywords": [
         "towords",
