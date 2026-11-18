@@ -6,9 +6,6 @@ outline: deep
 
 # Bug Report
 
-If you find errors or opportunities within the package, you can create an incident that we will attend to in the shortest time possible.
+[Open a GitHub issue](https://github.com/rmunate/SpellNumber/issues/new) with a minimal example, the expected and actual output, and your PHP, Laravel, SpellNumber, and ICU versions.
 
-Here!:
-[https://github.com/rmunate/SpellNumber/issues/new](https://github.com/rmunate/SpellNumber/issues/new)
-
-Remember that you can also contribute as a collaborator of this solution.
+Run `php --ri intl` to identify the installed ICU version. Include the requested locale, the exact input type and value, and any relevant package settings.

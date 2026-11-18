@@ -1,62 +1,82 @@
-name: Deploy VitePress site to Pages
+name: CI and GitHub Pages
 
 on:
-    push:
-        branches: [ main ]
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
 
-    # Allows you to run this workflow manually from the Actions tab
-    workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-    contents: read
-    pages: write
-    id-token: write
+  contents: read
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-    group: pages
-    cancel-in-progress: false
+  group: spell-number-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-    # Build job
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Checkout
-                uses: actions/checkout@v3
-                with:
-                    fetch-depth: 0 # Not needed if lastUpdated is not enabled
-            # - uses: pnpm/action-setup@v2 # Uncomment this if you're using pnpm
-            # - uses: oven-sh/setup-bun@v1 # Uncomment this if you're using Bun
-            -   name: Setup Node
-                uses: actions/setup-node@v3
-                with:
-                    node-version: 18
-                    cache: npm # or pnpm / yarn
-            -   name: Setup Pages
-                uses: actions/configure-pages@v3
-            -   name: Install dependencies
-                run: npm ci # or pnpm install / yarn install / bun install
-            -   name: Build with VitePress
-                run: |
-                    npm run docs:build # or pnpm docs:build / yarn docs:build / bun run docs:build
-                    touch docs/.vitepress/dist/.nojekyll
-            -   name: Upload artifact
-                uses: actions/upload-pages-artifact@v2
-                with:
-                    path: docs/.vitepress/dist
+  tests:
+    name: PHP ${{ matrix.php }} / Laravel ${{ matrix.laravel }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.2', '8.3', '8.4', '8.5']
+        laravel: ['12', '13']
+        exclude:
+          # Laravel 13 requires PHP 8.3 or later.
+          - php: '8.2'
+            laravel: '13'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: intl, mbstring
+          coverage: none
+          tools: composer:v2
+      - run: composer validate --strict
+      - run: composer update --with "laravel/framework:^${{ matrix.laravel }}.0" --prefer-dist --no-interaction --no-progress
+      - run: composer test
 
-    # Deployment job
-    deploy:
-        environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
-        needs: build
-        runs-on: ubuntu-latest
-        name: Deploy
-        steps:
-            -   name: Deploy to GitHub Pages
-                id: deployment
-                uses: actions/deploy-pages@v2
+  docs:
+    name: Build documentation
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run docs:build
+      - name: Configure GitHub Pages
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs/.vitepress/dist
+
+  deploy:
+    name: Deploy documentation
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: [tests, docs]
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -5,7 +5,7 @@ outline: deep
 ---
 
 <script setup>
-import { VPTeamMembers } from 'vitepress/theme'
+import { VPTeamMembers } from 'vitepress/theme-without-fonts'
 
 const members = [
   {
@@ -81,23 +81,30 @@ const members = [
 
 # Contributing
 
-If you want to add support for a new language or want to develop new features, you can submit your requests to the main branch of the repository.
+## Local checks
+
+Use PHP 8.2+ with Intl and mbstring, Composer 2, and Node.js 24 to work on the package:
+
+```bash
+composer update
+composer test
+npm ci
+npm run docs:build
+```
+
+To test against a particular framework release, use `composer update --with "laravel/framework:^13.0"` (requires PHP 8.3+), or use `^12.0` instead. Include focused regression tests in pull requests that change the conversion behavior.
+
+Use the VitePress development server only for local preview. The published documentation is a static build and does not run that server.
+
+## GitHub Pages and releases
+
+1. In GitHub, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**. The production environment is `github-pages`.
+2. The [CI and GitHub Pages workflow](https://github.com/rmunate/SpellNumber/actions/workflows/deploy.yml) runs the PHP suite and builds the site on pull requests. A push to `main` or a manual run on `main` deploys the site only after both checks pass.
+3. After the checks pass on the release commit, create and push the `v5.0.0` Git tag and publish the GitHub release. The Composer release version comes from the tag, not a hardcoded version in `composer.json`. Verify the version on [Packagist](https://packagist.org/packages/rmunate/spell-number).
 
 ## Contributors
-
-To date, the following world-class developers have contributed their knowledge.
-
-To whom we thank for supporting making programming easier.
 
 <VPTeamMembers size="small" :members="members" />
 
 ## License
-This project is under the [MIT License](https://choosealicense.com/licenses/mit/).
-
-🌟 Support My Projects! 🚀
-
-[![Become a Sponsor](https://img.shields.io/badge/-Become%20a%20Sponsor-blue?style=for-the-badge&logo=github)](https://github.com/sponsors/rmunate)
-
-Make any contributions you see fit; the code is entirely yours. Together, we can do amazing things and improve the world of development. Your support is invaluable. ✨
-
-If you have ideas, suggestions, or just want to collaborate, we are open to everything! Join our community and be part of our journey to success! 🌐👩‍💻👨‍💻
+The project is released under the [MIT License](https://github.com/rmunate/SpellNumber/blob/main/LICENSE.md).

@@ -1,30 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rmunate\Utilities\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Load the package configuration and make it publishable from Laravel.
+ */
 class SpellNumberProvider extends ServiceProvider
 {
     /**
-     * Perform post-registration booting of services.
-     *
-     * @return void
+     * Register the defaults without overwriting application configuration.
+     */
+    public function register(): void
+    {
+        $this->mergeConfigFrom(__DIR__.'/../../config/spell-number.php', 'spell-number');
+    }
+
+    /**
+     * Register the configuration file for artisan vendor:publish.
      */
     public function boot(): void
     {
         $this->publishes([
-            __DIR__.'/../../config/spell-number.php' => config_path('spell-number.php'),
+            __DIR__.'/../../config/spell-number.php' => $this->app->configPath('spell-number.php'),
         ], 'config');
-    }
-
-    /**
-     * Register any package services.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        // Register any package-specific services here
     }
 }

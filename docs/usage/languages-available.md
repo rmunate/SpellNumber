@@ -6,93 +6,49 @@ outline: deep
 
 # Supported Languages
 
-We currently have 11 preset languages to easily work with this package. _Although you can use other configurations with arbitrary outputs_, we list the pre-configured languages below:
+## Locale presets
 
-- German.
-- English.
-- Spanish.
-- Farsi.
-- French.
-- Hindi.
-- Italian.
-- Polish.
-- Portuguese.
-- Romanian.
-- Vietnamese.
+Use a preset directly with `->locale('es')`, without any extra flag. Presets define the connector used between whole and fractional parts. ICU supplies the number words.
 
-If you want to get the supported languages directly from the package, you have two ways to do it.
-
-## Available Locales
-Execute the method `getAvailableLocales`, as output it will give you an array with the available values.
-
-```php
-use Rmunate\Utilities\SpellNumber;
-
-SpellNumber::getAvailableLocales();
-
-// array:10 [▼
-//   0 => "de"
-//   1 => "en"
-//   2 => "es"
-//   3 => "fa"
-//   4 => "fr"
-//   5 => "hi"
-//   6 => "it"
-//   7 => "pl"
-//   8 => "pt"
-//   9 => "ro"
-//   10 => "vi"
-// ]
-```
-
-## Available Languages
-
-Execute the method `getAvailableLanguages`, as output it will give you an associative array with the values of available languages.
+| Code | Language | Fraction connector |
+| --- | --- | --- |
+| `de` | German | `und` |
+| `en` | English | `and` |
+| `es` | Spanish | `con` |
+| `fa` | Farsi | `ممیز` |
+| `fr` | French | `et` |
+| `hi` | Hindi | `और` |
+| `it` | Italian | `con` |
+| `pl` | Polish | `i` |
+| `pt` | Portuguese | `com` |
+| `ro` | Romanian | `cu` |
+| `vi` | Vietnamese | `và` |
 
 ```php
 use Rmunate\Utilities\SpellNumber;
 
-SpellNumber::getAvailableLanguages();
-
-// array:10 [▼ 
-//   "de" => "German"
-//   "en" => "English"
-//   "es" => "Spanish"
-//   "fa" => "Farsi"
-//   "fr" => "French"
-//   "hi" => "Hindi"
-//   "it" => "Italian"
-//   "pl" => "Polish"
-//   "pt" => "Portuguese"
-//   "ro" => "Romanian"
-//   "vi" => "Vietnamese"
-// ]
+$codes = SpellNumber::getAvailableLocales();     // ['de', 'en', 'es', ...]
+$names = SpellNumber::getAvailableLanguages();   // ['de' => 'German', ...]
 ```
 
-## Other Locales
+## Regional and additional locales
 
-If you would like to try a language other than the 10 previously mentioned, you can consult the different values that you can supply to the package to try to generate the output translated to said area and language.
-
-In order to use any of these options, you must use the constant `SpellNumber::SPECIFIC_LOCALE` in the `locale` method, example `->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)`.
-
+For a regional variant such as Swiss French, use an installed ICU locale with a hyphen or underscore. Pass `SpellNumber::SPECIFIC_LOCALE` as the second argument, or opt in for all instances with `default.specific_locale` in the [configuration](./config-file.md):
 
 ```php
 use Rmunate\Utilities\SpellNumber;
 
-SpellNumber::getAllLocales();
+SpellNumber::integer(70)->locale('fr-CH', SpellNumber::SPECIFIC_LOCALE)->toLetters();
+// "septante"
 
-// array:805 [▼ 
-//     0 => "af"
-//     1 => "af_NA"
-//     2 => "af_ZA"
-//     3 => "agq"
-//     4 => "agq_CM"
-//     5 => "ak"
-//     6 => "ak_GH"
-//     7 => "am"
-//     8 => "am_ET"
-//     9 => "ar"
-//     10 => "ar_001"
-//     ...
-// ]
+$words = SpellNumber::float('2.5')->locale('nl', SpellNumber::SPECIFIC_LOCALE)->toLetters();
+// $words is "twee, vijftig"
+
+$icuLocales = SpellNumber::getAllLocales();
 ```
+
+The ICU list includes resource locales that may not have their own spellout rules. SpellNumber allows ICU to use rules from the same language, but raises `SpellNumberExceptions` if ICU falls back to another language. Languages without a preset use the ICU decimal separator instead of a word between the parts.
+
+When you omit `locale()`, the configured locale takes precedence. Without one, the package tries the primary language of Laravel's `app.locale`: `es_CO` becomes `es`; an application locale without a preset falls back to `en`. For regional wording, set the full locale explicitly.
+
+For important outputs, test the exact input and locale in production's PHP/ICU version. A working cardinal rule doesn't imply a working [ordinal rule](./numbers-to-ordinal.md#rule-selection).

@@ -1,6 +1,11 @@
 {
+  "name": "spell-number-docs",
+  "private": true,
+  "version": "5.0.0",
   "devDependencies": {
-    "vitepress": "^1.0.0-rc.13"
+    "@fontsource/titillium-web": "^5.3.0",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.13"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",

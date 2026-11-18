@@ -1,6 +1,6 @@
 {
     "name": "rmunate/spell-number",
-    "description": "Easily convert numbers to letters, this library supports the native PHP INTL extension with which we can easily convert numbers to letters. This library provides us with the possibility of converting only to numbers or to currency formats depending on the language to be used, this package has support in the languages en: English, es: Spanish, pt: Portuguese, fr: French, it: Italian, ro: Romanian, fa: Farsi, hi: Hindi, pl: Polish.",
+    "description": "Spell out numbers, money amounts, and ordinals in Laravel using PHP Intl.",
     "keywords": [
         "towords",
         "toletters",
@@ -61,21 +61,23 @@
     "require": {
         "php": "^8.0",
         "ext-intl": "*",
-        "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0"
+        "illuminate/support": "^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.4"
+        "laravel/framework": "^12.0 || ^13.0",
+        "phpunit/phpunit": "^11.5"
     },
-    "extra" : {
-        "branch-alias" : {
-            "dev-main": "1.0.x-dev"
+    "scripts": {
+        "test": "@php vendor/bin/phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "5.0.x-dev"
         },
         "laravel": {
             "providers": [
                 "Rmunate\\Utilities\\Providers\\SpellNumberProvider"
             ]
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

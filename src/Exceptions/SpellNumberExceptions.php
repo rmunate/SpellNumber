@@ -1,27 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rmunate\Utilities\Exceptions;
 
 use Exception;
 use Throwable;
 
+/**
+ * An invalid conversion, unsupported locale, or failure reported by PHP Intl.
+ */
 final class SpellNumberExceptions extends Exception
 {
     /**
-     * Static method to throw the exception from the calling class.
-     *
-     * @param string         $message  The exception message.
-     * @param int            $code     The exception code (optional).
-     * @param Throwable|null $previous The previous exception (optional).
-     *
-     * @throws SpellNumberExceptions Changed "CustomException" to "SpellNumberExceptions".
-     *
-     * @return SpellNumberExceptions An instance of SpellNumberExceptions.
+     * Create a conversion exception with the package documentation link.
      */
-    public static function create($message, $code = 0, Throwable $previous = null)
+    public static function create(string $message, int $code = 0, ?Throwable $previous = null): self
     {
         return new self(
-            'Rmunate\Utilities\SpellNumber::class - '.$message.'- See https://rmunate.github.io/SpellNumber/',
+            'Rmunate\Utilities\SpellNumber - '.$message.' See https://rmunate.github.io/SpellNumber/',
             $code,
             $previous
         );

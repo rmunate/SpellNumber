@@ -1,54 +1,12 @@
 ---
-title: Numbers To Letters
+title: Numbers to Letters
 editLink: true
 outline: deep
 ---
 
-# Numbers To Letters
+# Numbers to Letters
 
-## Method Value
-
-### Integers
-
-You can easily convert whole numbers to words by defining the locale to be applied. If you do not define a locale, "en" (English) will be applied by default. Remember that if you export the vendor configuration file, it will not require this definition.
-
-```php
-use Rmunate\Utilities\SpellNumber;
-
-SpellNumber::value(100)->locale('en')->toLetters();
-// "one hundred"
-
-SpellNumber::value(100)->locale('es')->toLetters();
-// "cien"
-
-SpellNumber::value(100)->locale('fa')->toLetters();
-// "صد"
-
-SpellNumber::value(100)->locale('hi')->toLetters();
-// "एक सौ"
-```
-
-### Floating Point
-
-If required, you can pass a floating point number as an argument to convert it to words. Only the first two digits after the floating point will be taken.
-
-```php
-use Rmunate\Utilities\SpellNumber;
-
-SpellNumber::value(123456789.12)->locale('en')->toLetters();
-// "one hundred twenty-three million four hundred fifty-six thousand seven hundred eighty-nine and twelve"
-
-SpellNumber::value(123456789.12)->locale('es')->toLetters();
-// "ciento veintitrés millones cuatrocientos cincuenta y seis mil setecientos ochenta y nueve con doce"
-
-SpellNumber::value(123456789.12)->locale('hi')->toLetters();
-// "बारह करोड़ चौंतीस लाख छप्पन हज़ार सात सौ नवासी और बारह"
-```
-
-## Method Integer
-
-You can also rely on the `Integer` method to define that the input is a new integer.
-Remember to ensure that the input value is of type `int`.
+Use `toLetters()` when you want cardinal words without currency names. Import `SpellNumber` wherever you run the conversion (a controller, command, or test).
 
 ```php
 use Rmunate\Utilities\SpellNumber;
@@ -56,37 +14,45 @@ use Rmunate\Utilities\SpellNumber;
 SpellNumber::integer(100)->locale('en')->toLetters();
 // "one hundred"
 
-SpellNumber::integer(100)->locale('es')->toLetters();
+SpellNumber::value(100)->locale('es')->toLetters();
 // "cien"
-```
 
-## Method Float
-
-Now, if you require it to be translated into letters of more than two decimal places, the solution may be to use the Float method. This method necessarily receives a string value that allows the library to read the complete value sent after the floating point.
-
-```php
-use Rmunate\Utilities\SpellNumber;
-
-SpellNumber::float('12345.230')->locale('en')->toLetters();
-// "twelve thousand three hundred forty-five and two hundred thirty"
+SpellNumber::value(12.5)->locale('en')->toLetters();
+// "twelve and fifty"
 
 SpellNumber::float('12345.230')->locale('es')->toLetters();
 // "doce mil trescientos cuarenta y cinco con doscientos treinta"
+
+SpellNumber::value('-0.01')->locale('en')->toLetters();
+// "minus zero and one"
 ```
 
-## Especific Locale
+## Input types
 
-If you want to use a specific locale, you should always use the constant `SpellNumber::SPECIFIC_LOCALE`
+| Factory | Accepted input |
+| --- | --- |
+| `value()` | A PHP integer, a finite PHP float written as a plain decimal by PHP, or a decimal string. Use it when the data may arrive in more than one of those types. |
+| `integer()` | A native PHP `int`. Use it when your application already has a whole number, not a string from a form. |
+| `float()` | A decimal string, **not** a PHP `float`. Use it when the original digits matter. |
 
-```php
-use Rmunate\Utilities\SpellNumber;
+Use ASCII digits (`0`–`9`), an optional leading `+` or `-`, and a dot for the decimal separator. Leading zeros and surrounding ASCII whitespace are accepted. You can omit the whole digits (`'.5'`) or the fractional digits (`'12.'`), but not both. Grouping separators, a decimal comma, exponent strings like `'1e3'`, `NaN`, and infinity are not accepted. Normalize localized form input before conversion.
 
-SpellNumber::value(100)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->toLetters();
-// "cien"
+### How the fraction is read
 
-SpellNumber::integer(100)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->toLetters();
-// "cien"
+The fractional component is spelled as a number, not digit by digit. A single digit is right-padded; longer strings are kept without rounding or truncation:
 
-SpellNumber::float('12345.230')->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->toLetters();
-// "doce mil trescientos cuarenta y cinco con doscientos treinta"
-```
+| Input in `en` | Output |
+| --- | --- |
+| `value('.5')` | `zero and fifty` |
+| `value(' +0008.03 ')` | `eight and three` |
+| `float('2.0')` | `two and zero` |
+| `float('2.230')` | `two and two hundred thirty` |
+| `value('12.')` | `twelve` |
+
+Use an explicit string to retain trailing zeros: a native float does not remember how many decimal places you wrote. A float that PHP serializes in scientific notation is rejected; pass an equivalent plain decimal string if you need that input.
+
+### Range and errors
+
+The whole and fractional components must each fit in PHP's native integer range. ICU can impose a smaller limit depending on the locale and rule; SpellNumber rejects results that ICU can only render as digits. Catch [`SpellNumberExceptions`](../reference/api.md#catch-conversion-errors) if the input comes from outside your application.
+
+If you omit `locale()`, SpellNumber uses the [configured default](./config-file.md). See [supported languages](./languages-available.md) to use regional locales.

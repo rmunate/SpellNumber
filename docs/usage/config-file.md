@@ -1,110 +1,77 @@
 ---
-title: Config File
+title: Configuration
 editLink: true
 outline: deep
 ---
 
-# Config File
+# Configuration
 
-Since version 4.0 of the package, you will have the option to configure your environment so that the translations are easier to write in your controllers or classes, now you will have a file inside the `config` folder that will allow you to adjust by default the values to be used in the conversions.
+Use configuration for settings that should apply across your Laravel application. Use fluent setters to change a specific conversion without changing those defaults.
 
-You will also have a unique functionality, where you can create your own logic for any output of the values processed in the package.
+## Set up the file
 
-## Export file from vendor to project
+[Publish the configuration](../getting-started/publish-vendor.md), then open `config/spell-number.php` in your Laravel application. The package uses the following defaults even if you skip publishing:
 
-To export the configuration file from the vendor to the `config` folder, you can use the command:
+| Key | Default | Description |
+| --- | --- | --- |
+| `default.locale` | `null` | Use the primary language of `app.locale` if it is a preset; otherwise use `en`. Set a locale to override this behavior. |
+| `default.specific_locale` | `false` | Allow regional and additional ICU locales. |
+| `default.currency` | `dollars` | Name of the whole currency unit. |
+| `default.fraction` | `cents` | Name of the fractional currency unit. |
+| `default.ordinal_output` | `default` | Ordinal rule: `default`, `male`, or `female`. |
+| `replacements` | `[]` | Substrings to replace, grouped by primary language. |
+| `callback_output` | `null` | Optional [callable](./config-custom-callback.md) that receives the result and context. |
 
-``` bash
-php artisan vendor:publish --provider="Rmunate\\Utilities\\Providers\\SpellNumberProvider" --tag="config"
-```
+## Example: use Mexican Spanish and pesos
 
-## Locale.
+This is a complete example for `config/spell-number.php`. Merge it with existing settings rather than overwriting them unintentionally:
 
-Now that you have the `spell-number.php` file in the `config` folder, you can adjust the language that will be used for all translations of the package from numbers to letters, avoiding having to use it when invoking the use of the library.
+```php
+<?php
 
-``` php
 return [
-  //...
-  'default' => [
-    //...
-      'locale' => 'en',
-    //... 
-    ]
-]
+    'default' => [
+        'locale' => 'es_MX',
+        'specific_locale' => true,
+        'currency' => 'pesos',
+        'fraction' => 'centavos',
+        'ordinal_output' => 'default',
+    ],
+    'replacements' => [
+        'es' => [
+            'pesos' => 'pesos mexicanos',
+        ],
+    ],
+    'callback_output' => null,
+];
 ```
 
-In the index `locale` you can assign the one you are going to use globally.
+After you clear or rebuild the configuration cache, the following converts an amount using those defaults:
 
-## Specific Locale
+```php
+use Rmunate\Utilities\SpellNumber;
 
-By default the package only works with the list of supported languages, a list that can be obtained with the `SpellNumber::getAvailableLocales()` method, now if what you are looking for is to use a more precise `locale`, such as `es_CO`, `es_MX`,`en_US`, in that case you can leave this configuration defined to avoid having to pass the constant `SpellNumber::SPECIFIC_LOCALE` in the `->locale(...)` method.
+SpellNumber::float('100.12')->toMoney();
+// "cien pesos mexicanos con doce centavos"
 
-``` php
-return [
-  //...
-  'default' => [
-    //...
-      'specific_locale' => true, //false (default)
-    //... 
-    ]
-]
+SpellNumber::float('100.12')->locale('en')->currency('dollars')->fraction('cents')->toMoney();
+// "one hundred dollars and twelve cents"
 ```
 
-## Currency Values
+The second call overrides the default language and both labels for that instance only.
 
-Just as you can set the global translation language, you can also define the currency values that should be used in all library processing outputs.
+## How settings are applied
 
-``` php
-return [
-  //...
-  'default' => [
-    //...
-      'currency' => 'dollars',
-    //... 
-      'fraction' => 'cents',
-    //... 
-    ]
-]
-```
-
-## Output type ordinal texts
-
-If you are going to use the package to generate ordinal values, in that case you can also determine a global output for all calls of the method, for that you can define the output mode of the ordinal text from the configuration file, this avoids you having to go through the `SpellNumber::ORDINAL_DEFAULT`, `SpellNumber::ORDINAL_MALE`, `SpellNumber::ORDINAL_FEMALE` constants in the `->toOrdinal()` method.
-
-``` php
-return [
-  //...
-  'default' => [
-    //...
-      'ordinal_output' => 'default', // 'default', 'male', 'female'
-    //... 
-    ]
-]
-```
+1. The initial locale comes from `default.locale`, or from Laravel if the setting is `null`. A non-null legacy `default.lang` takes precedence over `default.locale`; remove or rename it if your new value appears to be ignored.
+2. Explicit calls to `locale()`, `currency()`, and `fraction()` override the initial settings on that instance. For ordinals, a mode argument to `toOrdinal()` overrides `default.ordinal_output`.
+3. The converter builds the text, applies [replacements](#replacements) for the final locale, and then passes the replaced text to the [output callback](./config-custom-callback.md) if one is configured.
 
 ## Replacements
 
-Some people around the world have seen that some small fragments of the packet processing outputs must conform to the current language of the country or region, usually they are small fragments that could be replaced by a specific term or form of writing, for that you now have the possibility of defining all the replacements of text fragments that you consider necessary.
+These are substring replacements, not whole-word rules. Use the primary language code (`es`, not `es_MX`). The text, search key, and replacement are lowercased; replacements are applied in the order you list them. Prefer narrow phrases if a short substring might match unrelated words.
 
-Relying on the structure of an associative array, you will put the value to be searched as an index and the text to be assigned as its replacement as a value.
+## Apply changes
 
-The primary value must be there, that is, "es" instead of "es_MX" or similar.
+Run `php artisan config:clear` from the Laravel application root during local development if config was cached. On a deployment that uses cached configuration, run `php artisan config:cache` after updating the file.
 
-``` php
-return [
-  //...
-  'replacements' => [
-      'es' => [
-          'uno' => 'un', 
-      ],
-  ],
-]
-```
-
-You must define the language on which the replacement should be applied in all the outputs of the internal processing of the package.
-
-## Callback
-
-If what you would like is to have a programmable way to modify the output of the package value, in that case this solution is what you need.
-
-Go to the next page =>
+If configuration caching fails, check [callback serialization](./config-custom-callback.md#using-config-cache).

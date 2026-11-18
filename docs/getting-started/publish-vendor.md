@@ -1,21 +1,39 @@
 ---
-title: Configuration File
+title: Publish Configuration
 editLink: true
 outline: deep
 ---
 
-# Laravel Configuration File
+# Publish Configuration
 
-This is optional.
+Publishing copies the package's configuration into your Laravel application so you can edit it. Skip this step if the defaults and fluent methods are enough.
 
-You can publish the config-file with:
+## 1. Publish the file
 
-``` bash
-php artisan vendor:publish --provider="Rmunate\\Utilities\\Providers\\SpellNumberProvider" --tag="config"
+Run this command from the directory containing `artisan` (Bash, zsh, or PowerShell):
+
+```shell
+php artisan vendor:publish --provider='Rmunate\Utilities\Providers\SpellNumberProvider' --tag=config
 ```
 
-[View File on GitHub](https://github.com/rmunate/SpellNumber/blob/1cca5565d6b8c049683357bcbb964b70bcfc4a92/config/spell-number.php)
+You should now have `config/spell-number.php` **in your application**. Edit that copy, not the file under `vendor/`.
 
-The configuration file will prove valuable if you intend to consistently use a single target language for converting numbers into letters.
+::: warning Already published?
+Don't add `--force` unless you intend to overwrite the application's copy. Compare it with the vendor file and merge the changes you want. If you're upgrading from 4.x, also check the [upgrade notes](./changelog.md#500).
+:::
 
-It also provides a comprehensive global output manipulation feature, empowering you to implement various adjustments or restore settings to the default package letter output.
+## 2. Make Laravel read your changes
+
+When developing locally, clear an existing configuration cache after changing the file:
+
+```shell
+php artisan config:clear
+```
+
+For a deployment that uses cached configuration, rebuild the cache using the deployed configuration:
+
+```shell
+php artisan config:cache
+```
+
+Continue to the [settings reference](../usage/config-file.md) or add a [cache-safe output callback](../usage/config-custom-callback.md).

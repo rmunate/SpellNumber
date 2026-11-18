@@ -1,76 +1,188 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rmunate\Utilities;
 
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Traits\Macroable;
-use Rmunate\Utilities\Bases\BaseSpellNumber;
+use IntlException;
+use Locale;
+use ResourceBundle;
 use Rmunate\Utilities\Callback\DataResponse;
 use Rmunate\Utilities\Exceptions\SpellNumberExceptions;
 use Rmunate\Utilities\Langs\Langs;
-use Rmunate\Utilities\Miscellaneous\Utilities;
 use Rmunate\Utilities\Miscellaneous\Words;
-use Rmunate\Utilities\Validator\Traits\CommonValidate;
+use Rmunate\Utilities\Validator\SpellNumberValidator;
 use Rmunate\Utilities\Wrappers\NumberFormatterWrapper;
 
-class SpellNumber extends BaseSpellNumber
+/**
+ * Convert numbers into localized cardinal, monetary, or ordinal words.
+ */
+class SpellNumber
 {
-    use CommonValidate;
     use Macroable;
 
-    /* Constants Locale */
+    /** Opt in to regional locales and additional ICU languages. */
     public const SPECIFIC_LOCALE = true;
 
-    /* Constants Ordinal Text */
+    /** Request the locale's default ordinal spellout rule. */
     public const ORDINAL_DEFAULT = '%spellout-ordinal';
+
+    /** Request the locale's masculine ordinal spellout rule. */
     public const ORDINAL_MALE = '%spellout-ordinal-masculine';
+
+    /** Request the locale's feminine ordinal spellout rule. */
     public const ORDINAL_FEMALE = '%spellout-ordinal-feminine';
 
-    /* Constants Macros */
+    /** Select letter conversion from a macro. */
     public const TO_LETTERS = 'TO_LETTERS';
+
+    /** Select money conversion from a macro. */
     public const TO_MONEY = 'TO_MONEY';
+
+    /** Select ordinal conversion from a macro. */
     public const TO_ORDINAL = 'TO_ORDINAL';
 
-    /* Propierties */
-    private $value;
-    private string $type;
+    /** @var array{whole: int, fraction: ?int, negativeZero: bool, type: 'integer'|'double'} */
+    private array $number;
+
+    /** The originally supplied value, made available to output callbacks. */
+    private int|float|string $value;
+
+    /** The ICU locale identifier for this conversion. */
     protected string $locale;
+
+    /** The label for the whole unit of currency. */
     protected string $currency;
+
+    /** The label for the fractional unit of currency. */
     protected string $fraction;
 
     /**
-     * Constructor.
+     * Prepare a number and read the default locale and currency from Laravel if available.
      *
-     * @param mixed  $value The numeric value to convert to words.
-     * @param string $type  The type of the value ('integer' or 'double').
+     * @param mixed  $value A PHP integer, float, or decimal string.
+     * @param string $type  The input mode: 'mixed', 'integer', or 'double'.
+     *
+     * @throws SpellNumberExceptions When the value, type, or default locale is invalid.
      */
-    public function __construct($value, string $type)
+    public function __construct(mixed $value, string $type = 'mixed')
     {
+        $this->number = SpellNumberValidator::parse($value, $type);
         $this->value = $value;
-        $this->type = $type;
-        $this->locale = config('spell-number.default.lang') ?? config('spell-number.default.locale') ?? Langs::getLocaleLaravel();
-        $this->currency = config('spell-number.default.currency') ?? 'dollars';
-        $this->fraction = config('spell-number.default.fraction') ?? 'cents';
+
+        $locale = self::config('spell-number.default.lang') ?? self::config('spell-number.default.locale');
+
+        if ($locale === null) {
+            $language = Langs::primary(self::config('app.locale', 'en'));
+            $this->locale = isset(Langs::LOCALES_AVAILABLE[$language]) ? $language : 'en';
+        } elseif (is_string($locale)) {
+            $this->locale($locale);
+        } else {
+            throw SpellNumberExceptions::create('The configured default locale must be a string or null.');
+        }
+
+        $this->currency = self::config('spell-number.default.currency') ?? 'dollars';
+        $this->fraction = self::config('spell-number.default.fraction') ?? 'cents';
     }
 
     /**
-     * Set the locale for the conversion.
+     * Create a conversion from an integer, float, or plain decimal string.
      *
-     * @param string $locale The locale to use for the conversion.
-     *
-     * @throws SpellNumberExceptions If the provided locale is not valid.
-     *
-     * @return SpellNumber The SpellNumber instance with the updated locale.
+     * @throws SpellNumberExceptions When the input is invalid or out of range.
      */
-    public function locale(string $locale, ?bool $specific_locale = null)
+    public static function value(mixed $value): static
     {
-        $valueConfig = config('spell-number.default.specific_locale');
+        return new static($value, 'mixed');
+    }
 
-        $specific_locale = $specific_locale ?? $valueConfig ?? false;
+    /**
+     * Create a conversion from a native PHP integer.
+     *
+     * @throws SpellNumberExceptions When the input is not a PHP int.
+     */
+    public static function integer(mixed $value): static
+    {
+        return new static($value, 'integer');
+    }
 
-        if ($specific_locale === false) {
-            if (!Utilities::isValidLocale($locale)) {
-                throw SpellNumberExceptions::create('The provided value is not valid. To view the available options, you can use the SpellNumber::getAvailableLocales() method, or you can pass the SpellNumber::SPECIFIC_LOCALE constant as the second parameter to enable specific or customized usage.');
-            }
+    /**
+     * Create a conversion from a decimal string without losing the supplied precision.
+     *
+     * @throws SpellNumberExceptions When the input is not a plain decimal string.
+     */
+    public static function float(mixed $value): static
+    {
+        if (!is_string($value)) {
+            throw SpellNumberExceptions::create('The float() factory requires a decimal string. Use value() for a native float.');
+        }
+
+        return new static($value, 'double');
+    }
+
+    /**
+     * List ICU resource locales; not all of them include spellout rules.
+     *
+     * @return list<string>
+     *
+     * @throws SpellNumberExceptions When the installed ICU locales cannot be read.
+     */
+    public static function getAllLocales(): array
+    {
+        try {
+            $locales = ResourceBundle::getLocales('');
+        } catch (IntlException $exception) {
+            throw SpellNumberExceptions::create('The installed ICU locales could not be read.', 0, $exception);
+        }
+
+        if ($locales === false) {
+            throw SpellNumberExceptions::create('The installed ICU locales could not be read.');
+        }
+
+        return $locales;
+    }
+
+    /**
+     * List the primary locale codes with package-provided formatting defaults.
+     *
+     * @return list<string>
+     */
+    public static function getAvailableLocales(): array
+    {
+        return array_keys(self::getAvailableLanguages());
+    }
+
+    /**
+     * List preset languages by their primary locale codes.
+     *
+     * @return array<string, string>
+     */
+    public static function getAvailableLanguages(): array
+    {
+        return Langs::LOCALES_AVAILABLE;
+    }
+
+    /**
+     * Select a preset language or opt in to an installed regional or additional ICU locale.
+     *
+     * @throws SpellNumberExceptions When the locale is invalid or requires specific locale mode.
+     */
+    public function locale(string $locale, ?bool $specific_locale = null): static
+    {
+        $specific_locale ??= self::config('spell-number.default.specific_locale') === true;
+
+        try {
+            $canonical = trim($locale) === '' ? null : Locale::canonicalize($locale);
+        } catch (IntlException $exception) {
+            throw SpellNumberExceptions::create("Invalid locale '{$locale}'.", 0, $exception);
+        }
+
+        if ($canonical === null || (
+            !isset(Langs::LOCALES_AVAILABLE[$canonical])
+            && (!$specific_locale || !in_array($canonical, self::getAllLocales(), true))
+        )) {
+            throw SpellNumberExceptions::create("Unsupported locale '{$locale}'. Use getAvailableLocales() for presets or enable SPECIFIC_LOCALE for an installed ICU locale.");
         }
 
         $this->locale = $locale;
@@ -79,13 +191,9 @@ class SpellNumber extends BaseSpellNumber
     }
 
     /**
-     * Set the currency for the conversion.
-     *
-     * @param string $currency The currency to use for the conversion.
-     *
-     * @return SpellNumber The SpellNumber instance with the updated currency.
+     * Set the label for the whole unit of currency.
      */
-    public function currency(string $currency)
+    public function currency(string $currency): static
     {
         $this->currency = $currency;
 
@@ -93,13 +201,9 @@ class SpellNumber extends BaseSpellNumber
     }
 
     /**
-     * Set the fraction for the conversion.
-     *
-     * @param string $fraction The fraction to use for the conversion.
-     *
-     * @return SpellNumber The SpellNumber instance with the updated fraction.
+     * Set the label for the fractional unit of currency.
      */
-    public function fraction(string $fraction)
+    public function fraction(string $fraction): static
     {
         $this->fraction = $fraction;
 
@@ -107,197 +211,135 @@ class SpellNumber extends BaseSpellNumber
     }
 
     /**
-     * Convert the numeric value to words.
+     * Spell out the number, including any fractional component.
      *
-     * @return string The textual representation of the numeric value.
+     * @return mixed The lowercase words, or the configured callback's result.
      */
-    public function toLetters()
+    public function toLetters(): mixed
     {
-        $callback = config('spell-number.callback_output');
+        return $this->output('toLetters', $this->cardinal());
+    }
 
-        if (!empty($callback) && is_callable($callback)) {
-            $words = ($this->type == 'integer') ? $this->integerToLetters() : $this->doubleToLetters();
+    /**
+     * Spell out the number using the configured currency and fraction labels.
+     *
+     * @return mixed The lowercase monetary words, or the configured callback's result.
+     */
+    public function toMoney(): mixed
+    {
+        return $this->output('toMoney', $this->cardinal(money: true));
+    }
 
-            return $callback(new DataResponse([
-                'method'   => 'toLetters',
-                'type'     => $this->type,
-                'value'    => $this->value,
-                'words'    => $words,
-                'lang'     => Utilities::extractPrimaryLocale($this->locale),
-                'locale'   => $this->locale,
-                'currency' => null,
-                'fraction' => null,
-            ]));
+    /**
+     * Spell out an integer ordinal in the requested default, masculine, or feminine mode.
+     *
+     * @return mixed The lowercase ordinal words, or the configured callback's result.
+     *
+     * @throws SpellNumberExceptions When the value, mode, or ICU rule is unsupported.
+     */
+    public function toOrdinal(?string $attr = null): mixed
+    {
+        if ($this->number['type'] !== 'integer') {
+            throw SpellNumberExceptions::create('To convert to ordinal words, provide an integer.');
         }
 
-        return ($this->type == 'integer') ? $this->integerToLetters() : $this->doubleToLetters();
+        $mode = $attr ?? self::config('spell-number.default.ordinal_output') ?? 'default';
+        [$rule, $mode] = match ($mode) {
+            'default', 'ordinal', self::ORDINAL_DEFAULT => [self::ORDINAL_DEFAULT, 'default'],
+            'male', 'masculine', 'ordinal-masculine', self::ORDINAL_MALE => [self::ORDINAL_MALE, 'male'],
+            'female', 'feminine', 'ordinal-feminine', self::ORDINAL_FEMALE => [self::ORDINAL_FEMALE, 'female'],
+            default => throw SpellNumberExceptions::create('The ordinal mode must be default, male, or female.'),
+        };
+
+        $formatter = new NumberFormatterWrapper($this->locale);
+
+        return $this->output('toOrdinal', $formatter->ordinal($this->number['whole'], $rule), $mode);
     }
 
     /**
-     * Convert the numeric value to a money representation.
-     *
-     * @return string The textual representation of the money value.
+     * Spell the whole and optional fractional components, with or without currency labels.
      */
-    public function toMoney()
+    private function cardinal(bool $money = false): string
     {
-        $callback = config('spell-number.callback_output');
+        $formatter = new NumberFormatterWrapper($this->locale);
+        $language = Langs::primary($this->locale);
+        $whole = $this->number['whole'];
+        $words = $formatter->cardinal($whole, $this->number['negativeZero']);
 
-        if (!empty($callback) && is_callable($callback)) {
-            $words = ($this->type == 'integer') ? $this->integerToMoney() : $this->doubleToMoney();
-
-            return $callback(new DataResponse([
-                'method'   => 'toMoney',
-                'type'     => $this->type,
-                'value'    => $this->value,
-                'words'    => $words,
-                'lang'     => Utilities::extractPrimaryLocale($this->locale),
-                'locale'   => $this->locale,
-                'currency' => $this->currency,
-                'fraction' => $this->fraction,
-            ]));
+        if ($money) {
+            $words = Words::moneyPart($words, $whole, $this->currency, $language);
         }
 
-        return ($this->type == 'integer') ? $this->integerToMoney() : $this->doubleToMoney();
-    }
+        $fraction = $this->number['fraction'];
 
-    /**
-     * Convert the numeric value to ordinal representation.
-     *
-     * @return string The textual representation of the ordinal value.
-     */
-    public function toOrdinal(?string $attr = null)
-    {
-        $valueConfig = config('spell-number.default.ordinal_output');
-
-        $attr = Utilities::textOrdinalMode($attr ?? $valueConfig);
-
-        $callback = config('spell-number.callback_output');
-
-        if (!empty($callback) && is_callable($callback)) {
-            $words = $this->integerToOrdinal($attr);
-
-            return $callback(new DataResponse([
-                'method'   => 'toOrdinal',
-                'type'     => $this->type,
-                'value'    => $this->value,
-                'words'    => $words,
-                'lang'     => Utilities::extractPrimaryLocale($this->locale),
-                'locale'   => $this->locale,
-                'mode'     => Utilities::textOrdinalModeHuman($attr),
-            ]));
+        if ($fraction === null) {
+            return $words;
         }
 
-        return $this->integerToOrdinal($attr);
-    }
+        $fractionWords = $formatter->cardinal($fraction);
 
-    /**
-     * Convert the integer numeric value to its ordinal textual representation.
-     *
-     * @return string The textual representation of the ordinal value.
-     */
-    private function integerToOrdinal($attr)
-    {
-        if ($this->type == 'double') {
-            throw SpellNumberExceptions::create('To convert to ordinal numbers, an integer value is required as input');
+        if ($money) {
+            $fractionWords = Words::moneyPart($fractionWords, $fraction, $this->fraction, $language);
         }
 
-        $formatter = NumberFormatterWrapper::format($this->value, $this->locale, true, $attr);
-        $formatter = Words::replaceLocale($formatter, $this->locale, self::TO_ORDINAL);
+        $connector = Langs::LOCALES_CONNECTORS[$language] ?? null;
+        $separator = $connector === null ? $formatter->decimalSeparator() : ' '.$connector;
 
-        return Words::replaceFromConfig($formatter, $this->locale);
+        return $words.$separator.' '.$fractionWords;
     }
 
     /**
-     * Convert the integer numeric value to its textual representation.
-     *
-     * @return string The textual representation of the integer numeric value.
+     * Apply the configured replacements and pass the final words and metadata to the callback.
      */
-    private function integerToLetters()
+    private function output(string $method, string $words, ?string $mode = null): mixed
     {
-        $formatter = NumberFormatterWrapper::format($this->value, $this->locale);
-        $formatter = Words::replaceLocale($formatter, $this->locale, self::TO_LETTERS);
+        $language = Langs::primary($this->locale);
+        $words = Words::replaceFromConfig($words, self::config("spell-number.replacements.{$language}") ?? []);
+        $callback = self::config('spell-number.callback_output');
 
-        return Words::replaceFromConfig($formatter, $this->locale);
-    }
-
-    /**
-     * Convert the double numeric value to its textual representation.
-     *
-     * @return string The textual representation of the double numeric value.
-     */
-    private function doubleToLetters()
-    {
-        $parts = explode('.', $this->value);
-
-        if (!array_key_exists(1, $parts)) {
-            return $this->integerToLetters();
+        if ($callback === null) {
+            return $words;
         }
 
-        $parts[1] = Utilities::decimal($parts[1]);
-
-        $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale);
-        $letters2 = NumberFormatterWrapper::format($parts[1], $this->locale);
-
-        $output = sprintf('%s %s %s', $letters1, Utilities::connector($this->locale), $letters2);
-        $output = Words::replaceLocale($output, $this->locale, self::TO_LETTERS);
-
-        return Words::replaceFromConfig($output, $this->locale);
-    }
-
-    /**
-     * Convert the integer numeric value to its money representation.
-     *
-     * @return string The money representation of the integer numeric value.
-     */
-    private function integerToMoney()
-    {
-        $letters = NumberFormatterWrapper::format($this->value, $this->locale).' '.$this->currency;
-        $letters = Words::replaceLocale($letters, $this->locale, self::TO_MONEY);
-
-        return Words::replaceFromConfig($letters, $this->locale);
-    }
-
-    /**
-     * Convert the double numeric value to its money representation.
-     *
-     * @return string The money representation of the double numeric value.
-     */
-    private function doubleToMoney()
-    {
-        $parts = explode('.', $this->value);
-
-        if (!array_key_exists(1, $parts)) {
-            return $this->integerToMoney();
+        if (!is_callable($callback)) {
+            throw SpellNumberExceptions::create('The configured output callback must be callable or null.');
         }
 
-        $parts[1] = Utilities::decimal($parts[1]);
-
-        $letters1 = NumberFormatterWrapper::format($parts[0], $this->locale).' '.$this->currency;
-        $letters2 = NumberFormatterWrapper::format($parts[1], $this->locale).' '.$this->fraction;
-
-        $output = $letters1.' '.Utilities::connector($this->locale).' '.$letters2;
-        $output = Words::replaceLocale($output, $this->locale, self::TO_MONEY);
-
-        return Words::replaceFromConfig($output, $this->locale);
+        return $callback(new DataResponse([
+            'method'   => $method,
+            'type'     => $this->number['type'],
+            'value'    => $this->value,
+            'words'    => $words,
+            'lang'     => $language,
+            'locale'   => $this->locale,
+            'mode'     => $mode,
+            'currency' => $method === 'toMoney' ? $this->currency : null,
+            'fraction' => $method === 'toMoney' ? $this->fraction : null,
+        ]));
     }
 
     /**
-     * Perform a spell-related action based on the specified method and optional ordinal mode.
-     *
-     * @param string      $method      The method to perform (TO_LETTERS, TO_MONEY, or TO_ORDINAL).
-     * @param string|null $modeOrdinal The optional ordinal mode when using TO_ORDINAL.
-     *
-     * @throws SpellNumberExceptions When the requested action is invalid.
-     *
-     * @return mixed The result of the specified action.
+     * Read Laravel configuration if the application has bootstrapped its repository.
      */
-    private function spell(string $method, ?string $modeOrdinal = null)
+    private static function config(string $key, mixed $default = null): mixed
+    {
+        $app = Facade::getFacadeApplication();
+
+        return $app !== null && $app->bound('config') ? $app->make('config')->get($key, $default) : $default;
+    }
+
+    /**
+     * Dispatch a conversion from a bound SpellNumber macro.
+     *
+     * @throws SpellNumberExceptions When the macro requests an unknown conversion.
+     */
+    private function spell(string $method, ?string $modeOrdinal = null): mixed
     {
         return match ($method) {
-            'TO_LETTERS' => $this->toLetters(),
-            'TO_MONEY'   => $this->toMoney(),
-            'TO_ORDINAL' => $this->toOrdinal($modeOrdinal),
-            default      => throw SpellNumberExceptions::create("The requested action does not exist. The 'spell' method only accepts one of the following three options: SpellNumber::TO_LETTERS, SpellNumber::TO_MONEY, or SpellNumber::TO_ORDINAL."),
+            self::TO_LETTERS  => $this->toLetters(),
+            self::TO_MONEY    => $this->toMoney(),
+            self::TO_ORDINAL  => $this->toOrdinal($modeOrdinal),
+            default          => throw SpellNumberExceptions::create('The macro must select TO_LETTERS, TO_MONEY, or TO_ORDINAL.'),
         };
     }
 }

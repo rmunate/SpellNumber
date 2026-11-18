@@ -1,68 +1,50 @@
 ---
-title: Macroable
+title: Macros
 editLink: true
 outline: deep
 ---
 
-# Macroable
+# Macros
 
-You likely have excellent ideas for methods that could greatly benefit from the capabilities of **SpellNumber**. We encourage you to create them yourself.
+Use a macro when several callers need the same application-specific formatting. A macro is a named method you add to SpellNumber with Laravel's `Macroable` trait.
 
-## Creating a Macro
+## 1. Register the macro
 
-To develop a custom method, you can establish a new provider and register it within your application, following the guidelines in the [Laravel Documentation](https://laravel.com/docs/10.x/providers). This approach can lead to a more organized and clear code structure. For this guide's purposes, we'll utilize the `AppServiceProvider`, which is readily available and located at `app/Providers/AppServiceProvider.php`.
-
-Within the `register()` method of the Provider, you can craft your custom method. For practical demonstration, let's create the `toLettersWithSymbol` method. This method will transform the supplied value into words, followed by the currency symbol and its abbreviation. The output will be **'Two hundred - $MXN'**.
+Open `app/Providers/AppServiceProvider.php` in your Laravel application. Add the import and put the `SpellNumber::macro()` call inside the existing `boot()` method; keep any logic that's already there. If `boot()` is missing, add it as shown:
 
 ```php
 namespace App\Providers;
 
-use Rmunate\Utilities\SpellNumber;
 use Illuminate\Support\ServiceProvider;
+use Rmunate\Utilities\SpellNumber;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
+    /** Register application macros. */
+    public function boot(): void
     {
-        SpellNumber::macro('toLettersWithSymbol', function (string $symbol) {
-        
-            $value = $this->spell(SpellNumber::TO_LETTERS);
-
-            return "$value - $symbol";
+        SpellNumber::macro('toLettersWithSymbol', function (string $symbol): string {
+            return $this->toLetters().' - '.$symbol;
         });
     }
 }
 ```
 
-## The Spell Method
+Use a non-static closure: Laravel binds `$this` to the current `SpellNumber` instance. Pick a name that doesn't conflict with a built-in method.
 
-If you observe, the "spell" method is used within the constructed macro. This method is exclusively available in this context and cannot be utilized elsewhere. It facilitates the effortless conversion of the provided value into words, as needed.
+## 2. Call it from a conversion
 
-To Letters:
-```php
-$this->spell(SpellNumber::TO_LETTERS)
-```
-
-To Money Format:
-```php
-$this->spell(SpellNumber::TO_MONEY)
-```
-
-To Ordinal Text:
-```php
-$this->spell(SpellNumber::TO_ORDINAL, SpellNumber::ORDINAL_DEFAULT)
-```
-
-## How to Use My Macro
-
-Now that you have created your macro within the service provider, simply call it like an original method of the SpellNumber class.
+Import `SpellNumber` where you use the macro:
 
 ```php
-SpellNumber::value(200)->locale('es_MX', SpellNumber::SPECIFIC_LOCALE)->toLettersWithSymbol('$MXN')
-// "Doscientos - $MXN"
+use Rmunate\Utilities\SpellNumber;
+
+SpellNumber::integer(200)->locale('es')->toLettersWithSymbol('$MXN');
+// "doscientos - $MXN"
 ```
 
-You now possess the ability to create unique solutions within your applications.
+This macro expects `toLetters()` to return a string. If you configure a non-string [output callback](./config-custom-callback.md), adjust the macro accordingly. If the method isn't available, check that the application boots `AppServiceProvider` before calling it.
+
+## Existing macros
+
+Inside a bound macro, existing calls to `$this->spell(SpellNumber::TO_LETTERS)`, `$this->spell(SpellNumber::TO_MONEY)`, and `$this->spell(SpellNumber::TO_ORDINAL, SpellNumber::ORDINAL_DEFAULT)` continue to work. Use the public conversion methods directly unless you need to choose a conversion dynamically.
