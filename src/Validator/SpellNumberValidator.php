@@ -16,9 +16,9 @@ final class SpellNumberValidator
     /**
      * Normalize a number while preserving its original type and fractional digits.
      *
-     * @return array{whole: int, fraction: ?int, negativeZero: bool, type: 'integer'|'double'}
-     *
      * @throws SpellNumberExceptions When the value, requested type, or environment is invalid.
+     *
+     * @return array{whole: int, fraction: ?int, negativeZero: bool, type: 'integer'|'double'}
      */
     public static function parse(mixed $value, string $type): array
     {

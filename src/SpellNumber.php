@@ -124,9 +124,9 @@ class SpellNumber
     /**
      * List ICU resource locales; not all of them include spellout rules.
      *
-     * @return list<string>
-     *
      * @throws SpellNumberExceptions When the installed ICU locales cannot be read.
+     *
+     * @return list<string>
      */
     public static function getAllLocales(): array
     {
@@ -233,9 +233,9 @@ class SpellNumber
     /**
      * Spell out an integer ordinal in the requested default, masculine, or feminine mode.
      *
-     * @return mixed The lowercase ordinal words, or the configured callback's result.
-     *
      * @throws SpellNumberExceptions When the value, mode, or ICU rule is unsupported.
+     *
+     * @return mixed The lowercase ordinal words, or the configured callback's result.
      */
     public function toOrdinal(?string $attr = null): mixed
     {
@@ -339,7 +339,7 @@ class SpellNumber
             self::TO_LETTERS  => $this->toLetters(),
             self::TO_MONEY    => $this->toMoney(),
             self::TO_ORDINAL  => $this->toOrdinal($modeOrdinal),
-            default          => throw SpellNumberExceptions::create('The macro must select TO_LETTERS, TO_MONEY, or TO_ORDINAL.'),
+            default           => throw SpellNumberExceptions::create('The macro must select TO_LETTERS, TO_MONEY, or TO_ORDINAL.'),
         };
     }
 }
